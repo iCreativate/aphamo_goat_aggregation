@@ -252,12 +252,14 @@
                 <input type="email" id="hub-modal-register-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
               </div>
               <div class="contact-form__row learner-hub__roles-row">
-                <span class="contact-form__label">I am registering as a <span class="contact-form__required">*</span></span>
-                <div class="learner-hub__roles">
-                  <label class="learner-hub__role"><input type="radio" name="role" value="learner" required> <span>Learner</span></label>
-                  <label class="learner-hub__role"><input type="radio" name="role" value="beneficiary"> <span>Beneficiary</span></label>
-                  <label class="learner-hub__role"><input type="radio" name="role" value="farmer"> <span>Goat farmer (seller)</span></label>
+                <span class="contact-form__label">I am registering as <span class="contact-form__required">*</span></span>
+                <p class="learner-hub__roles-hint">Select all that apply.</p>
+                <div class="learner-hub__roles learner-hub__roles--checkboxes">
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="learner" class="hub-modal-role-checkbox"> <span>Learner</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="beneficiary" class="hub-modal-role-checkbox"> <span>Beneficiary</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="farmer" class="hub-modal-role-checkbox"> <span>Goat farmer (seller)</span></label>
                 </div>
+                <span id="hub-modal-register-roles-error" class="learner-hub__roles-error" aria-live="polite" hidden>Select at least one role.</span>
               </div>
               <div class="contact-form__row">
                 <label class="contact-form__label" for="hub-modal-register-password">Password <span class="contact-form__required">*</span></label>
