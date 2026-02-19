@@ -215,6 +215,12 @@
               </a>
             </li>
             <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#events" class="portal-dashboard__nav-link" role="tab" id="admin-tab-events" aria-selected="false" aria-controls="panel-events" data-panel="events" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Events
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
               <a href="#users" class="portal-dashboard__nav-link" role="tab" id="admin-tab-users" aria-selected="false" aria-controls="panel-users" data-panel="users" tabindex="-1">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 Users
@@ -291,6 +297,7 @@
               <li><a href="#beneficiaries" class="portal-dashboard__panel-link" data-panel="beneficiaries">Approve pending beneficiaries</a></li>
               <li><a href="#learners" class="portal-dashboard__panel-link" data-panel="learners">Approve pending learners</a></li>
               <li><a href="#farmers" class="portal-dashboard__panel-link" data-panel="farmers">Approve pending farmers (sellers)</a></li>
+              <li><a href="#events" class="portal-dashboard__panel-link" data-panel="events">Manage events (past, upcoming, ongoing)</a></li>
               <li><a href="#users" class="portal-dashboard__panel-link" data-panel="users">Add, suspend, or delete users</a></li>
               <li>Lock or unlock courses based on payment status</li>
             </ul>
@@ -602,6 +609,54 @@
             <div class="admin-stat-grid admin-stat-grid--wide" style="margin-bottom:0.75rem">
               <div class="admin-stat"><span class="admin-stat__value" id="admin-listings-approved-count">0</span><span class="admin-stat__label">Approved</span></div>
               <div class="admin-stat"><span class="admin-stat__value" id="admin-listings-rejected-count">0</span><span class="admin-stat__label">Rejected</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-events" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Events</h2>
+          <p class="admin-course-builder-intro">Add and manage events (past, present, future). These appear on the public <a href="/events/" target="_blank" rel="noopener">Events</a> page.</p>
+          <div class="portal-dashboard__card">
+            <h3>Add event</h3>
+            <form id="admin-add-event-form" class="profile-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-title">Title <span class="contact-form__required">*</span></label>
+                <input type="text" id="event-add-title" name="title" class="contact-form__input" required placeholder="e.g. Goat handling & weighing">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-location">Location</label>
+                <input type="text" id="event-add-location" name="location" class="contact-form__input" placeholder="e.g. Koedoeberg Farm">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-date">Date</label>
+                <input type="date" id="event-add-date" name="date" class="contact-form__input" placeholder="YYYY-MM-DD">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-details">Details</label>
+                <textarea id="event-add-details" name="details" class="contact-form__input" rows="3" placeholder="Short description for the events page."></textarea>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-status">Status</label>
+                <select id="event-add-status" name="status" class="contact-form__input contact-form__select">
+                  <option value="upcoming">Upcoming</option>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="past">Past</option>
+                </select>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary">Add event</button>
+              </div>
+            </form>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>All events</h3>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Title</th><th>Location</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="admin-events-tbody">
+                  <tr><td colspan="5">No events yet.</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -1646,8 +1701,69 @@
           renderApprovals('farmer', 'admin-farmers-tbody', 'admin-farmers-approved-tbody');
           renderGoatListings();
         }
+        if (panelId === 'events') renderEvents();
         if (panelId === 'users') renderUsers();
         if (panelId === 'dashboard') renderDashboardAnalytics();
+      }
+
+      function renderEvents() {
+        var events = adminData.getEvents();
+        var tbody = document.getElementById('admin-events-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        if (events.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5">No events yet.</td></tr>';
+          return;
+        }
+        var order = { upcoming: 0, ongoing: 1, past: 2 };
+        events.slice().sort(function (a, b) {
+          var o = (order[a.status] ?? 1) - (order[b.status] ?? 1);
+          if (o !== 0) return o;
+          return (b.date || '').localeCompare(a.date || '');
+        }).forEach(function (ev) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + (ev.title || '—') + '</td><td>' + (ev.location || '—') + '</td><td>' + (ev.date || '—') + '</td><td><span class="admin-user-status admin-user-status--' + (ev.status === 'past' ? 'approved' : ev.status === 'upcoming' ? 'pending' : 'approved') + '">' + (ev.status || 'upcoming') + '</span></td><td class="admin-approval-row"><button type="button" class="btn btn--outline btn--sm edit-event-btn" data-event-id="' + (ev.id || '') + '">Edit</button> <button type="button" class="btn btn--outline btn--sm delete-event-btn" data-event-id="' + (ev.id || '') + '">Delete</button></td>';
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll('.edit-event-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.dataset.eventId;
+            if (!id) return;
+            var events = adminData.getEvents();
+            var ev = events.filter(function (e) { return e.id === id; })[0];
+            if (!ev) return;
+            var titleEl = document.getElementById('event-add-title');
+            var locEl = document.getElementById('event-add-location');
+            var dateEl = document.getElementById('event-add-date');
+            var detailsEl = document.getElementById('event-add-details');
+            var statusEl = document.getElementById('event-add-status');
+            if (titleEl) titleEl.value = ev.title || '';
+            if (locEl) locEl.value = ev.location || '';
+            if (dateEl) dateEl.value = ev.date || '';
+            if (detailsEl) detailsEl.value = ev.details || '';
+            if (statusEl) statusEl.value = ev.status || 'upcoming';
+            var form = document.getElementById('admin-add-event-form');
+            if (form) {
+              form.dataset.editEventId = id;
+              form.querySelector('button[type="submit"]').textContent = 'Update event';
+            }
+            showPanel('events');
+          });
+        });
+        tbody.querySelectorAll('.delete-event-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.dataset.eventId;
+            if (!id || !confirm('Delete this event? It will be removed from the public Events page.')) return;
+            adminData.deleteEvent(id);
+            renderEvents();
+            var form = document.getElementById('admin-add-event-form');
+            if (form) {
+              delete form.dataset.editEventId;
+              form.reset();
+              form.querySelector('button[type="submit"]').textContent = 'Add event';
+            }
+          });
+        });
       }
 
         var user = auth.getCurrentUser();
@@ -1660,7 +1776,7 @@
         renderCourses();
         bindAssessmentsPanel();
         var hash = (window.location.hash || '').replace(/^#/, '');
-        if (hash && ['dashboard', 'courses', 'course-builder', 'assessments', 'beneficiaries', 'learners', 'farmers', 'users'].indexOf(hash) >= 0) {
+        if (hash && ['dashboard', 'courses', 'course-builder', 'assessments', 'beneficiaries', 'learners', 'farmers', 'events', 'users'].indexOf(hash) >= 0) {
           showPanel(hash);
         }
         renderApprovals('beneficiary', 'admin-beneficiaries-tbody', 'admin-beneficiaries-approved-tbody');
@@ -1715,6 +1831,28 @@
           } else {
             alert(result.message || 'Could not add user.');
           }
+        });
+
+        document.getElementById('admin-add-event-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var form = e.target;
+          var editId = form.dataset.editEventId;
+          var title = document.getElementById('event-add-title').value.trim();
+          var location = document.getElementById('event-add-location').value.trim();
+          var date = document.getElementById('event-add-date').value.trim();
+          var details = document.getElementById('event-add-details').value.trim();
+          var status = document.getElementById('event-add-status').value || 'upcoming';
+          if (!title) { alert('Title is required.'); return; }
+          if (editId) {
+            adminData.updateEvent(editId, { title: title, location: location, date: date, details: details, status: status });
+            delete form.dataset.editEventId;
+            form.querySelector('button[type="submit"]').textContent = 'Add event';
+          } else {
+            adminData.addEvent({ title: title, location: location, date: date, details: details, status: status });
+          }
+          form.reset();
+          renderEvents();
+          showPanel('events');
         });
 
         function handlePanelClick(e) {

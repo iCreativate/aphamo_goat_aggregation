@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Events – Workshops, vet days, and aggregation activities at Aphamo Goat Aggregation Centre and Koedoeberg Farm.">
+  <title>Events – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+  <script src="../scripts/admin-data.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <div class="nav__dropdown">
+          <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+          <ul class="nav__sub" aria-label="Goat Aggregation Hub submenu">
+            <li><a class="nav__sublink" href="/sell/">Beneficiary Programme</a></li>
+          </ul>
+        </div>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/events/">Events</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Events</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero page-hero--blc" aria-labelledby="events-hero-title">
+      <div class="container page-hero__container">
+        <h1 id="events-hero-title" class="page-hero__title">Events</h1>
+        <p class="page-hero__sub">Workshops, vet days, and aggregation activities at Koedoeberg Farm and across the network.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="events-intro-title">
+      <div class="container">
+        <h2 id="events-intro-title" class="listings-intro__title">Upcoming events</h2>
+        <p class="listings-intro__text">Join us for hands-on workshops, herd health days, and aggregation drop-offs. Events are announced here and on the <a href="/training/">Training &amp; Development</a> page. Contact us to register or for dates in your area.</p>
+        <div class="portal-dashboard__table-wrap" style="margin-top: var(--space-xl);">
+          <table class="portal-dashboard__table">
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="events-tbody">
+              <tr><td colspan="4">Loading events…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top: var(--space-lg);">More events will be added as dates are confirmed. <a href="/contact/">Contact us</a> to express interest or to host an event in your region.</p>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="events-cta-title">
+      <div class="container">
+        <h2 id="events-cta-title" class="cta-band__title">Get involved</h2>
+        <p class="cta-band__sub">Register for events, join a workshop, or find out about aggregation days near you.</p>
+        <div class="cta-band__actions">
+          <a href="/contact/" class="btn btn--cream btn--lg">Contact Us</a>
+          <a href="/training/" class="btn btn--outline btn--lg">Training &amp; Development</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/events/">Events</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var adminData = window.AphamoAdminData;
+      if (!adminData || !adminData.getEvents) return;
+      var tbody = document.getElementById('events-tbody');
+      if (!tbody) return;
+      var events = adminData.getEvents();
+      var order = { upcoming: 0, ongoing: 1, past: 2 };
+      events = events.slice().sort(function (a, b) {
+        var o = (order[a.status] ?? 1) - (order[b.status] ?? 1);
+        if (o !== 0) return o;
+        return (a.date || '').localeCompare(b.date || '');
+      });
+      tbody.innerHTML = '';
+      if (events.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4">No events at the moment. Check back soon.</td></tr>';
+        return;
+      }
+      events.forEach(function (ev) {
+        var tr = document.createElement('tr');
+        var dateText = ev.date || 'TBC';
+        tr.innerHTML = '<td>' + (ev.title || '—') + '</td><td>' + (ev.location || '—') + '</td><td>' + dateText + '</td><td>' + (ev.details || '—') + '</td>';
+        tbody.appendChild(tr);
+      });
+    })();
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+  </script>
+</body>
+</html>

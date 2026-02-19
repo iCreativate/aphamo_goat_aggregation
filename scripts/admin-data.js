@@ -7,6 +7,15 @@
   var PAYMENTS_KEY = 'aphamo_payments';
   var PROGRESS_KEY = 'aphamo_progress';
   var LISTINGS_KEY = 'aphamo_goat_listings';
+  var EVENTS_KEY = 'aphamo_events';
+
+  var EVENTS_SEED = [
+    { id: 'evt_seed_1', title: 'Goat handling & weighing', location: 'Groot Marico', date: '2026-03-15', details: 'Hands-on handling and weighing for aggregation readiness. Open to beneficiaries and smallholders.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'evt_seed_2', title: 'Herd health check workshop', location: 'North West', date: '2026-04-10', details: 'Vet-led health checks, vaccination, and parasite control. Bring your herd records.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'evt_seed_3', title: 'Aggregation drop-off day', location: 'Koedoeberg Farm', date: '2026-05-20', details: 'Bring animals for quality check and aggregation. Pre-register via contact form.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'evt_seed_4', title: 'Introduction to Goat Husbandry – workshop', location: 'Koedoeberg Farm', date: '2025-11-08', details: 'Full-day workshop covering breeds, housing, feeding, and basic care. Completed successfully.', status: 'past', createdAt: '2025-10-01T00:00:00.000Z' },
+    { id: 'evt_seed_5', title: 'Record-keeping for Smallholders', location: 'Online', date: '2025-12-05', details: 'Webinar on births, deaths, sales, and compliance records for aggregation.', status: 'past', createdAt: '2025-11-01T00:00:00.000Z' }
+  ];
 
   function getCourses() {
     try {
@@ -358,6 +367,68 @@
     getListingsByFarmer: function (email) {
       var em = (email || '').toLowerCase();
       return this.getListings().filter(function (l) { return (l.farmerEmail || '').toLowerCase() === em; });
+    },
+
+    getEvents: function () {
+      try {
+        var raw = localStorage.getItem(EVENTS_KEY);
+        var list = raw ? JSON.parse(raw) : null;
+        if (!Array.isArray(list) || list.length === 0) {
+          setEvents(EVENTS_SEED.slice());
+          return EVENTS_SEED.slice();
+        }
+        return list;
+      } catch (e) {
+        setEvents(EVENTS_SEED.slice());
+        return EVENTS_SEED.slice();
+      }
+    },
+    setEvents: function (events) {
+      try {
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    },
+    addEvent: function (data) {
+      var events = this.getEvents();
+      var id = 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+      var event = {
+        id: id,
+        title: (data.title || '').trim(),
+        location: (data.location || '').trim(),
+        date: (data.date || '').trim(),
+        details: (data.details || '').trim(),
+        status: (data.status === 'past' || data.status === 'ongoing' || data.status === 'upcoming') ? data.status : 'upcoming',
+        createdAt: new Date().toISOString()
+      };
+      events.push(event);
+      return this.setEvents(events) ? id : null;
+    },
+    updateEvent: function (id, updates) {
+      var events = this.getEvents();
+      var idx = events.findIndex(function (e) { return e.id === id; });
+      if (idx < 0) return false;
+      if (updates.title !== undefined) events[idx].title = String(updates.title).trim();
+      if (updates.location !== undefined) events[idx].location = String(updates.location).trim();
+      if (updates.date !== undefined) events[idx].date = String(updates.date).trim();
+      if (updates.details !== undefined) events[idx].details = String(updates.details).trim();
+      if (updates.status !== undefined && ['past', 'ongoing', 'upcoming'].indexOf(updates.status) >= 0) events[idx].status = updates.status;
+      return this.setEvents(events);
+    },
+    deleteEvent: function (id) {
+      var events = this.getEvents().filter(function (e) { return e.id !== id; });
+      return this.setEvents(events);
     }
   };
+
+  function setEvents(events) {
+    try {
+      localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 })();
