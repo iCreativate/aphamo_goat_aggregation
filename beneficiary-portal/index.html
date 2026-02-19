@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beneficiary Portal – Secure login for Aphamo beneficiaries to track compliance, training, and programme status.">
+  <title>Beneficiary Portal – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/sell/">Beneficiary Programme</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Beneficiary Portal</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="portal-gate" class="portal-gate">
+    <section class="page-hero page-hero--blc" aria-labelledby="beneficiary-portal-title">
+      <div class="container page-hero__container">
+        <h1 id="beneficiary-portal-title" class="page-hero__title">Beneficiary Portal</h1>
+        <p class="page-hero__sub">Secure login for approved beneficiaries to track compliance, training, and aggregation status.</p>
+      </div>
+    </section>
+
+    <section class="section learner-hub" aria-labelledby="beneficiary-portal-heading">
+      <div class="container learner-hub__container">
+        <p id="beneficiary-portal-heading" class="learner-hub__intro">
+          Use your beneficiary credentials to access your dashboard. If you have applied but not yet been approved, our team will confirm your access details.
+        </p>
+
+        <div class="learner-hub__panel">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h2 class="learner-hub__card-title">Beneficiary login</h2>
+            <p class="learner-hub__card-desc">Sign in to view your compliance status, training milestones, and programme notes.</p>
+            <form class="learner-hub__form" id="beneficiary-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="beneficiary-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="beneficiary-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary" selected>Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="beneficiary-email">Email or ID number <span class="contact-form__required">*</span></label>
+                <input type="text" id="beneficiary-email" name="email" class="contact-form__input" required placeholder="you@example.com or ID number">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="beneficiary-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="beneficiary-password" name="password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Not a beneficiary yet?</p>
+                <a href="/sell/" class="btn btn--outline learner-hub__switch-btn">View Beneficiary Programme</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <section class="contact-form-section" aria-labelledby="compliance-tracking-title">
+          <div class="contact-form-section__container">
+            <h2 id="compliance-tracking-title" class="contact-form-card__title">Digital compliance tracking system</h2>
+            <p class="contact-form-section__intro">
+              The Beneficiary Portal includes a digital compliance dashboard where you and Aphamo can monitor your progress in real time.
+            </p>
+            <ul class="beneficiary-conduct__list" role="list">
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Training compliance – which modules you have completed and which are outstanding.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Production records – herd numbers, births, sales, and mortalities captured per period.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Animal health – vaccinations, treatments, and veterinary visits logged against your profile.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Aggregation &amp; supply – deliveries to Aphamo, quality checks, and payment history.</span>
+              </li>
+            </ul>
+            <p class="contact-form-section__note">
+              This page is a front-end placeholder. When you are ready, connect the login and dashboard to your database or compliance tracking system.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+    </div>
+
+    <div id="portal-dashboard" class="portal-dashboard" aria-label="Beneficiary dashboard">
+      <div class="portal-dashboard__bar">
+        <p class="portal-dashboard__welcome">Welcome, <strong id="portal-dashboard-name">Beneficiary</strong> <span class="portal-dashboard__role" id="portal-dashboard-role" aria-label="Logged in as">Beneficiary</span></p>
+        <div id="portal-switcher" class="portal-switcher" hidden>
+          <label for="portal-switcher-select" class="portal-switcher__label">Switch to:</label>
+          <select id="portal-switcher-select" class="portal-switcher__select" aria-label="Switch to another portal">
+            <option value="">Other portals</option>
+          </select>
+        </div>
+        <button type="button" class="portal-dashboard__sign-out" id="portal-sign-out">Sign out</button>
+      </div>
+      <div class="portal-dashboard__layout">
+        <aside class="portal-dashboard__side" aria-label="Portal navigation">
+          <ul class="portal-dashboard__nav" role="tablist" id="portal-tablist">
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#dashboard" class="portal-dashboard__nav-link is-active" role="tab" id="tab-dashboard" aria-selected="true" aria-controls="panel-dashboard" data-panel="dashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                Dashboard
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#compliance" class="portal-dashboard__nav-link" role="tab" id="tab-compliance" aria-selected="false" aria-controls="panel-compliance" data-panel="compliance" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                Compliance
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#production" class="portal-dashboard__nav-link" role="tab" id="tab-production" aria-selected="false" aria-controls="panel-production" data-panel="production" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Production records
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#health" class="portal-dashboard__nav-link" role="tab" id="tab-health" aria-selected="false" aria-controls="panel-health" data-panel="health" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                Animal health
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#supply" class="portal-dashboard__nav-link" role="tab" id="tab-supply" aria-selected="false" aria-controls="panel-supply" data-panel="supply" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Supply &amp; payments
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#analytics" class="portal-dashboard__nav-link" role="tab" id="tab-analytics" aria-selected="false" aria-controls="panel-analytics" data-panel="analytics" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Analytics
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#profile" class="portal-dashboard__nav-link" role="tab" id="tab-profile" aria-selected="false" aria-controls="panel-profile" data-panel="profile" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Profile &amp; settings
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <div class="portal-dashboard__main">
+          <div id="panel-dashboard" class="portal-dashboard__panel is-visible" role="tabpanel" aria-labelledby="tab-dashboard">
+            <h2 class="portal-dashboard__title">Dashboard</h2>
+            <div class="portal-dashboard__card portal-dashboard__card--intro">
+              <p class="portal-dashboard__intro-text">Welcome to your beneficiary dashboard. Here you can track your compliance status, submit production records, log animal health events, and view supply and payment history with Aphamo.</p>
+              <div class="portal-dashboard__stat-grid">
+                <div class="portal-dashboard__stat portal-dashboard__stat--status portal-dashboard__stat--pending">
+                  <span class="portal-dashboard__stat-value">Setup required</span>
+                  <span class="portal-dashboard__stat-label">Compliance status</span>
+                </div>
+                <a href="#production" class="portal-dashboard__stat portal-dashboard__stat--link" id="stat-records-due" data-panel="production" aria-label="3 records due this month - go to Production records">
+                  <span class="portal-dashboard__stat-value">3</span>
+                  <span class="portal-dashboard__stat-label">Records due this month</span>
+                </a>
+                <a href="#dashboard" class="portal-dashboard__stat portal-dashboard__stat--link" id="stat-outstanding-actions" data-panel="dashboard" data-scroll-to="dashboard-action-required" aria-label="2 outstanding actions - view action required">
+                  <span class="portal-dashboard__stat-value" id="outstanding-actions-count">2</span>
+                  <span class="portal-dashboard__stat-label">Outstanding actions</span>
+                </a>
+              </div>
+            </div>
+            <div class="portal-dashboard__card" id="dashboard-action-required">
+              <h3 class="portal-dashboard__actions-title">Action required</h3>
+              <p class="portal-dashboard__actions-desc">Complete these items to stay on track with your beneficiary programme.</p>
+              <div class="portal-dashboard__action-list">
+                <div class="portal-dashboard__action-item" id="action-production-summary">
+                  <div class="portal-dashboard__action-content">
+                    <h4 class="portal-dashboard__action-title">Submit Monthly production summary</h4>
+                    <p class="portal-dashboard__action-detail">January 2026 summary due by 15 Feb 2026. Include herd count, births, deaths, and sales.</p>
+                  </div>
+                  <div class="portal-dashboard__action-cta">
+                    <button type="button" class="btn btn--primary" id="beneficiary-btn-submit-production" aria-describedby="action-production-summary">Submit production summary</button>
+                  </div>
+                </div>
+                <div class="portal-dashboard__action-item" id="action-delivery-slot">
+                  <div class="portal-dashboard__action-content">
+                    <h4 class="portal-dashboard__action-title">Confirm delivery slot</h4>
+                    <p class="portal-dashboard__action-detail">Next aggregation at Groot Marico. Confirm your slot (email sent 5 Feb).</p>
+                  </div>
+                  <div class="portal-dashboard__action-cta">
+                    <button type="button" class="btn btn--primary" id="beneficiary-btn-confirm-delivery" aria-describedby="action-delivery-slot">Confirm delivery slot</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Recent activity</h3>
+              <div class="portal-dashboard__empty-state">
+                <p>Your recent activity will appear here as you submit production records, log health events, and complete deliveries.</p>
+              </div>
+            </div>
+          </div>
+          <div id="panel-compliance" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-compliance">
+            <h2 class="portal-dashboard__title">Compliance</h2>
+            <div class="portal-dashboard__card portal-dashboard__card--compliance-intro">
+              <p class="portal-dashboard__compliance-status">Upload all required documents and complete the actions below to become compliant. Your status will remain <strong>pending review</strong> until everything is submitted.</p>
+              <p>Complete both sections to gain full access to aggregation deliveries, quality bonuses, and programme support:</p>
+              <ol class="portal-dashboard__compliance-steps">
+                <li><strong>Upload documents</strong> – Signed agreement, ID, proof of address, training certificate (if applicable), and bank details.</li>
+                <li><strong>Perform actions</strong> – Submit production records, log animal health events, and confirm delivery slots when notified.</li>
+              </ol>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Documents to upload</h3>
+              <p class="portal-dashboard__card-desc">Upload all of the following documents. We need these to verify your eligibility and keep your profile up to date. Accepted formats: PDF, Word, or images.</p>
+              <ul class="portal-dashboard__compliance-list">
+                <li class="portal-dashboard__compliance-item" data-doc="agreement">
+                  <span class="portal-dashboard__compliance-label">Signed beneficiary agreement <span class="contact-form__required">*</span></span>
+                  <div class="portal-dashboard__compliance-upload">
+                    <label for="upload-agreement" class="btn btn--outline btn--sm">Choose file</label>
+                    <input type="file" id="upload-agreement" accept=".pdf,.doc,.docx,image/*" aria-label="Upload signed beneficiary agreement" data-required="true">
+                    <span class="portal-dashboard__compliance-filename" id="upload-agreement-name" aria-live="polite"></span>
+                    <span class="portal-dashboard__compliance-hint">PDF, Word, or image</span>
+                  </div>
+                </li>
+                <li class="portal-dashboard__compliance-item" data-doc="id">
+                  <span class="portal-dashboard__compliance-label">ID document <span class="contact-form__required">*</span></span>
+                  <div class="portal-dashboard__compliance-upload">
+                    <label for="upload-id" class="btn btn--outline btn--sm">Choose file</label>
+                    <input type="file" id="upload-id" accept=".pdf,image/*" aria-label="Upload ID document" data-required="true">
+                    <span class="portal-dashboard__compliance-filename" id="upload-id-name" aria-live="polite"></span>
+                    <span class="portal-dashboard__compliance-hint">PDF or image</span>
+                  </div>
+                </li>
+                <li class="portal-dashboard__compliance-item" data-doc="address">
+                  <span class="portal-dashboard__compliance-label">Proof of address or farm registration <span class="contact-form__required">*</span></span>
+                  <div class="portal-dashboard__compliance-upload">
+                    <label for="upload-address" class="btn btn--outline btn--sm">Choose file</label>
+                    <input type="file" id="upload-address" accept=".pdf,.doc,.docx,image/*" aria-label="Upload proof of address or farm registration" data-required="true">
+                    <span class="portal-dashboard__compliance-filename" id="upload-address-name" aria-live="polite"></span>
+                    <span class="portal-dashboard__compliance-hint">PDF, Word, or image</span>
+                  </div>
+                </li>
+                <li class="portal-dashboard__compliance-item" data-doc="training">
+                  <span class="portal-dashboard__compliance-label">Training completion certificate</span>
+                  <div class="portal-dashboard__compliance-upload">
+                    <label for="upload-training" class="btn btn--outline btn--sm">Choose file</label>
+                    <input type="file" id="upload-training" accept=".pdf,.doc,.docx,image/*" aria-label="Upload training completion certificate">
+                    <span class="portal-dashboard__compliance-filename" id="upload-training-name" aria-live="polite"></span>
+                    <span class="portal-dashboard__compliance-hint">If applicable</span>
+                  </div>
+                </li>
+                <li class="portal-dashboard__compliance-item" data-doc="bank">
+                  <span class="portal-dashboard__compliance-label">Bank details for payments <span class="contact-form__required">*</span></span>
+                  <div class="portal-dashboard__compliance-upload">
+                    <label for="upload-bank" class="btn btn--outline btn--sm">Choose file</label>
+                    <input type="file" id="upload-bank" accept=".pdf,.doc,.docx,image/*" aria-label="Upload bank statement or confirmation letter" data-required="true">
+                    <span class="portal-dashboard__compliance-filename" id="upload-bank-name" aria-live="polite"></span>
+                    <span class="portal-dashboard__compliance-hint">Statement or letter showing account holder name</span>
+                  </div>
+                </li>
+              </ul>
+              <div class="portal-dashboard__compliance-actions">
+                <button type="button" class="btn btn--primary" id="compliance-submit-documents">Submit documents</button>
+                <p class="portal-dashboard__compliance-message" id="compliance-upload-message" role="status" aria-live="polite"></p>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Actions to complete</h3>
+              <p class="portal-dashboard__card-desc">Perform each of these tasks regularly to stay compliant. Use the links to go directly to each section.</p>
+              <ul class="portal-dashboard__compliance-list portal-dashboard__compliance-list--actions">
+                <li class="portal-dashboard__compliance-item">
+                  <span class="portal-dashboard__compliance-label">Submit monthly production records</span>
+                  <a href="#production" class="portal-dashboard__panel-link" data-panel="production">Go to Production records</a>
+                </li>
+                <li class="portal-dashboard__compliance-item">
+                  <span class="portal-dashboard__compliance-label">Log animal health events (vaccinations, treatments)</span>
+                  <a href="#health" class="portal-dashboard__panel-link" data-panel="health">Go to Animal health</a>
+                </li>
+                <li class="portal-dashboard__compliance-item">
+                  <span class="portal-dashboard__compliance-label">Confirm delivery slots when notified</span>
+                  <a href="#dashboard" class="portal-dashboard__panel-link" data-panel="dashboard">Go to Dashboard</a>
+                </li>
+              </ul>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Why compliance matters</h3>
+              <p>Compliant beneficiaries remain in good standing for aggregation deliveries, quality bonuses, and continued support from Aphamo. Non-compliance may affect delivery slots and programme eligibility. If you are unsure about a requirement, contact the team via the <a href="/contact/">Contact</a> page.</p>
+            </div>
+          </div>
+          <div id="panel-production" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-production">
+            <h2 class="portal-dashboard__title">Production records</h2>
+            <div class="production-hero">
+              <div class="production-hero__content">
+                <h3 class="production-hero__title">Submit your production summary</h3>
+                <p class="production-hero__desc">Include opening and closing herd count, births, deaths, sales, and notes. Submit monthly to stay compliant.</p>
+                <button type="button" class="btn btn--primary btn--lg" id="production-btn-open-form">Submit production summary</button>
+              </div>
+            </div>
+            <div class="portal-dashboard__card production-card">
+              <h3 class="production-card__title">Submitted records</h3>
+              <div class="production-table" id="production-records-table">
+                <div class="production-table__row production-table__row--header">
+                  <span>Period</span>
+                  <span>Submitted</span>
+                  <span>Status</span>
+                  <span></span>
+                </div>
+                <div class="production-table__body" id="production-records-body">
+                  <div class="production-table__empty" id="production-records-empty">
+                    <p>No production records submitted yet. Use the button above to submit your first monthly summary.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card production-guidelines">
+              <div class="production-guidelines__header">
+                <span class="production-guidelines__icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                </span>
+                <h3 class="production-guidelines__title">Record-keeping guidelines</h3>
+              </div>
+              <p class="production-guidelines__intro">Follow these practices to keep accurate production records.</p>
+              <ol class="production-guidelines__list">
+                <li class="production-guidelines__item">
+                  <span class="production-guidelines__number" aria-hidden="true">1</span>
+                  <span>Count all goats on the first and last day of the period (opening and closing herd).</span>
+                </li>
+                <li class="production-guidelines__item">
+                  <span class="production-guidelines__number" aria-hidden="true">2</span>
+                  <span>Record births (live and stillborn), deaths (with reason if known), and sales or transfers.</span>
+                </li>
+                <li class="production-guidelines__item">
+                  <span class="production-guidelines__number" aria-hidden="true">3</span>
+                  <span>Keep supporting documents (e.g. vet notes, sale slips) for your own files; we may request them for audits.</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div id="panel-health" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-health">
+            <h2 class="portal-dashboard__title">Animal health</h2>
+            <div class="portal-dashboard__card">
+              <p>Log vaccinations, treatments, and veterinary visits for your herd. Good health records support compliance and help with disease traceability and market confidence.</p>
+              <div class="health-actions">
+                <button type="button" class="btn btn--primary" id="health-btn-vaccination">Add vaccination</button>
+                <button type="button" class="btn btn--outline" id="health-btn-treatment">Add treatment</button>
+                <button type="button" class="btn btn--outline" id="health-btn-vet">Log vet visit</button>
+              </div>
+            </div>
+            <div class="health-tabs" role="tablist" aria-label="Health event types">
+              <button type="button" class="health-tabs__tab is-active" role="tab" id="health-tab-all" aria-selected="true" aria-controls="health-panel-all" data-tab="all">All events</button>
+              <button type="button" class="health-tabs__tab" role="tab" id="health-tab-vaccination" aria-selected="false" aria-controls="health-panel-vaccination" data-tab="vaccination" tabindex="-1">Vaccinations</button>
+              <button type="button" class="health-tabs__tab" role="tab" id="health-tab-treatment" aria-selected="false" aria-controls="health-panel-treatment" data-tab="treatment" tabindex="-1">Treatments</button>
+              <button type="button" class="health-tabs__tab" role="tab" id="health-tab-vet" aria-selected="false" aria-controls="health-panel-vet" data-tab="vet" tabindex="-1">Vet visits</button>
+            </div>
+            <div class="health-panels">
+              <div id="health-panel-all" class="health-panel is-visible" role="tabpanel" aria-labelledby="health-tab-all">
+                <div class="portal-dashboard__card health-events-card">
+                  <div class="health-events-empty" id="health-events-empty-all">
+                    <p>No health events logged yet. Use the buttons above to add vaccinations, treatments, or vet visits.</p>
+                  </div>
+                </div>
+              </div>
+              <div id="health-panel-vaccination" class="health-panel" role="tabpanel" aria-labelledby="health-tab-vaccination" aria-hidden="true">
+                <div class="portal-dashboard__card health-events-card">
+                  <div class="health-events-empty">
+                    <p>No vaccinations recorded. Click <strong>Add vaccination</strong> above to log your first.</p>
+                  </div>
+                </div>
+              </div>
+              <div id="health-panel-treatment" class="health-panel" role="tabpanel" aria-labelledby="health-tab-treatment" aria-hidden="true">
+                <div class="portal-dashboard__card health-events-card">
+                  <div class="health-events-empty">
+                    <p>No treatments recorded. Click <strong>Add treatment</strong> above to log deworming, wound care, or other treatments.</p>
+                  </div>
+                </div>
+              </div>
+              <div id="health-panel-vet" class="health-panel" role="tabpanel" aria-labelledby="health-tab-vet" aria-hidden="true">
+                <div class="portal-dashboard__card health-events-card">
+                  <div class="health-events-empty">
+                    <p>No vet visits logged. Click <strong>Log vet visit</strong> above to record a veterinary appointment.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Health reminders</h3>
+              <ul>
+                <li>Schedule clostridial vaccinations as per your vet's advice; log each one here.</li>
+                <li>Deworming: consider every 3–4 months depending on conditions; log each treatment.</li>
+                <li>Contact your vet or Aphamo if you see signs of illness or unexplained losses.</li>
+              </ul>
+            </div>
+          </div>
+          <div id="panel-supply" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-supply">
+            <h2 class="portal-dashboard__title">Supply &amp; payments</h2>
+            <div class="portal-dashboard__card">
+              <p>View your delivery history to Aphamo, quality check outcomes, and payment history. Deliveries are scheduled in advance; payments are made according to the beneficiary agreement after quality approval.</p>
+              <div class="supply-actions">
+                <button type="button" class="btn btn--primary" id="supply-btn-delivery">Log delivery</button>
+                <button type="button" class="btn btn--outline" id="supply-btn-payment">Log payment</button>
+              </div>
+            </div>
+            <div class="supply-tabs" role="tablist" aria-label="Supply sections">
+              <button type="button" class="supply-tabs__tab is-active" role="tab" id="supply-tab-deliveries" aria-selected="true" aria-controls="supply-panel-deliveries" data-tab="deliveries">Deliveries</button>
+              <button type="button" class="supply-tabs__tab" role="tab" id="supply-tab-payments" aria-selected="false" aria-controls="supply-panel-payments" data-tab="payments" tabindex="-1">Payments</button>
+              <button type="button" class="supply-tabs__tab" role="tab" id="supply-tab-next" aria-selected="false" aria-controls="supply-panel-next" data-tab="next" tabindex="-1">Next delivery</button>
+            </div>
+            <div class="supply-panels">
+              <div id="supply-panel-deliveries" class="supply-panel is-visible" role="tabpanel" aria-labelledby="supply-tab-deliveries">
+                <div class="portal-dashboard__card">
+                  <h3>Delivery history</h3>
+                  <div class="supply-table">
+                    <div class="supply-table__row supply-table__row--header"><span>Date</span><span>Location</span><span>Head</span><span>Quality</span><span></span></div>
+                    <div class="supply-table__body" id="supply-deliveries-body">
+                      <div class="supply-table__empty" id="supply-deliveries-empty">
+                        <p>No deliveries recorded yet. Click <strong>Log delivery</strong> above to record your first aggregation delivery to Aphamo.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="supply-panel-payments" class="supply-panel" role="tabpanel" aria-labelledby="supply-tab-payments" aria-hidden="true">
+                <div class="portal-dashboard__card">
+                  <h3>Payment history</h3>
+                  <div class="supply-table">
+                    <div class="supply-table__row supply-table__row--header"><span>Payment date</span><span>For period</span><span>Amount</span><span>Status</span><span></span></div>
+                    <div class="supply-table__body" id="supply-payments-body">
+                      <div class="supply-table__empty" id="supply-payments-empty">
+                        <p>No payments recorded yet. Click <strong>Log payment</strong> above when you receive payment for a delivery.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p>Payments are made via EFT to the account registered on your beneficiary profile. Queries: <a href="/contact/">Contact</a>.</p>
+                </div>
+              </div>
+              <div id="supply-panel-next" class="supply-panel" role="tabpanel" aria-labelledby="supply-tab-next" aria-hidden="true">
+                <div class="portal-dashboard__card supply-next-card">
+                  <h3>Next delivery</h3>
+                  <p>Your next scheduled aggregation slot will be confirmed by email. Typical frequency is monthly or as per your production capacity.</p>
+                  <a href="#dashboard" class="btn btn--primary supply-panel-link" data-panel="dashboard">View action required on Dashboard</a>
+                  <p class="supply-next-note">Reply to the scheduling email or <a href="/contact/">contact</a> the team to adjust your slot.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="panel-analytics" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-analytics">
+            <h2 class="portal-dashboard__title">Analytics</h2>
+            <div class="portal-dashboard__card">
+              <p>Your beneficiary programme analytics: deliveries, payments, compliance trend, and herd metrics over time.</p>
+              <div class="portal-dashboard__empty-state">
+                <p>Analytics will appear here as you log deliveries, receive payments, and build your programme history. Track total head delivered, YTD payments, quality pass rate, and delivery trends.</p>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Compliance score history</h3>
+              <p class="portal-dashboard__empty-state">Your compliance history will appear here once you have uploaded all required documents on the <a href="#compliance" class="portal-dashboard__panel-link" data-panel="compliance">Compliance</a> page and submitted your production records.</p>
+            </div>
+          </div>
+          <div id="panel-profile" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-profile">
+            <h2 class="portal-dashboard__title">Profile &amp; settings</h2>
+            <div class="portal-dashboard__card profile-card">
+              <div class="profile-header">
+                <div class="profile-avatar-wrap">
+                  <img id="profile-avatar" class="profile-avatar" src="" alt="" width="96" height="96">
+                  <span class="profile-avatar-placeholder" id="profile-avatar-placeholder" aria-hidden="true">?</span>
+                  <label for="profile-photo-input" class="profile-avatar-change">Change photo</label>
+                  <input type="file" id="profile-photo-input" accept="image/*" class="profile-photo-input" aria-label="Upload profile photo">
+                </div>
+                <div class="profile-info">
+                  <h3 id="profile-name" class="profile-name">—</h3>
+                  <p id="profile-email" class="profile-email">—</p>
+                </div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Update profile</h3>
+              <form id="profile-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-name-input">Full name</label>
+                  <input type="text" id="profile-name-input" name="name" class="contact-form__input" placeholder="Your name">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-email-input">Email</label>
+                  <input type="email" id="profile-email-input" name="email" class="contact-form__input" placeholder="you@example.com">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Change password</h3>
+              <form id="profile-password-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-current-password">Current password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-current-password" name="current" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-new-password">New password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-new-password" name="new" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-confirm-password">Confirm new password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-confirm-password" name="confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Update password</button>
+                </div>
+              </form>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Settings</h3>
+              <div class="profile-settings">
+                <label class="profile-setting">
+                  <input type="checkbox" id="setting-email-notifications" name="emailNotifications" checked>
+                  <span>Email notifications for updates and reminders</span>
+                </label>
+                <label class="profile-setting">
+                  <input type="checkbox" id="setting-activity-digest" name="activityDigest">
+                  <span>Weekly activity digest email</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/learner-portal/">Learner Portal</a></li>
+          <li><a href="/beneficiary-portal/">Beneficiary Portal</a></li>
+          <li><a href="/goat-listing-portal/">Goat Listing Portal</a></li>
+          <li><a href="/admin-portal/">Admin Portal</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <div id="hub-modal" class="hub-modal" aria-hidden="true" role="dialog" aria-labelledby="hub-modal-title">
+    <div class="hub-modal__backdrop"></div>
+    <div class="hub-modal__box">
+      <button type="button" class="hub-modal__close" aria-label="Close The Hub">&times;</button>
+      <h2 id="hub-modal-title" class="hub-modal__title">The Hub</h2>
+      <p class="hub-modal__intro">Sign in or register as a learner, beneficiary, or goat farmer.</p>
+      <div class="section learner-hub learner-hub--login" id="hub-modal-section">
+        <div class="learner-hub__panel learner-hub__panel--login" id="hub-modal-panel-login">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h3 class="learner-hub__card-title">Sign in</h3>
+            <p class="learner-hub__card-desc">Sign in to continue your training and view your dashboard.</p>
+            <form class="learner-hub__form" id="hub-modal-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="hub-modal-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-login-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-login-password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Don't have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-signup">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="learner-hub__panel learner-hub__panel--register learner-hub__panel--hidden" id="hub-modal-panel-register">
+          <div class="learner-hub__card learner-hub__card--register">
+            <h3 class="learner-hub__card-title">Create account</h3>
+            <p class="learner-hub__card-desc">Select all that apply—you can be a beneficiary, farmer, and learner at once.</p>
+            <form class="learner-hub__form" id="hub-modal-register-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-name">Full name <span class="contact-form__required">*</span></label>
+                <input type="text" id="hub-modal-register-name" class="contact-form__input" required autocomplete="name" placeholder="e.g. John Smith">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-register-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row learner-hub__roles-row">
+                <span class="contact-form__label">I am registering as <span class="contact-form__required">*</span></span>
+                <p class="learner-hub__roles-hint">Select all that apply.</p>
+                <div class="learner-hub__roles learner-hub__roles--checkboxes">
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="learner" class="hub-modal-role-checkbox"> <span>Learner</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="beneficiary" class="hub-modal-role-checkbox"> <span>Beneficiary</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="farmer" class="hub-modal-role-checkbox"> <span>Goat farmer (seller)</span></label>
+                </div>
+                <span id="hub-modal-register-roles-error" class="learner-hub__roles-error" aria-live="polite" hidden>Select at least one role.</span>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-password" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-confirm">Confirm password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra learner-hub__form-extra--checkbox">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" name="updates" class="learner-hub__checkbox" checked>
+                  <span>Send me training updates and course news</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Create account</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Already have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-login">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <p class="learner-hub__note">By signing in or registering you agree to our terms and privacy policy. POPIA-compliant.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="beneficiary-modal-production" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="production-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="production-modal-title" class="beneficiary-action-modal__title">Submit Monthly production summary</h2>
+      <p class="beneficiary-action-modal__sub">Enter your herd figures for the reporting period.</p>
+      <form id="beneficiary-form-production" class="beneficiary-action-modal__form" novalidate>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-period">Reporting period <span class="contact-form__required">*</span></label>
+          <input type="text" id="prod-period" name="period" class="contact-form__input" required placeholder="e.g. January 2026">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-opening">Opening herd count</label>
+          <input type="number" id="prod-opening" name="opening" class="contact-form__input" min="0" placeholder="e.g. 45">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-closing">Closing herd count</label>
+          <input type="number" id="prod-closing" name="closing" class="contact-form__input" min="0" placeholder="e.g. 48">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-births">Births</label>
+          <input type="number" id="prod-births" name="births" class="contact-form__input" min="0" placeholder="0">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-deaths">Deaths</label>
+          <input type="number" id="prod-deaths" name="deaths" class="contact-form__input" min="0" placeholder="0">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-sales">Sales / transferred out</label>
+          <input type="number" id="prod-sales" name="sales" class="contact-form__input" min="0" placeholder="0">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="prod-notes">Notes (optional)</label>
+          <textarea id="prod-notes" name="notes" class="contact-form__input contact-form__textarea" rows="3" placeholder="e.g. disease, feed changes"></textarea>
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Submit summary</button>
+        </div>
+      </form>
+      <div id="production-success" class="beneficiary-action-modal__success" hidden>
+        <p><strong>Thank you.</strong> Your production summary has been recorded. We will confirm receipt by email.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="beneficiary-modal-delivery" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="delivery-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="delivery-modal-title" class="beneficiary-action-modal__title">Confirm delivery slot</h2>
+      <p class="beneficiary-action-modal__sub">Groot Marico aggregation. Confirm your preferred slot.</p>
+      <div class="beneficiary-action-modal__info">
+        <p><strong>Location:</strong> Groot Marico</p>
+        <p><strong>Suggested slot:</strong> As per email sent 5 Feb 2026.</p>
+        <p>Confirm below to lock in your slot. You will receive a confirmation email.</p>
+      </div>
+      <form id="beneficiary-form-delivery" class="beneficiary-action-modal__form">
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="delivery-confirm-date">I can deliver on (optional)</label>
+          <input type="text" id="delivery-confirm-date" name="date" class="contact-form__input" placeholder="e.g. 25 Feb 2026 or as scheduled">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="delivery-confirm-notes">Notes (optional)</label>
+          <input type="text" id="delivery-confirm-notes" name="notes" class="contact-form__input" placeholder="e.g. approximate head count">
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Confirm delivery slot</button>
+        </div>
+      </form>
+      <div id="delivery-success" class="beneficiary-action-modal__success" hidden>
+        <p><strong>Slot confirmed.</strong> Your delivery slot at Groot Marico has been confirmed. We will send you a confirmation email shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="beneficiary-modal-detail" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="detail-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="detail-modal-title" class="beneficiary-action-modal__title">Details</h2>
+      <div id="detail-modal-body" class="beneficiary-action-modal__info"></div>
+    </div>
+  </div>
+
+  <div id="beneficiary-modal-health" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="health-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="health-modal-title" class="beneficiary-action-modal__title">Add health event</h2>
+      <form id="beneficiary-form-health" class="beneficiary-action-modal__form" novalidate>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="health-date">Date <span class="contact-form__required">*</span></label>
+          <input type="date" id="health-date" name="date" class="contact-form__input" required>
+        </div>
+        <div class="contact-form__row" id="health-row-type">
+          <label class="contact-form__label" for="health-type">Type</label>
+          <input type="text" id="health-type" name="type" class="contact-form__input" placeholder="e.g. Clostridial, Deworming">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="health-detail">Details</label>
+          <textarea id="health-detail" name="detail" class="contact-form__input contact-form__textarea" rows="3" placeholder="e.g. Whole herd – 45 head, product used"></textarea>
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="health-head">Number of animals</label>
+          <input type="number" id="health-head" name="head" class="contact-form__input" min="0" placeholder="e.g. 45">
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Log event</button>
+        </div>
+      </form>
+      <div id="health-success" class="beneficiary-action-modal__success" hidden>
+        <p><strong>Event logged.</strong> Your health record has been saved.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="beneficiary-modal-supply-delivery" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="supply-delivery-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="supply-delivery-modal-title" class="beneficiary-action-modal__title">Log delivery</h2>
+      <p class="beneficiary-action-modal__sub">Record an aggregation delivery to Aphamo.</p>
+      <form id="beneficiary-form-supply-delivery" class="beneficiary-action-modal__form" novalidate>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-delivery-date">Date <span class="contact-form__required">*</span></label>
+          <input type="date" id="supply-delivery-date" name="date" class="contact-form__input" required>
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-delivery-location">Location <span class="contact-form__required">*</span></label>
+          <input type="text" id="supply-delivery-location" name="location" class="contact-form__input" required placeholder="e.g. Groot Marico">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-delivery-head">Number of head <span class="contact-form__required">*</span></label>
+          <input type="number" id="supply-delivery-head" name="head" class="contact-form__input" required min="1" placeholder="e.g. 12">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-delivery-quality">Quality outcome</label>
+          <select id="supply-delivery-quality" name="quality" class="contact-form__input">
+            <option value="Passed">Passed</option>
+            <option value="Conditional">Conditional</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Log delivery</button>
+        </div>
+      </form>
+      <div id="supply-delivery-success" class="beneficiary-action-modal__success" hidden>
+        <p><strong>Delivery recorded.</strong> Your delivery has been logged.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="beneficiary-modal-supply-payment" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="supply-payment-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="supply-payment-modal-title" class="beneficiary-action-modal__title">Log payment</h2>
+      <p class="beneficiary-action-modal__sub">Record a payment received for a delivery.</p>
+      <form id="beneficiary-form-supply-payment" class="beneficiary-action-modal__form" novalidate>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-payment-date">Payment date <span class="contact-form__required">*</span></label>
+          <input type="date" id="supply-payment-date" name="date" class="contact-form__input" required>
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-payment-period">For period / delivery <span class="contact-form__required">*</span></label>
+          <input type="text" id="supply-payment-period" name="period" class="contact-form__input" required placeholder="e.g. December 2025 delivery">
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="supply-payment-amount">Amount (ZAR) <span class="contact-form__required">*</span></label>
+          <input type="text" id="supply-payment-amount" name="amount" class="contact-form__input" required placeholder="e.g. R 24,600">
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Log payment</button>
+        </div>
+      </form>
+      <div id="supply-payment-success" class="beneficiary-action-modal__success" hidden>
+        <p><strong>Payment recorded.</strong> Your payment has been logged.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="../scripts/hub-auth.js"></script>
+  <script src="../scripts/hub-modal.js"></script>
+  <script src="../scripts/profile-panel.js"></script>
+  <script src="../scripts/portal-switcher.js"></script>
+  <script>
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+
+    (function () {
+      var auth = window.AphamoHubAuth;
+      var gate = document.getElementById('portal-gate');
+      var dashboard = document.getElementById('portal-dashboard');
+      var expectedRole = 'beneficiary';
+
+      if (auth) {
+        var user = auth.getCurrentUser();
+        if (user) {
+          if (auth.hasRole(user, expectedRole)) {
+            if (!auth.isApproved(user, expectedRole)) {
+              if (gate) gate.classList.remove('portal-gate--hidden');
+              var intro = document.getElementById('beneficiary-portal-heading');
+              if (intro) intro.innerHTML = 'Your beneficiary account is <strong>pending approval</strong>. Our team will review your registration and notify you when you can access the portal. If you have questions, <a href="/contact/">contact us</a>.';
+              var loginPanel = document.querySelector('#portal-gate .learner-hub__panel');
+              if (loginPanel) loginPanel.style.display = 'none';
+              return;
+            }
+            if (gate) gate.classList.add('portal-gate--hidden');
+            if (dashboard) {
+              dashboard.classList.add('portal-dashboard--visible');
+              var nameEl = document.getElementById('portal-dashboard-name');
+              if (nameEl) nameEl.textContent = user.name || user.email || 'Beneficiary';
+              var roleEl = document.getElementById('portal-dashboard-role');
+              if (roleEl) roleEl.textContent = user.role === 'farmer' ? 'Goat farmer' : (user.role === 'beneficiary' ? 'Beneficiary' : 'Learner');
+              if (window.AphamoProfilePanel) AphamoProfilePanel.init(auth);
+            }
+            var signOutBtn = document.getElementById('portal-sign-out');
+            if (signOutBtn) signOutBtn.addEventListener('click', function () {
+              auth.signOut();
+              window.location.reload();
+            });
+            var navLinks = document.querySelectorAll('.portal-dashboard__nav-link[data-panel]');
+            var panels = document.querySelectorAll('.portal-dashboard__panel');
+            function initBeneficiaryDeliveryChart() {
+              if (window.beneficiaryDeliveryChart) return;
+              var ctx = document.getElementById('beneficiary-delivery-chart');
+              if (!ctx || typeof Chart === 'undefined') return;
+              var months = ['Sep 2025', 'Oct 2025', 'Nov 2025', 'Dec 2025', 'Jan 2026', 'Feb 2026'];
+              var headDelivered = [6, 10, 8, 12, 12, 0];
+              var paymentValue = [12000, 20000, 16400, 24600, 24600, 0];
+              window.beneficiaryDeliveryChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: months,
+                  datasets: [
+                    {
+                      label: 'Head delivered',
+                      data: headDelivered,
+                      backgroundColor: 'rgba(30, 64, 175, 0.7)',
+                      borderColor: 'rgb(30, 64, 175)',
+                      borderWidth: 1,
+                      yAxisID: 'y'
+                    },
+                    {
+                      label: 'Payment (R thousands)',
+                      data: paymentValue.map(function (v) { return v / 1000; }),
+                      type: 'line',
+                      borderColor: 'rgb(120, 53, 15)',
+                      backgroundColor: 'rgba(120, 53, 15, 0.1)',
+                      borderWidth: 2,
+                      fill: true,
+                      tension: 0.3,
+                      yAxisID: 'y1'
+                    }
+                  ]
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  interaction: { mode: 'index', intersect: false },
+                  plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                      callbacks: {
+                        label: function (item) {
+                          if (item.datasetIndex === 0) return item.dataset.label + ': ' + item.raw + ' head';
+                          return item.dataset.label + ': R ' + (item.raw * 1000).toLocaleString();
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    y: {
+                      type: 'linear',
+                      position: 'left',
+                      title: { display: true, text: 'Head delivered' },
+                      min: 0,
+                      ticks: { stepSize: 2 }
+                    },
+                    y1: {
+                      type: 'linear',
+                      position: 'right',
+                      title: { display: true, text: 'Payment (R \'000)' },
+                      min: 0,
+                      grid: { drawOnChartArea: false },
+                      ticks: { callback: function (v) { return v + 'k'; } }
+                    }
+                  }
+                }
+              });
+            }
+            function switchPanel(link) {
+              var panelId = link.getAttribute('aria-controls') || ('panel-' + link.getAttribute('data-panel'));
+              navLinks.forEach(function (l) {
+                l.classList.remove('is-active');
+                l.setAttribute('aria-selected', 'false');
+                l.setAttribute('tabindex', '-1');
+              });
+              panels.forEach(function (p) {
+                p.classList.remove('is-visible');
+                p.setAttribute('aria-hidden', 'true');
+              });
+              link.classList.add('is-active');
+              link.setAttribute('aria-selected', 'true');
+              link.setAttribute('tabindex', '0');
+              var panel = document.getElementById(panelId);
+              if (panel) {
+                panel.classList.add('is-visible');
+                panel.setAttribute('aria-hidden', 'false');
+                if (panelId === 'panel-analytics') initBeneficiaryDeliveryChart();
+                if (panelId === 'panel-profile' && window.AphamoProfilePanel) AphamoProfilePanel.refresh();
+              }
+              link.focus();
+            }
+            document.querySelectorAll('.portal-dashboard__panel-link').forEach(function (link) {
+              link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var panel = link.getAttribute('data-panel');
+                var tab = document.querySelector('.portal-dashboard__nav [data-panel="' + panel + '"]');
+                if (tab) switchPanel(tab);
+              });
+            });
+            var statRecordsDue = document.getElementById('stat-records-due');
+            var statOutstanding = document.getElementById('stat-outstanding-actions');
+            if (statRecordsDue) {
+              statRecordsDue.addEventListener('click', function (e) {
+                e.preventDefault();
+                var targetTab = document.querySelector('.portal-dashboard__nav-link[data-panel="production"]');
+                if (targetTab) switchPanel(targetTab);
+              });
+            }
+            if (statOutstanding) {
+              statOutstanding.addEventListener('click', function (e) {
+                e.preventDefault();
+                var targetTab = document.querySelector('.portal-dashboard__nav-link[data-panel="dashboard"]');
+                if (targetTab) switchPanel(targetTab);
+                var scrollToEl = document.getElementById('dashboard-action-required');
+                if (scrollToEl) {
+                  requestAnimationFrame(function () {
+                    scrollToEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  });
+                }
+              });
+            }
+            navLinks.forEach(function (link, i) {
+              link.addEventListener('click', function (e) {
+                e.preventDefault();
+                switchPanel(link);
+              });
+              link.addEventListener('keydown', function (e) {
+                var list = link.closest('[role="tablist"]');
+                var tabs = list ? list.querySelectorAll('[role="tab"][data-panel]') : [];
+                var idx = Array.prototype.indexOf.call(tabs, link);
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  switchPanel(tabs[(idx + 1) % tabs.length]);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                  e.preventDefault();
+                  switchPanel(tabs[(idx - 1 + tabs.length) % tabs.length]);
+                } else if (e.key === 'Home') {
+                  e.preventDefault();
+                  switchPanel(tabs[0]);
+                } else if (e.key === 'End') {
+                  e.preventDefault();
+                  switchPanel(tabs[tabs.length - 1]);
+                }
+              });
+            });
+            panels.forEach(function (p) {
+              if (!p.classList.contains('is-visible')) p.setAttribute('aria-hidden', 'true');
+            });
+          } else {
+            window.location.href = auth.getPortalUrl(user.role);
+            return;
+          }
+        }
+      }
+
+      var form = document.getElementById('beneficiary-login-form');
+      if (form && auth) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          var email = document.getElementById('beneficiary-email').value.trim();
+          var password = document.getElementById('beneficiary-password').value;
+          var roleEl = document.getElementById('beneficiary-login-role');
+          var result = auth.login(email, password);
+          if (result.success) {
+            var role = roleEl && roleEl.value ? roleEl.value : null;
+            if (role === 'admin') {
+              var sessUser = auth.getCurrentUser();
+              if (!auth.hasRole(sessUser, 'admin')) {
+                auth.signOut();
+                alert('You do not have admin access.');
+                return;
+              }
+            }
+            var url = role ? auth.getPortalUrl(role) : result.redirectUrl;
+            window.location.href = url;
+            return;
+          }
+          alert(result.message || 'Sign-in failed.');
+        });
+      }
+    })();
+
+    (function beneficiaryActionModals() {
+      var productionModal = document.getElementById('beneficiary-modal-production');
+      var deliveryModal = document.getElementById('beneficiary-modal-delivery');
+      var btnProduction = document.getElementById('beneficiary-btn-submit-production');
+      var btnDelivery = document.getElementById('beneficiary-btn-confirm-delivery');
+      var formProduction = document.getElementById('beneficiary-form-production');
+      var formDelivery = document.getElementById('beneficiary-form-delivery');
+      var productionSuccess = document.getElementById('production-success');
+      var deliverySuccess = document.getElementById('delivery-success');
+      var actionProductionSummary = document.getElementById('action-production-summary');
+      var actionDeliverySlot = document.getElementById('action-delivery-slot');
+
+      function openModal(modal) {
+        if (!modal) return;
+        if (modal.id === 'beneficiary-modal-production' && formProduction && productionSuccess) {
+          formProduction.hidden = false;
+          formProduction.reset();
+          productionSuccess.hidden = true;
+          productionSuccess.setAttribute('hidden', '');
+        }
+        if (modal.id === 'beneficiary-modal-delivery' && formDelivery && deliverySuccess) {
+          formDelivery.hidden = false;
+          deliverySuccess.hidden = true;
+          deliverySuccess.setAttribute('hidden', '');
+        }
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', onEscape);
+      }
+      function closeModal(modal) {
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onEscape);
+      }
+      function onEscape(e) {
+        if (e.key !== 'Escape') return;
+        if (productionModal && productionModal.classList.contains('is-open')) closeModal(productionModal);
+        else if (deliveryModal && deliveryModal.classList.contains('is-open')) closeModal(deliveryModal);
+      }
+
+      function setupModal(modal, openBtn, backdropSelector, closeBtnSelector) {
+        if (!modal) return;
+        var backdrop = modal.querySelector(backdropSelector || '.beneficiary-action-modal__backdrop');
+        var closeBtn = modal.querySelector(closeBtnSelector || '.beneficiary-action-modal__close');
+        if (openBtn) openBtn.addEventListener('click', function () { openModal(modal); });
+        if (backdrop) backdrop.addEventListener('click', function () { closeModal(modal); });
+        if (closeBtn) closeBtn.addEventListener('click', function () { closeModal(modal); });
+      }
+
+      setupModal(productionModal, btnProduction);
+      setupModal(deliveryModal, btnDelivery);
+      var btnProductionForm = document.getElementById('production-btn-open-form');
+      if (btnProductionForm) btnProductionForm.addEventListener('click', function () { openModal(productionModal); });
+
+      if (formProduction) {
+        formProduction.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var period = (document.getElementById('prod-period') && document.getElementById('prod-period').value.trim()) || 'This month';
+          var today = new Date();
+          var dateStr = today.toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' });
+          var body = document.getElementById('production-records-body');
+          var empty = document.getElementById('production-records-empty');
+          if (body && empty) {
+            empty.remove();
+            var row = document.createElement('div');
+            row.className = 'production-table__row production-table__row--clickable';
+            row.dataset.period = period;
+            row.dataset.date = dateStr;
+            row.innerHTML = '<span>' + period + '</span><span>' + dateStr + '</span><span class="production-table__status production-table__status--accepted">Accepted</span><span class="production-table__action" aria-label="View details">View</span>';
+            row.addEventListener('click', function () {
+              var d = document.getElementById('beneficiary-modal-detail');
+              if (d) {
+                var t = d.querySelector('[id="detail-modal-title"]');
+                var b = d.querySelector('[id="detail-modal-body"]');
+                if (t) t.textContent = 'Production record: ' + period;
+                if (b) b.innerHTML = '<p><strong>Period:</strong> ' + period + '</p><p><strong>Submitted:</strong> ' + dateStr + '</p><p><strong>Status:</strong> Accepted</p>';
+                d.classList.add('is-open');
+                d.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                function onEsc(e) {
+                  if (e.key === 'Escape') {
+                    d.classList.remove('is-open');
+                    d.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                    document.removeEventListener('keydown', onEsc);
+                  }
+                }
+                document.addEventListener('keydown', onEsc);
+              }
+            });
+            body.insertBefore(row, body.firstChild);
+          }
+          formProduction.hidden = true;
+          formProduction.reset();
+          if (productionSuccess) {
+            productionSuccess.hidden = false;
+            productionSuccess.removeAttribute('hidden');
+          }
+          if (actionProductionSummary) actionProductionSummary.classList.add('is-done');
+          updateOutstandingCount();
+          setTimeout(function () { closeModal(productionModal); }, 2000);
+        });
+      }
+      if (formDelivery) {
+        formDelivery.addEventListener('submit', function (e) {
+          e.preventDefault();
+          formDelivery.hidden = true;
+          if (deliverySuccess) {
+            deliverySuccess.hidden = false;
+            deliverySuccess.removeAttribute('hidden');
+          }
+          if (actionDeliverySlot) actionDeliverySlot.classList.add('is-done');
+          updateOutstandingCount();
+          setTimeout(function () { closeModal(deliveryModal); }, 2000);
+        });
+      }
+      function updateOutstandingCount() {
+        var list = document.querySelector('.portal-dashboard__action-list');
+        var remaining = list ? list.querySelectorAll('.portal-dashboard__action-item:not(.is-done)').length : 0;
+        var el = document.getElementById('outstanding-actions-count');
+        if (el) el.textContent = remaining;
+      }
+    })();
+
+    (function beneficiaryPanels() {
+      var detailModal = document.getElementById('beneficiary-modal-detail');
+      var detailTitle = document.getElementById('detail-modal-title');
+      var detailBody = document.getElementById('detail-modal-body');
+      var healthModal = document.getElementById('beneficiary-modal-health');
+      var healthForm = document.getElementById('beneficiary-form-health');
+      var healthSuccess = document.getElementById('health-success');
+
+      function openDetailModal(title, html) {
+        if (detailTitle) detailTitle.textContent = title;
+        if (detailBody) detailBody.innerHTML = html;
+        if (detailModal) {
+          detailModal.classList.add('is-open');
+          detailModal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          document.addEventListener('keydown', closeDetailOnEscape);
+        }
+      }
+      function closeDetailModal() {
+        if (detailModal) {
+          detailModal.classList.remove('is-open');
+          detailModal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          document.removeEventListener('keydown', closeDetailOnEscape);
+        }
+      }
+      function closeDetailOnEscape(e) { if (e.key === 'Escape') closeDetailModal(); }
+      if (detailModal) {
+        detailModal.querySelector('.beneficiary-action-modal__backdrop')?.addEventListener('click', closeDetailModal);
+        detailModal.querySelector('.beneficiary-action-modal__close')?.addEventListener('click', closeDetailModal);
+      }
+
+      document.querySelectorAll('.production-table__row--clickable').forEach(function (row) {
+        row.addEventListener('click', function () {
+          var cells = row.querySelectorAll('span:not(.production-table__action)');
+          var period = (cells[0] ? cells[0].textContent.trim() : '') || row.dataset.period || '';
+          var date = (cells[1] ? cells[1].textContent.trim() : '') || row.dataset.date || '';
+          openDetailModal('Production record: ' + period, '<p><strong>Period:</strong> ' + period + '</p><p><strong>Submitted:</strong> ' + date + '</p><p><strong>Status:</strong> Accepted</p>');
+        });
+      });
+
+      function setupSubTabs(containerSelector, tabSelector, panelSelector) {
+        var container = document.querySelector(containerSelector);
+        if (!container) return;
+        var tabs = container.querySelectorAll(tabSelector);
+        var panels = container.querySelectorAll(panelSelector);
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var targetId = tab.getAttribute('aria-controls');
+            tabs.forEach(function (t) {
+              t.classList.remove('is-active');
+              t.setAttribute('aria-selected', 'false');
+              t.setAttribute('tabindex', '-1');
+            });
+            panels.forEach(function (p) {
+              p.classList.remove('is-visible');
+              p.setAttribute('aria-hidden', 'true');
+            });
+            tab.classList.add('is-active');
+            tab.setAttribute('aria-selected', 'true');
+            tab.setAttribute('tabindex', '0');
+            var panel = document.getElementById(targetId);
+            if (panel) {
+              panel.classList.add('is-visible');
+              panel.setAttribute('aria-hidden', 'false');
+            }
+          });
+        });
+      }
+      setupSubTabs('.health-tabs', '.health-tabs__tab', '.health-panel');
+      setupSubTabs('.supply-tabs', '.supply-tabs__tab', '.supply-panel');
+
+      document.querySelectorAll('.health-event__expand').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var event = btn.closest('.health-event');
+          var date = event.querySelector('.health-event__date')?.textContent || '';
+          var type = event.querySelector('.health-event__type')?.textContent || '';
+          var detail = event.querySelector('.health-event__detail')?.textContent || '';
+          openDetailModal(type + ' – ' + date, '<p><strong>Date:</strong> ' + date + '</p><p><strong>Type:</strong> ' + type + '</p><p><strong>Details:</strong> ' + detail + '</p>');
+        });
+      });
+
+      document.querySelectorAll('.supply-table__row--clickable').forEach(function (row) {
+        row.addEventListener('click', function () {
+          var html = '';
+          if (row.dataset.location) {
+            html = '<p><strong>Date:</strong> ' + (row.dataset.date || '') + '</p><p><strong>Location:</strong> ' + row.dataset.location + '</p><p><strong>Head:</strong> ' + (row.dataset.head || '') + '</p><p><strong>Quality:</strong> ' + (row.dataset.quality || '') + '</p>';
+            openDetailModal('Delivery details', html);
+          } else {
+            html = '<p><strong>Payment date:</strong> ' + (row.dataset.date || '') + '</p><p><strong>Period:</strong> ' + (row.dataset.period || '') + '</p><p><strong>Amount:</strong> ' + (row.dataset.amount || '') + '</p><p><strong>Status:</strong> ' + (row.dataset.status || '') + '</p>';
+            openDetailModal('Payment details', html);
+          }
+        });
+      });
+
+      document.querySelectorAll('.supply-panel-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var panel = link.getAttribute('data-panel');
+          var tab = document.querySelector('.portal-dashboard__nav [data-panel="' + panel + '"]');
+          if (tab) { tab.click(); }
+        });
+      });
+
+      if (healthModal) {
+        function openHealthModal(title, type) {
+          document.getElementById('health-modal-title').textContent = title;
+          healthForm.dataset.healthType = type || '';
+          healthForm.hidden = false;
+          healthSuccess.hidden = true;
+          healthModal.classList.add('is-open');
+          healthModal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeHealthModal() {
+          healthModal.classList.remove('is-open');
+          healthModal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+        document.getElementById('health-btn-vaccination')?.addEventListener('click', function () { openHealthModal('Add vaccination', 'vaccination'); });
+        document.getElementById('health-btn-treatment')?.addEventListener('click', function () { openHealthModal('Add treatment', 'treatment'); });
+        document.getElementById('health-btn-vet')?.addEventListener('click', function () { openHealthModal('Log vet visit', 'vet'); });
+        healthModal.querySelector('.beneficiary-action-modal__backdrop')?.addEventListener('click', closeHealthModal);
+        healthModal.querySelector('.beneficiary-action-modal__close')?.addEventListener('click', closeHealthModal);
+        if (healthForm) {
+          healthForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var dateVal = document.getElementById('health-date').value;
+            var typeVal = healthForm.dataset.healthType || document.getElementById('health-type').value || 'Event';
+            var detailVal = document.getElementById('health-detail').value || '';
+            var headVal = document.getElementById('health-head').value || '';
+            var dateStr = dateVal ? new Date(dateVal + 'T12:00:00').toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+            var typeLabel = typeVal === 'vaccination' ? 'Vaccination' : typeVal === 'treatment' ? 'Treatment' : typeVal === 'vet' ? 'Vet visit' : typeVal;
+            var detailText = detailVal || (headVal ? headVal + ' head' : '');
+            var eventHtml = '<div class="health-event health-event--' + typeVal + '" data-type="' + typeVal + '"><div class="health-event__main"><span class="health-event__date">' + dateStr + '</span><span class="health-event__type">' + typeLabel + '</span><span class="health-event__detail">' + detailText + '</span></div><button type="button" class="health-event__expand" aria-label="View details">Details</button></div>';
+            var allPanel = document.querySelector('#health-panel-all .health-events-card');
+            var typePanel = document.querySelector('#health-panel-' + typeVal + ' .health-events-card');
+            var emptyAll = document.getElementById('health-events-empty-all');
+            if (allPanel && emptyAll) {
+              emptyAll.remove();
+              allPanel.insertAdjacentHTML('afterbegin', eventHtml);
+            }
+            if (typePanel) {
+              var emptyType = typePanel.querySelector('.health-events-empty');
+              if (emptyType) emptyType.remove();
+              typePanel.insertAdjacentHTML('afterbegin', eventHtml);
+            }
+            document.querySelectorAll('.health-event__expand').forEach(function (btn) {
+              if (btn.closest('.health-event') && !btn._bound) {
+                btn._bound = true;
+                btn.addEventListener('click', function (ev) {
+                  ev.stopPropagation();
+                  var evt = btn.closest('.health-event');
+                  var d = evt.querySelector('.health-event__date').textContent;
+                  var t = evt.querySelector('.health-event__type').textContent;
+                  var det = evt.querySelector('.health-event__detail').textContent;
+                  detailModal && (detailTitle.textContent = t + ' \u2013 ' + d, detailBody.innerHTML = '<p><strong>Date:</strong> ' + d + '</p><p><strong>Type:</strong> ' + t + '</p><p><strong>Details:</strong> ' + det + '</p>', detailModal.classList.add('is-open'), detailModal.setAttribute('aria-hidden', 'false'), document.body.style.overflow = 'hidden');
+                });
+              }
+            });
+            healthForm.hidden = true;
+            healthForm.reset();
+            healthSuccess.hidden = false;
+            healthSuccess.removeAttribute('hidden');
+            setTimeout(closeHealthModal, 1500);
+          });
+        }
+      }
+
+      var supplyDeliveryModal = document.getElementById('beneficiary-modal-supply-delivery');
+      var supplyPaymentModal = document.getElementById('beneficiary-modal-supply-payment');
+      var formSupplyDelivery = document.getElementById('beneficiary-form-supply-delivery');
+      var formSupplyPayment = document.getElementById('beneficiary-form-supply-payment');
+      function openSupplyModal(modal) {
+        if (!modal) return;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', supplyModalEscape);
+      }
+      function closeSupplyModal(modal) {
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', supplyModalEscape);
+      }
+      function supplyModalEscape(e) {
+        if (e.key === 'Escape') {
+          if (supplyDeliveryModal && supplyDeliveryModal.classList.contains('is-open')) closeSupplyModal(supplyDeliveryModal);
+          else if (supplyPaymentModal && supplyPaymentModal.classList.contains('is-open')) closeSupplyModal(supplyPaymentModal);
+        }
+      }
+      document.getElementById('supply-btn-delivery')?.addEventListener('click', function () {
+        formSupplyDelivery && (formSupplyDelivery.hidden = false, formSupplyDelivery.reset());
+        document.getElementById('supply-delivery-success') && (document.getElementById('supply-delivery-success').hidden = true);
+        openSupplyModal(supplyDeliveryModal);
+      });
+      document.getElementById('supply-btn-payment')?.addEventListener('click', function () {
+        formSupplyPayment && (formSupplyPayment.hidden = false, formSupplyPayment.reset());
+        document.getElementById('supply-payment-success') && (document.getElementById('supply-payment-success').hidden = true);
+        openSupplyModal(supplyPaymentModal);
+      });
+      supplyDeliveryModal?.querySelector('.beneficiary-action-modal__backdrop')?.addEventListener('click', function () { closeSupplyModal(supplyDeliveryModal); });
+      supplyDeliveryModal?.querySelector('.beneficiary-action-modal__close')?.addEventListener('click', function () { closeSupplyModal(supplyDeliveryModal); });
+      supplyPaymentModal?.querySelector('.beneficiary-action-modal__backdrop')?.addEventListener('click', function () { closeSupplyModal(supplyPaymentModal); });
+      supplyPaymentModal?.querySelector('.beneficiary-action-modal__close')?.addEventListener('click', function () { closeSupplyModal(supplyPaymentModal); });
+      if (formSupplyDelivery) {
+        formSupplyDelivery.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var dateVal = document.getElementById('supply-delivery-date').value;
+          var location = document.getElementById('supply-delivery-location').value.trim();
+          var head = document.getElementById('supply-delivery-head').value;
+          var quality = document.getElementById('supply-delivery-quality').value;
+          var dateStr = dateVal ? new Date(dateVal + 'T12:00:00').toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+          var body = document.getElementById('supply-deliveries-body');
+          var empty = document.getElementById('supply-deliveries-empty');
+          if (body && empty) {
+            empty.remove();
+            var row = document.createElement('button');
+            row.type = 'button';
+            row.className = 'supply-table__row supply-table__row--clickable';
+            row.dataset.date = dateStr;
+            row.dataset.location = location;
+            row.dataset.head = head;
+            row.dataset.quality = quality;
+            row.innerHTML = '<span>' + dateStr + '</span><span>' + location + '</span><span>' + head + '</span><span class="supply-table__status supply-table__status--passed">' + quality + '</span><span class="supply-table__action">View</span>';
+            row.addEventListener('click', function () {
+              openDetailModal('Delivery details', '<p><strong>Date:</strong> ' + dateStr + '</p><p><strong>Location:</strong> ' + location + '</p><p><strong>Head:</strong> ' + head + '</p><p><strong>Quality:</strong> ' + quality + '</p>');
+            });
+            body.insertBefore(row, body.firstChild);
+          }
+          formSupplyDelivery.hidden = true;
+          document.getElementById('supply-delivery-success').hidden = false;
+          document.getElementById('supply-delivery-success').removeAttribute('hidden');
+          setTimeout(function () { closeSupplyModal(supplyDeliveryModal); }, 1500);
+        });
+      }
+      if (formSupplyPayment) {
+        formSupplyPayment.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var dateVal = document.getElementById('supply-payment-date').value;
+          var period = document.getElementById('supply-payment-period').value.trim();
+          var amount = document.getElementById('supply-payment-amount').value.trim();
+          var dateStr = dateVal ? new Date(dateVal + 'T12:00:00').toLocaleDateString('en-ZA', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+          var body = document.getElementById('supply-payments-body');
+          var empty = document.getElementById('supply-payments-empty');
+          if (body && empty) {
+            empty.remove();
+            var row = document.createElement('button');
+            row.type = 'button';
+            row.className = 'supply-table__row supply-table__row--clickable';
+            row.dataset.date = dateStr;
+            row.dataset.period = period;
+            row.dataset.amount = amount;
+            row.dataset.status = 'Paid';
+            row.innerHTML = '<span>' + dateStr + '</span><span>' + period + '</span><span>' + amount + '</span><span class="supply-table__status supply-table__status--paid">Paid</span><span class="supply-table__action">View</span>';
+            row.addEventListener('click', function () {
+              openDetailModal('Payment details', '<p><strong>Payment date:</strong> ' + dateStr + '</p><p><strong>Period:</strong> ' + period + '</p><p><strong>Amount:</strong> ' + amount + '</p><p><strong>Status:</strong> Paid</p>');
+            });
+            body.insertBefore(row, body.firstChild);
+          }
+          formSupplyPayment.hidden = true;
+          document.getElementById('supply-payment-success').hidden = false;
+          document.getElementById('supply-payment-success').removeAttribute('hidden');
+          setTimeout(function () { closeSupplyModal(supplyPaymentModal); }, 1500);
+        });
+      }
+
+      (function complianceDocuments() {
+        var uploadIds = ['upload-agreement', 'upload-id', 'upload-address', 'upload-training', 'upload-bank'];
+        uploadIds.forEach(function (id) {
+          var input = document.getElementById(id);
+          var nameEl = document.getElementById(id + '-name');
+          if (input && nameEl) {
+            input.addEventListener('change', function () {
+              if (input.files && input.files.length > 0) {
+                nameEl.textContent = input.files[0].name;
+                nameEl.classList.add('is-selected');
+                input.closest('.portal-dashboard__compliance-item')?.classList.add('has-file');
+              } else {
+                nameEl.textContent = '';
+                nameEl.classList.remove('is-selected');
+                input.closest('.portal-dashboard__compliance-item')?.classList.remove('has-file');
+              }
+            });
+          }
+        });
+        var submitBtn = document.getElementById('compliance-submit-documents');
+        var messageEl = document.getElementById('compliance-upload-message');
+        if (submitBtn && messageEl) {
+          submitBtn.addEventListener('click', function () {
+            var required = document.querySelectorAll('.portal-dashboard__compliance-item input[data-required="true"]');
+            var missing = [];
+            var labels = { 'upload-agreement': 'Signed beneficiary agreement', 'upload-id': 'ID document', 'upload-address': 'Proof of address', 'upload-bank': 'Bank details' };
+            required.forEach(function (input) {
+              if (!input.files || input.files.length === 0) {
+                missing.push(labels[input.id] || input.id);
+              }
+            });
+            if (missing.length > 0) {
+              messageEl.textContent = 'Please select files for: ' + missing.join(', ');
+              messageEl.classList.remove('is-success');
+              messageEl.classList.add('is-error');
+              return;
+            }
+            messageEl.textContent = 'Documents uploaded successfully. We will review them and update your compliance status.';
+            messageEl.classList.remove('is-error');
+            messageEl.classList.add('is-success');
+            document.querySelectorAll('.portal-dashboard__compliance-item.has-file').forEach(function (item) {
+              item.classList.add('is-uploaded');
+            });
+          });
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>
+

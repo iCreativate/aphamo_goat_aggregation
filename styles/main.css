@@ -1,0 +1,10 @@
+/* Aphamo Goat Aggregation – Main stylesheet
+   Google-style UI with Roboto */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800&display=swap');
+
+@import 'variables.css';
+@import 'base.css';
+@import 'components.css';
+@import 'header-footer.css';
+@import 'home.css';

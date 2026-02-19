@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse goat listings – Boer, Kalahari Red, Savanna, Indigenous Veld. Find breeding stock, meat goats, and weaners from verified sellers across South Africa.">
+  <title>Browse Listings – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/sell/">Beneficiary Programme</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Browse Listings</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero page-hero--blc" aria-labelledby="listings-hero-title">
+      <div class="container page-hero__container">
+        <h1 id="listings-hero-title" class="page-hero__title">Browse Listings</h1>
+        <p class="page-hero__sub">Find quality goats—breeding stock, meat goats, and weaners—from verified sellers across South Africa.</p>
+      </div>
+    </section>
+
+    <section class="section listings-intro" aria-labelledby="listings-intro-title">
+      <div class="container">
+        <h2 id="listings-intro-title" class="listings-intro__title">Quality goats, one marketplace</h2>
+        <p class="listings-intro__text">Browse current listings by breed, location, and purpose. All sellers are linked to the Aphamo aggregation and training network. Use the filters below to narrow your search, or scroll to see all available goats.</p>
+      </div>
+    </section>
+
+    <section class="section listings-filters" aria-label="Filter listings">
+      <div class="container">
+        <p class="listings-filters__label">Filter by breed</p>
+        <div class="listings-filters__pills" id="listings-filter-pills" role="group" aria-label="Filter by breed">
+          <button type="button" class="listings-pill listings-pill--active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="listings-pill" data-filter="boer" aria-pressed="false">Boer</button>
+          <button type="button" class="listings-pill" data-filter="kalahari-red" aria-pressed="false">Kalahari Red</button>
+          <button type="button" class="listings-pill" data-filter="savanna" aria-pressed="false">Savanna</button>
+          <button type="button" class="listings-pill" data-filter="indigenous-veld" aria-pressed="false">Indigenous Veld</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section listings-grid-wrap" aria-labelledby="listings-grid-title">
+      <div class="container">
+        <h2 id="listings-grid-title" class="listings-grid__title">Current listings</h2>
+        <div class="featured-listings__grid listings-page__grid" id="listings-grid">
+          <a href="/listings/1/" class="featured-listings__card listing-card" data-breed="boer">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/boer.jpg" alt="Boer goats" loading="lazy">
+              <span class="badge badge--verified">Verified</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Boer breeding pair</h3>
+              <p class="card__meta">Gauteng · 18 months · Breeding</p>
+              <p class="card__price">R 8 500</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/2/" class="featured-listings__card listing-card" data-breed="kalahari-red">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/kalahari-red.jpg" alt="Kalahari Red goats" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Kalahari Red herd</h3>
+              <p class="card__meta">Free State · Mixed ages · Meat</p>
+              <p class="card__price">R 1 200 / head</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/3/" class="featured-listings__card listing-card" data-breed="savanna">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/savanna.jpg" alt="Savanna goats" loading="lazy">
+              <span class="badge badge--verified">Verified</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Savanna does (5)</h3>
+              <p class="card__meta">Limpopo · 2–3 years · Breeding</p>
+              <p class="card__price">R 45 000</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/4/" class="featured-listings__card listing-card" data-breed="indigenous-veld">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/indigenous-veld.jpg" alt="Indigenous Veld goats" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Indigenous Veld kids</h3>
+              <p class="card__meta">KZN · 3 months · Breeding / Meat</p>
+              <p class="card__price">R 900 / head</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/5/" class="featured-listings__card listing-card" data-breed="boer">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/boer.jpg" alt="Boer bucks" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Boer buck (stud)</h3>
+              <p class="card__meta">North West · 2 years · Breeding</p>
+              <p class="card__price">R 12 000</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/6/" class="featured-listings__card listing-card" data-breed="kalahari-red">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/kalahari-red.jpg" alt="Kalahari Red weaners" loading="lazy">
+              <span class="badge badge--verified">Verified</span>
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Kalahari Red weaners (20)</h3>
+              <p class="card__meta">Eastern Cape · 4–5 months · Meat</p>
+              <p class="card__price">R 1 050 / head</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/7/" class="featured-listings__card listing-card" data-breed="savanna">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/savanna.jpg" alt="Savanna herd" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Savanna wethers (10)</h3>
+              <p class="card__meta">Mpumalanga · 8–10 months · Meat</p>
+              <p class="card__price">R 2 800 / head</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+          <a href="/listings/8/" class="featured-listings__card listing-card" data-breed="indigenous-veld">
+            <div class="featured-listings__card-media">
+              <img class="card__image" src="../images/breeds/indigenous-veld.jpg" alt="Indigenous goats" loading="lazy">
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Mixed indigenous (15)</h3>
+              <p class="card__meta">Limpopo · Mixed · Breeding / Meat</p>
+              <p class="card__price">R 850 / head</p>
+              <span class="btn btn--primary featured-listings__btn">View &amp; Inquire</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section listings-cta" aria-labelledby="listings-sell-cta-title">
+      <div class="container">
+        <div class="listings-cta__card">
+          <h2 id="listings-sell-cta-title" class="listings-cta__title">Beneficiary Programme</h2>
+          <p class="listings-cta__text">Join the Beneficiary Programme to list your animals on Aphamo and reach buyers across the aggregation network. Verified beneficiaries get better visibility and access to training and market support.</p>
+          <a href="/sell/" class="btn btn--primary btn--lg">Join the Beneficiary Programme</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="listings-contact-title">
+      <div class="container">
+        <h2 id="listings-contact-title" class="cta-band__title">Need help finding stock?</h2>
+        <p class="cta-band__sub">Contact us for aggregation support, bulk enquiries, or to connect with trained beneficiaries and cooperatives.</p>
+        <div class="cta-band__actions">
+          <a href="/contact/" class="btn btn--cream btn--lg">Contact us</a>
+          <a href="/breeds/" class="btn btn--outline btn--lg">Goat Aggregation Hub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <div id="hub-modal" class="hub-modal" aria-hidden="true" role="dialog" aria-labelledby="hub-modal-title">
+    <div class="hub-modal__backdrop"></div>
+    <div class="hub-modal__box">
+      <button type="button" class="hub-modal__close" aria-label="Close The Hub">&times;</button>
+      <h2 id="hub-modal-title" class="hub-modal__title">The Hub</h2>
+      <p class="hub-modal__intro">Sign in or register as a learner, beneficiary, or goat farmer.</p>
+      <div class="section learner-hub learner-hub--login" id="hub-modal-section">
+        <div class="learner-hub__panel learner-hub__panel--login" id="hub-modal-panel-login">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h3 class="learner-hub__card-title">Sign in</h3>
+            <p class="learner-hub__card-desc">Sign in to continue your training and view your dashboard.</p>
+            <form class="learner-hub__form" id="hub-modal-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="hub-modal-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-login-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-login-password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Don't have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-signup">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="learner-hub__panel learner-hub__panel--register learner-hub__panel--hidden" id="hub-modal-panel-register">
+          <div class="learner-hub__card learner-hub__card--register">
+            <h3 class="learner-hub__card-title">Create account</h3>
+            <p class="learner-hub__card-desc">Register as a learner, beneficiary, or goat farmer.</p>
+            <form class="learner-hub__form" id="hub-modal-register-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-name">Full name <span class="contact-form__required">*</span></label>
+                <input type="text" id="hub-modal-register-name" class="contact-form__input" required autocomplete="name" placeholder="e.g. John Smith">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-register-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row learner-hub__roles-row">
+                <span class="contact-form__label">I am registering as a <span class="contact-form__required">*</span></span>
+                <div class="learner-hub__roles">
+                  <label class="learner-hub__role"><input type="radio" name="role" value="learner" required> <span>Learner</span></label>
+                  <label class="learner-hub__role"><input type="radio" name="role" value="beneficiary"> <span>Beneficiary</span></label>
+                  <label class="learner-hub__role"><input type="radio" name="role" value="farmer"> <span>Goat farmer (seller)</span></label>
+                </div>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-password" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-confirm">Confirm password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra learner-hub__form-extra--checkbox">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" name="updates" class="learner-hub__checkbox" checked>
+                  <span>Send me training updates and course news</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Create account</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Already have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-login">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <p class="learner-hub__note">By signing in or registering you agree to our terms and privacy policy. POPIA-compliant.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/hub-auth.js"></script>
+  <script src="../scripts/hub-modal.js"></script>
+  <script>
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+
+    (function () {
+      var grid = document.getElementById('listings-grid');
+      var pills = document.getElementById('listings-filter-pills');
+      if (!grid || !pills) return;
+      var cards = grid.querySelectorAll('.listing-card');
+      var buttons = pills.querySelectorAll('.listings-pill');
+
+      function setFilter(breed) {
+        buttons.forEach(function (btn) {
+          var filter = btn.getAttribute('data-filter');
+          btn.classList.toggle('listings-pill--active', filter === breed);
+          btn.setAttribute('aria-pressed', filter === breed ? 'true' : 'false');
+        });
+        cards.forEach(function (card) {
+          var cardBreed = card.getAttribute('data-breed');
+          var show = breed === 'all' || cardBreed === breed;
+          card.style.display = show ? '' : 'none';
+        });
+        var url = breed === 'all' ? '/listings/' : '/listings/?breed=' + breed;
+        if (typeof history.replaceState !== 'undefined') {
+          history.replaceState({}, '', url);
+        }
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var initial = params.get('breed') || 'all';
+      if (initial !== 'all' && ['boer', 'kalahari-red', 'savanna', 'indigenous-veld'].indexOf(initial) !== -1) {
+        setFilter(initial);
+      }
+
+      pills.addEventListener('click', function (e) {
+        var btn = e.target.closest('.listings-pill');
+        if (!btn) return;
+        var filter = btn.getAttribute('data-filter');
+        setFilter(filter);
+      });
+    })();
+  </script>
+</body>
+</html>

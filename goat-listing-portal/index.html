@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Goat Listing Portal – Secure login for farmers to manage goat listings, pricing, and buyer inquiries on Aphamo.">
+  <title>Goat Listing Portal – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/sell/">Beneficiary Programme</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Goat Listing Portal</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="portal-gate" class="portal-gate">
+    <section class="page-hero page-hero--blc" aria-labelledby="listing-portal-title">
+      <div class="container page-hero__container">
+        <h1 id="listing-portal-title" class="page-hero__title">Goat Listing Portal</h1>
+        <p class="page-hero__sub">Secure login for goat farmers to manage listings, pricing, and buyer inquiries.</p>
+      </div>
+    </section>
+
+    <section class="section learner-hub" aria-labelledby="listing-portal-heading">
+      <div class="container learner-hub__container">
+        <p id="listing-portal-heading" class="learner-hub__intro">
+          Use your farmer credentials to add, edit, or pause listings and respond to inquiries from verified buyers.
+        </p>
+
+        <div class="learner-hub__panel">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h2 class="learner-hub__card-title">Farmer login</h2>
+            <p class="learner-hub__card-desc">Sign in to manage your goat listings and track interest from buyers.</p>
+            <form class="learner-hub__form" id="farmer-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="farmer-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="farmer-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer" selected>Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="farmer-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="farmer-email" name="email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="farmer-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="farmer-password" name="password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">New to Aphamo?</p>
+                <a href="/the-hub/" class="btn btn--outline learner-hub__switch-btn">Register as a goat farmer</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <section class="contact-form-section" aria-labelledby="listing-portal-features-title">
+          <div class="contact-form-section__container">
+            <h2 id="listing-portal-features-title" class="contact-form-card__title">What you can do in the Goat Listing Portal</h2>
+            <p class="contact-form-section__intro">
+              Once integrated with your backend system, this portal will allow farmers to manage their listings end-to-end.
+            </p>
+            <ul class="beneficiary-conduct__list" role="list">
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Create new listings with photos, breed, age, location, and purpose.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Update prices, availability, and notes as your herd changes.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">See interest and inquiries from buyers routed via Aphamo.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Pause or close listings once animals are sold.</span>
+              </li>
+            </ul>
+            <p class="contact-form-section__note">
+              This is a front-end placeholder. When you are ready, connect the login and listing management features to your listings database or marketplace backend.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+    </div>
+
+    <div id="portal-dashboard" class="portal-dashboard" aria-label="Goat listing dashboard">
+      <div class="portal-dashboard__bar">
+        <p class="portal-dashboard__welcome">Welcome, <strong id="portal-dashboard-name">Farmer</strong> <span class="portal-dashboard__role" id="portal-dashboard-role" aria-label="Logged in as">Goat farmer</span></p>
+        <div id="portal-switcher" class="portal-switcher" hidden>
+          <label for="portal-switcher-select" class="portal-switcher__label">Switch to:</label>
+          <select id="portal-switcher-select" class="portal-switcher__select" aria-label="Switch to another portal">
+            <option value="">Other portals</option>
+          </select>
+        </div>
+        <button type="button" class="portal-dashboard__sign-out" id="portal-sign-out">Sign out</button>
+      </div>
+      <div class="portal-dashboard__layout">
+        <aside class="portal-dashboard__side" aria-label="Portal navigation">
+          <ul class="portal-dashboard__nav" role="tablist" id="portal-tablist">
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#dashboard" class="portal-dashboard__nav-link is-active" role="tab" id="tab-dashboard" aria-selected="true" aria-controls="panel-dashboard" data-panel="dashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                Dashboard
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#listings" class="portal-dashboard__nav-link" role="tab" id="tab-listings" aria-selected="false" aria-controls="panel-listings" data-panel="listings" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                My listings
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#new-listing" class="portal-dashboard__nav-link" role="tab" id="tab-new-listing" aria-selected="false" aria-controls="panel-new-listing" data-panel="new-listing" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New listing
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#inquiries" class="portal-dashboard__nav-link" role="tab" id="tab-inquiries" aria-selected="false" aria-controls="panel-inquiries" data-panel="inquiries" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Inquiries
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#analytics" class="portal-dashboard__nav-link" role="tab" id="tab-analytics" aria-selected="false" aria-controls="panel-analytics" data-panel="analytics" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Analytics
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#profile" class="portal-dashboard__nav-link" role="tab" id="tab-profile" aria-selected="false" aria-controls="panel-profile" data-panel="profile" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Profile &amp; settings
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="/listings/" class="portal-dashboard__nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Browse all listings
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <div class="portal-dashboard__main">
+          <div id="panel-dashboard" class="portal-dashboard__panel is-visible" role="tabpanel" aria-labelledby="tab-dashboard">
+            <h2 class="portal-dashboard__title">Dashboard</h2>
+            <div class="portal-dashboard__card">
+              <p>Welcome to your goat listing dashboard. Here you can manage your live listings, add new animals for sale, and respond to buyer inquiries through Aphamo.</p>
+              <div class="portal-dashboard__stat-grid">
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">3</span><span class="portal-dashboard__stat-label">Active listings</span></div>
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">5</span><span class="portal-dashboard__stat-label">New inquiries</span></div>
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">2</span><span class="portal-dashboard__stat-label">Sold this month</span></div>
+              </div>
+              <h3>Quick actions</h3>
+              <ul>
+                <li>You have <strong>5</strong> unanswered inquiries – reply from the <strong>Inquiries</strong> page.</li>
+                <li>One listing (<strong>Boer weaners – Lot A</strong>) is over 30 days old; consider updating the price or description.</li>
+                <li>Add a new listing when you have animals ready for sale via <strong>New listing</strong>.</li>
+              </ul>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Recent activity</h3>
+              <div class="portal-dashboard__empty-state">
+                <p>Your activity will appear here as you create listings, receive inquiries, and complete sales.</p>
+              </div>
+            </div>
+          </div>
+          <div id="panel-listings" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-listings">
+            <h2 class="portal-dashboard__title">My listings</h2>
+            <div class="portal-dashboard__card">
+              <p>View and manage all your goat listings. You can edit details, pause a listing when animals are reserved or sold, or close it when the sale is complete.</p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Pending approval</h3>
+              <p>Listings you have submitted. They will appear below once admin has approved them.</p>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Title</th><th>Breed</th><th>Qty</th><th>Price</th><th>Status</th></tr></thead>
+                  <tbody id="farmer-listings-pending-tbody">
+                    <tr><td colspan="5">No pending listings.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Approved listings</h3>
+              <p>These listings are live on the Browse Listings page.</p>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Title</th><th>Breed</th><th>Qty</th><th>Price</th><th>Location</th></tr></thead>
+                  <tbody id="farmer-listings-approved-tbody">
+                    <tr><td colspan="5">No approved listings yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Rejected listings</h3>
+              <p>Listings that did not meet the criteria. You can submit a new listing with updated details.</p>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Title</th><th>Breed</th><th>Rejected</th></tr></thead>
+                  <tbody id="farmer-listings-rejected-tbody">
+                    <tr><td colspan="3">None.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="panel-new-listing" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-new-listing">
+            <h2 class="portal-dashboard__title">New listing</h2>
+            <div class="portal-dashboard__card">
+              <p>Create a new listing to offer goats for sale on Aphamo. Good descriptions and clear pricing help buyers find and trust your listing. You can save a draft and publish when ready.</p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Listing form</h3>
+              <p>Complete the fields below. Required fields are marked with *. Once published, your listing will appear on the <a href="/listings/">Browse Listings</a> page.</p>
+              <ul>
+                <li><strong>Title</strong> – Short, clear name (e.g. “Boer weaners – Lot A”, “Kalahari Red breeding does”).</li>
+                <li><strong>Breed</strong> – Select from Boer, Kalahari Red, Savanna, Mixed, or Other.</li>
+                <li><strong>Quantity</strong> – Number of animals available.</li>
+                <li><strong>Price</strong> – Per head or total; indicate currency (ZAR).</li>
+                <li><strong>Location</strong> – Town or area (e.g. Groot Marico, North West); full address is not shown publicly.</li>
+                <li><strong>Description</strong> – Age, sex, purpose (meat, breeding, etc.), health and vaccination notes.</li>
+                <li><strong>Photos</strong> – At least one clear photo improves response rates.</li>
+              </ul>
+              <form id="farmer-new-listing-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-title">Title <span class="contact-form__required">*</span></label>
+                  <input type="text" id="listing-title" name="title" class="contact-form__input" required placeholder="e.g. Boer weaners – Lot A">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-breed">Breed <span class="contact-form__required">*</span></label>
+                  <select id="listing-breed" name="breed" class="contact-form__input contact-form__select" required>
+                    <option value="">— Select —</option>
+                    <option value="Boer">Boer</option>
+                    <option value="Kalahari Red">Kalahari Red</option>
+                    <option value="Savanna">Savanna</option>
+                    <option value="Mixed">Mixed</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-quantity">Quantity <span class="contact-form__required">*</span></label>
+                  <input type="number" id="listing-quantity" name="quantity" class="contact-form__input" required min="1" placeholder="Number of animals">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-price">Price <span class="contact-form__required">*</span></label>
+                  <input type="text" id="listing-price" name="price" class="contact-form__input" required placeholder="e.g. R 8 500 or R 450 per head">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-location">Location <span class="contact-form__required">*</span></label>
+                  <input type="text" id="listing-location" name="location" class="contact-form__input" required placeholder="e.g. Groot Marico, North West">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-description">Description <span class="contact-form__required">*</span></label>
+                  <textarea id="listing-description" name="description" class="contact-form__input contact-form__textarea" rows="4" required placeholder="Age, sex, purpose (meat/breeding), health and vaccination notes."></textarea>
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="listing-photo">Photo URL (optional)</label>
+                  <input type="url" id="listing-photo" name="photoUrl" class="contact-form__input" placeholder="https://...">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Submit for approval</button>
+                </div>
+              </form>
+              <p class="admin-pending-note" style="margin-top:0.5rem">Listings are reviewed by admin against the website criteria. You will be able to see approved listings under My listings.</p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Tips for better listings</h3>
+              <ul>
+                <li>Use accurate breed and age – buyers filter by these.</li>
+                <li>Mention vaccination and deworming status when known.</li>
+                <li>Respond to inquiries promptly; it builds trust and speeds up sales.</li>
+                <li>Update or pause the listing as soon as animals are sold or no longer available.</li>
+              </ul>
+            </div>
+          </div>
+          <div id="panel-inquiries" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-inquiries">
+            <h2 class="portal-dashboard__title">Inquiries</h2>
+            <div class="portal-dashboard__card">
+              <p>Buyers can contact you about your listings via the Aphamo site. Reply to inquiries here or by email. Good communication helps close sales and builds your reputation.</p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Unanswered inquiries (5)</h3>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Date</th><th>Listing</th><th>From</th><th>Message</th><th>Action</th></tr></thead>
+                  <tbody>
+                    <tr><td>9 Feb 2026</td><td>Boer weaners – Lot A</td><td>Buyer 1</td><td>Are these still available? Can I view?</td><td><button type="button" class="btn btn--primary btn--sm">Reply</button></td></tr>
+                    <tr><td>8 Feb 2026</td><td>Boer weaners – Lot B</td><td>Buyer 2</td><td>Price negotiable for all 6?</td><td><button type="button" class="btn btn--primary btn--sm">Reply</button></td></tr>
+                    <tr><td>7 Feb 2026</td><td>Mixed breed does</td><td>Buyer 3</td><td>Vaccination status?</td><td><button type="button" class="btn btn--primary btn--sm">Reply</button></td></tr>
+                    <tr><td>6 Feb 2026</td><td>Boer weaners – Lot A</td><td>Buyer 4</td><td>Location for viewing?</td><td><button type="button" class="btn btn--primary btn--sm">Reply</button></td></tr>
+                    <tr><td>5 Feb 2026</td><td>Boer weaners – Lot A</td><td>Buyer 5</td><td>Interested in 4 only – possible?</td><td><button type="button" class="btn btn--primary btn--sm">Reply</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Replied / closed</h3>
+              <p>Inquiries you have replied to or marked as closed are listed here for reference.</p>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Date</th><th>Listing</th><th>From</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td>3 Feb 2026</td><td>Kalahari Red buck</td><td>Buyer X</td><td>Replied – sold offline</td></tr>
+                    <tr><td>25 Jan 2026</td><td>Savanna does</td><td>Buyer Y</td><td>Replied – viewing arranged</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>How inquiries work</h3>
+              <p>When a buyer clicks “Contact seller” on your listing, they can send a message. You receive an email and can also see and reply to the inquiry here. Keep responses professional and include the information the buyer asked for (price, location, availability).</p>
+            </div>
+          </div>
+          <div id="panel-analytics" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-analytics">
+            <h2 class="portal-dashboard__title">Analytics</h2>
+            <div class="portal-dashboard__card">
+              <p>Listing and buyer engagement analytics: views, inquiries, and sales performance over time.</p>
+              <div class="portal-dashboard__empty-state">
+                <p>Analytics will appear here as you create listings, receive views and inquiries, and make sales. Track listing views, inquiry counts, and performance by listing.</p>
+              </div>
+            </div>
+          </div>
+          <div id="panel-profile" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-profile">
+            <h2 class="portal-dashboard__title">Profile &amp; settings</h2>
+            <div class="portal-dashboard__card profile-card">
+              <div class="profile-header">
+                <div class="profile-avatar-wrap">
+                  <img id="profile-avatar" class="profile-avatar" src="" alt="" width="96" height="96">
+                  <span class="profile-avatar-placeholder" id="profile-avatar-placeholder" aria-hidden="true">?</span>
+                  <label for="profile-photo-input" class="profile-avatar-change">Change photo</label>
+                  <input type="file" id="profile-photo-input" accept="image/*" class="profile-photo-input" aria-label="Upload profile photo">
+                </div>
+                <div class="profile-info">
+                  <h3 id="profile-name" class="profile-name">—</h3>
+                  <p id="profile-email" class="profile-email">—</p>
+                </div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Update profile</h3>
+              <form id="profile-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-name-input">Full name</label>
+                  <input type="text" id="profile-name-input" name="name" class="contact-form__input" placeholder="Your name">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-email-input">Email</label>
+                  <input type="email" id="profile-email-input" name="email" class="contact-form__input" placeholder="you@example.com">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Change password</h3>
+              <form id="profile-password-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-current-password">Current password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-current-password" name="current" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-new-password">New password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-new-password" name="new" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-confirm-password">Confirm new password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-confirm-password" name="confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Update password</button>
+                </div>
+              </form>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Settings</h3>
+              <div class="profile-settings">
+                <label class="profile-setting">
+                  <input type="checkbox" id="setting-email-notifications" name="emailNotifications" checked>
+                  <span>Email notifications for updates and reminders</span>
+                </label>
+                <label class="profile-setting">
+                  <input type="checkbox" id="setting-activity-digest" name="activityDigest">
+                  <span>Weekly activity digest email</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/learner-portal/">Learner Portal</a></li>
+          <li><a href="/beneficiary-portal/">Beneficiary Portal</a></li>
+          <li><a href="/goat-listing-portal/">Goat Listing Portal</a></li>
+          <li><a href="/admin-portal/">Admin Portal</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <div id="hub-modal" class="hub-modal" aria-hidden="true" role="dialog" aria-labelledby="hub-modal-title">
+    <div class="hub-modal__backdrop"></div>
+    <div class="hub-modal__box">
+      <button type="button" class="hub-modal__close" aria-label="Close The Hub">&times;</button>
+      <h2 id="hub-modal-title" class="hub-modal__title">The Hub</h2>
+      <p class="hub-modal__intro">Sign in or register as a learner, beneficiary, or goat farmer.</p>
+      <div class="section learner-hub learner-hub--login" id="hub-modal-section">
+        <div class="learner-hub__panel learner-hub__panel--login" id="hub-modal-panel-login">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h3 class="learner-hub__card-title">Sign in</h3>
+            <p class="learner-hub__card-desc">Sign in to continue your training and view your dashboard.</p>
+            <form class="learner-hub__form" id="hub-modal-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="hub-modal-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-login-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-login-password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Don't have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-signup">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="learner-hub__panel learner-hub__panel--register learner-hub__panel--hidden" id="hub-modal-panel-register">
+          <div class="learner-hub__card learner-hub__card--register">
+            <h3 class="learner-hub__card-title">Create account</h3>
+            <p class="learner-hub__card-desc">Register as a learner, beneficiary, or goat farmer.</p>
+            <form class="learner-hub__form" id="hub-modal-register-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-name">Full name <span class="contact-form__required">*</span></label>
+                <input type="text" id="hub-modal-register-name" class="contact-form__input" required autocomplete="name" placeholder="e.g. John Smith">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-register-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row learner-hub__roles-row">
+                <span class="contact-form__label">I am registering as <span class="contact-form__required">*</span></span>
+                <p class="learner-hub__roles-hint">Select all that apply.</p>
+                <div class="learner-hub__roles learner-hub__roles--checkboxes">
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="learner" class="hub-modal-role-checkbox"> <span>Learner</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="beneficiary" class="hub-modal-role-checkbox"> <span>Beneficiary</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="farmer" class="hub-modal-role-checkbox"> <span>Goat farmer (seller)</span></label>
+                </div>
+                <span id="hub-modal-register-roles-error" class="learner-hub__roles-error" aria-live="polite" hidden>Select at least one role.</span>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-password" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-confirm">Confirm password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra learner-hub__form-extra--checkbox">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" name="updates" class="learner-hub__checkbox" checked>
+                  <span>Send me training updates and course news</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Create account</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Already have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-login">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <p class="learner-hub__note">By signing in or registering you agree to our terms and privacy policy. POPIA-compliant.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/hub-auth.js"></script>
+  <script src="../scripts/admin-data.js"></script>
+  <script src="../scripts/hub-modal.js"></script>
+  <script src="../scripts/profile-panel.js"></script>
+  <script src="../scripts/portal-switcher.js"></script>
+  <script>
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+
+    (function () {
+      var auth = window.AphamoHubAuth;
+      var gate = document.getElementById('portal-gate');
+      var dashboard = document.getElementById('portal-dashboard');
+      var expectedRole = 'farmer';
+
+      if (auth) {
+        var user = auth.getCurrentUser();
+        if (user) {
+          if (auth.hasRole(user, expectedRole)) {
+            if (!auth.isApproved(user, expectedRole)) {
+              if (gate) gate.classList.remove('portal-gate--hidden');
+              var intro = document.getElementById('listing-portal-heading');
+              if (intro) intro.innerHTML = 'Your farmer (seller) account is <strong>pending approval</strong>. Our team will review your registration and notify you when you can list goats for sale. If you have questions, <a href="/contact/">contact us</a>.';
+              var loginPanel = document.querySelector('#portal-gate .learner-hub__panel');
+              if (loginPanel) loginPanel.style.display = 'none';
+              return;
+            }
+            if (gate) gate.classList.add('portal-gate--hidden');
+            if (dashboard) {
+              dashboard.classList.add('portal-dashboard--visible');
+              var nameEl = document.getElementById('portal-dashboard-name');
+              if (nameEl) nameEl.textContent = user.name || user.email || 'Farmer';
+              var roleEl = document.getElementById('portal-dashboard-role');
+              if (roleEl) roleEl.textContent = user.role === 'farmer' ? 'Goat farmer' : (user.role === 'beneficiary' ? 'Beneficiary' : 'Learner');
+              if (window.AphamoProfilePanel) AphamoProfilePanel.init(auth);
+            }
+            var signOutBtn = document.getElementById('portal-sign-out');
+            if (signOutBtn) signOutBtn.addEventListener('click', function () {
+              auth.signOut();
+              window.location.reload();
+            });
+            var navLinks = document.querySelectorAll('.portal-dashboard__nav-link[data-panel]');
+            var panels = document.querySelectorAll('.portal-dashboard__panel');
+            function switchPanel(link) {
+              var panelId = link.getAttribute('aria-controls') || ('panel-' + link.getAttribute('data-panel'));
+              navLinks.forEach(function (l) {
+                l.classList.remove('is-active');
+                l.setAttribute('aria-selected', 'false');
+                l.setAttribute('tabindex', '-1');
+              });
+              panels.forEach(function (p) {
+                p.classList.remove('is-visible');
+                p.setAttribute('aria-hidden', 'true');
+              });
+              link.classList.add('is-active');
+              link.setAttribute('aria-selected', 'true');
+              link.setAttribute('tabindex', '0');
+              var panel = document.getElementById(panelId);
+              if (panel) {
+                panel.classList.add('is-visible');
+                panel.setAttribute('aria-hidden', 'false');
+                if (panelId === 'panel-profile' && window.AphamoProfilePanel) AphamoProfilePanel.refresh();
+              }
+              link.focus();
+            }
+            navLinks.forEach(function (link, i) {
+              link.addEventListener('click', function (e) {
+                e.preventDefault();
+                switchPanel(link);
+              });
+              link.addEventListener('keydown', function (e) {
+                var list = link.closest('[role="tablist"]');
+                var tabs = list ? list.querySelectorAll('[role="tab"][data-panel]') : [];
+                var idx = Array.prototype.indexOf.call(tabs, link);
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  switchPanel(tabs[(idx + 1) % tabs.length]);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                  e.preventDefault();
+                  switchPanel(tabs[(idx - 1 + tabs.length) % tabs.length]);
+                } else if (e.key === 'Home') {
+                  e.preventDefault();
+                  switchPanel(tabs[0]);
+                } else if (e.key === 'End') {
+                  e.preventDefault();
+                  switchPanel(tabs[tabs.length - 1]);
+                }
+              });
+            });
+            panels.forEach(function (p) {
+              if (!p.classList.contains('is-visible')) p.setAttribute('aria-hidden', 'true');
+            });
+            var adminData = window.AphamoAdminData;
+            function renderFarmerListings() {
+              if (!adminData) return;
+              var u = auth.getCurrentUser();
+              if (!u) return;
+              var listings = adminData.getListingsByFarmer(u.email) || [];
+              var pending = listings.filter(function (l) { return l.status === 'pending'; });
+              var approved = listings.filter(function (l) { return l.status === 'approved'; });
+              var rejected = listings.filter(function (l) { return l.status === 'rejected'; });
+              var pendingTbody = document.getElementById('farmer-listings-pending-tbody');
+              var approvedTbody = document.getElementById('farmer-listings-approved-tbody');
+              var rejectedTbody = document.getElementById('farmer-listings-rejected-tbody');
+              if (pendingTbody) {
+                pendingTbody.innerHTML = pending.length === 0 ? '<tr><td colspan="5">No pending listings.</td></tr>' : pending.map(function (l) {
+                  return '<tr><td>' + (l.title || '—') + '</td><td>' + (l.breed || '—') + '</td><td>' + (l.quantity || '—') + '</td><td>' + (l.price || '—') + '</td><td><span style="font-size:0.85rem;background:#fef3c7;color:#b45309;padding:0.15rem 0.4rem;border-radius:4px">Pending review</span></td></tr>';
+                }).join('');
+              }
+              if (approvedTbody) {
+                approvedTbody.innerHTML = approved.length === 0 ? '<tr><td colspan="5">No approved listings yet.</td></tr>' : approved.map(function (l) {
+                  return '<tr><td>' + (l.title || '—') + '</td><td>' + (l.breed || '—') + '</td><td>' + (l.quantity || '—') + '</td><td>' + (l.price || '—') + '</td><td>' + (l.location || '—') + '</td></tr>';
+                }).join('');
+              }
+              if (rejectedTbody) {
+                rejectedTbody.innerHTML = rejected.length === 0 ? '<tr><td colspan="3">None.</td></tr>' : rejected.map(function (l) {
+                  var d = l.approvedAt ? new Date(l.approvedAt).toLocaleDateString('en-ZA') : '—';
+                  return '<tr><td>' + (l.title || '—') + '</td><td>' + (l.breed || '—') + '</td><td>' + d + '</td></tr>';
+                }).join('');
+              }
+            }
+            if (adminData) renderFarmerListings();
+            var newListingForm = document.getElementById('farmer-new-listing-form');
+            if (adminData && newListingForm) {
+              newListingForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var u = auth.getCurrentUser();
+                if (!u || !auth.hasRole(u, 'farmer') || !auth.isApproved(u, 'farmer')) {
+                  alert('You must be signed in as an approved farmer to submit a listing.');
+                  return;
+                }
+                var title = document.getElementById('listing-title').value.trim();
+                var breed = document.getElementById('listing-breed').value.trim();
+                var quantity = parseInt(document.getElementById('listing-quantity').value, 10) || 0;
+                var price = document.getElementById('listing-price').value.trim();
+                var location = document.getElementById('listing-location').value.trim();
+                var description = document.getElementById('listing-description').value.trim();
+                var photoUrl = document.getElementById('listing-photo').value.trim();
+                if (!title || !breed || !price || !location || !description) {
+                  alert('Please fill in all required fields.');
+                  return;
+                }
+                var id = adminData.addListing({
+                  farmerEmail: u.email,
+                  farmerName: u.name || u.email,
+                  title: title,
+                  breed: breed,
+                  quantity: quantity,
+                  price: price,
+                  location: location,
+                  description: description,
+                  photoUrls: photoUrl ? [photoUrl] : []
+                });
+                if (id) {
+                  newListingForm.reset();
+                  renderFarmerListings();
+                  alert('Your listing has been submitted for admin approval. You will see it under My listings once approved.');
+                } else {
+                  alert('Could not save listing. Please try again.');
+                }
+              });
+            }
+          } else {
+            window.location.href = auth.getPortalUrl(user.role);
+            return;
+          }
+        }
+      }
+
+      var form = document.getElementById('farmer-login-form');
+      if (form && auth) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          var email = document.getElementById('farmer-email').value.trim();
+          var password = document.getElementById('farmer-password').value;
+          var roleEl = document.getElementById('farmer-login-role');
+          var result = auth.login(email, password);
+          if (result.success) {
+            var role = roleEl && roleEl.value ? roleEl.value : null;
+            if (role === 'admin') {
+              var sessUser = auth.getCurrentUser();
+              if (!auth.hasRole(sessUser, 'admin')) {
+                auth.signOut();
+                alert('You do not have admin access.');
+                return;
+              }
+            }
+            var url = role ? auth.getPortalUrl(role) : result.redirectUrl;
+            window.location.href = url;
+            return;
+          }
+          alert(result.message || 'Sign-in failed.');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+

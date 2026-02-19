@@ -1,0 +1,111 @@
+/* Aphamo – Design Tokens (Google-style UI)
+   South Africa's Premier Goat Aggregation & Learning Hub */
+
+:root {
+  /* Primary – BLC-style professional blue */
+  --color-primary: #1e40af;
+  --color-primary-dark: #1e3a8a;
+  --color-primary-light: #3b82f6;
+  --color-primary-rgb: 30, 64, 175;
+
+  /* Secondary – teal (BLC-style accent) */
+  --color-secondary: #0d9488;
+  --color-secondary-dark: #0f766e;
+
+  /* Accent – for cards and highlights */
+  --color-terracotta: #2563eb;
+  --color-cream: #f8fafc;
+  --color-cream-dark: #f1f5f9;
+
+  /* Neutrals – clean greys */
+  --color-ink: #1e293b;
+  --color-ink-secondary: #64748b;
+  --color-ink-tertiary: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-divider: #f1f5f9;
+  --color-white: #ffffff;
+
+  /* Surfaces – BLC-style light backgrounds */
+  --color-surface: #ffffff;
+  --color-surface-2: #f8fafc;
+  --color-surface-3: #f1f5f9;
+  --color-background: #f8fafc;
+
+  /* Earth (body text – keep brand warmth where needed) */
+  --color-earth: #5C4033;
+  --color-text: var(--color-ink);
+  --color-text-heading: var(--color-ink);
+  --color-text-secondary: var(--color-ink-secondary);
+
+  /* Gold / energy */
+  --color-gold: #D4A84B;
+  --color-gold-dark: #b8923a;
+
+  /* Accent palette – orange, red, green, brown (for cards & variety) */
+  --color-accent-orange: #c2410c;
+  --color-accent-orange-dark: #9a3412;
+  --color-accent-red: #b91c1c;
+  --color-accent-red-dark: #991b1b;
+  --color-accent-green: #15803d;
+  --color-accent-green-dark: #166534;
+  --color-accent-brown: #78350f;
+  --color-accent-brown-dark: #92400e;
+
+  /* Semantic */
+  --color-success: var(--color-secondary);
+  --color-error: #d93025;
+
+  /* Typography – Roboto (Google) */
+  --font-heading: 'Roboto', system-ui, -apple-system, sans-serif;
+  --font-body: 'Roboto', system-ui, -apple-system, sans-serif;
+
+  --text-h1: 2rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-caption: 0.75rem;
+  --line-tight: 1.25;
+  --line-body: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing (generous, Google-like) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --section-padding: clamp(48px, 6vw, 80px);
+  --container-max: 1200px;
+  --container-narrow: 720px;
+
+  /* Border radius – Material 8dp */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* BLC-style soft shadows */
+  --shadow-0: none;
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-sm: var(--shadow-1);
+  --shadow-md: var(--shadow-2);
+  --shadow-lg: var(--shadow-3);
+
+  /* Transitions */
+  --ease-out: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-h1: 2.25rem;
+    --text-h2: 1.75rem;
+    --text-h3: 1.375rem;
+  }
+}

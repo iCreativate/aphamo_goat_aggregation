@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Portal – Manage courses, approve beneficiaries, learners, and farmers on Aphamo Goat Aggregation.">
+  <title>Admin Portal – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+  <style>
+    #admin-gate {
+      width: 100%;
+      min-height: calc(100vh - 180px);
+      background: linear-gradient(135deg, var(--color-primary, #1e40af) 0%, var(--color-primary-dark, #1e3a8a) 50%, #1e3a8a 100%);
+      background-size: 100% 100%;
+      background-attachment: scroll;
+      margin: 0;
+      padding: 2rem 1rem 4rem;
+      box-sizing: border-box;
+    }
+    #admin-gate .page-hero--blc { background: none; padding-top: 1rem; }
+    #admin-gate .page-hero__title { color: #fff; }
+    #admin-gate .page-hero__sub { color: rgba(255, 255, 255, 0.95); }
+    #admin-gate .section.learner-hub { background: transparent; }
+    #admin-gate .learner-hub__container { max-width: 420px; margin: 0 auto; }
+    .admin-portal__gate { max-width: none; margin: 0 auto; }
+    .admin-portal__gate-note { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-top: 0.5rem; }
+    #admin-gate .learner-hub__card--login { background: rgba(255,255,255,0.98); color: #1e293b; }
+    #admin-gate .learner-hub__card-title { color: #1e293b; }
+    #admin-gate .learner-hub__card-desc { color: #64748b; }
+    .admin-portal__bar { background: #1e293b; color: #fff; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    .admin-portal__bar a { color: #94a3b8; text-decoration: none; }
+    .admin-portal__bar a:hover { color: #fff; }
+    .admin-portal__main { max-width: 1200px; margin: 0 auto; padding: 1.5rem; display: flex; flex-direction: column; min-height: 0; }
+    .admin-portal__panel { display: none; }
+    #panel-course-preview:not(.is-visible) { display: none !important; }
+    .admin-portal__panel.admin-course-preview-panel.is-visible { display: flex; flex: 1 1 auto; min-height: 0; flex-direction: column; }
+    .admin-portal__panel.is-visible { display: block; }
+    .admin-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .admin-stat { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; text-align: center; }
+    .admin-stat__value { font-size: 1.75rem; font-weight: 700; color: #1e40af; display: block; }
+    .admin-stat__label { font-size: 0.85rem; color: #64748b; }
+    .admin-course-lock { font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    .admin-course-lock--locked { background: #fef2f2; color: #dc2626; }
+    .admin-course-lock--open { background: #f0fdf4; color: #16a34a; }
+    .admin-approval-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .admin-user-status { font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    .admin-user-status--suspended { background: #fef2f2; color: #dc2626; }
+    .admin-user-status--approved { background: #f0fdf4; color: #16a34a; }
+    .admin-user-status--pending { background: #fefce8; color: #ca8a04; }
+    .admin-stat-grid--wide { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+    .admin-stat--success .admin-stat__value { color: #16a34a; }
+    .admin-stat--warning .admin-stat__value { color: #ca8a04; }
+    .admin-payment-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+    @media (max-width: 768px) { .admin-payment-tables { grid-template-columns: 1fr; } }
+    .admin-payment-section h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .admin-progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+    .admin-progress-bar__fill { height: 100%; background: #1e40af; border-radius: 4px; transition: width 0.3s; }
+    .admin-pending-note { font-size: 0.9rem; color: #64748b; margin-top: 0.75rem; }
+    #admin-dashboard-wrap[hidden] { display: none !important; }
+    .portal-gate--hidden { display: none !important; }
+    .admin-course-builder-intro { color: #64748b; margin-bottom: 1.5rem; }
+    .admin-course-builder-card h4 { font-size: 0.95rem; margin: 1rem 0 0.5rem; }
+    .admin-course-builder-ai-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .admin-course-builder-ai-row input { flex: 1; min-width: 200px; }
+    .admin-course-builder-preview { margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .admin-course-builder-list { list-style: none; padding: 0; margin: 0 0 0.75rem; }
+    .admin-course-builder-module-note { font-size: 0.9rem; color: #64748b; margin-bottom: 0.75rem; }
+    .admin-course-builder-modules { display: flex; flex-direction: column; gap: 0.75rem; }
+    .cb-module-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; }
+    .cb-module-card__head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; cursor: pointer; }
+    .cb-module-card__head:hover { color: #1e40af; }
+    .cb-module-card__body { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; }
+    .cb-module-card.is-open .cb-module-card__body { display: block; }
+    .cb-module-fields { display: flex; flex-direction: column; gap: 0.5rem; }
+    .cb-module-fields label { font-size: 0.85rem; font-weight: 500; }
+    .admin-course-builder-list li { padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+    .admin-course-builder-inline-form { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-start; margin-top: 0.5rem; }
+    .admin-course-builder-inline-form input, .admin-course-builder-inline-form textarea { flex: 1; min-width: 180px; }
+    .cb-options-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+    .cb-options-wrap label { display: flex; align-items: center; gap: 0.5rem; }
+    .cb-options-wrap input[type="text"] { flex: 1; }
+    .admin-course-preview-panel { padding-top: 0; display: flex; flex-direction: column; min-height: 0; }
+    .admin-course-preview-header { flex-shrink: 0; position: sticky; top: 0; background: #fff; z-index: 5; padding: 0.75rem 0 1rem; border-bottom: 1px solid #e2e8f0; margin-bottom: 1rem; }
+    .admin-course-preview-title { margin: 0.5rem 0 0; font-size: 1.1rem; }
+    .admin-course-preview-content { text-align: left; width: 100%; max-width: none; flex: 1 1 auto; min-height: 0; overflow-y: auto; padding-bottom: 2rem; }
+    .admin-course-preview-content.learner-view h2 { font-size: 1.5rem; margin: 1.5rem 0 0.75rem; }
+    .admin-course-preview-content.learner-view h3 { font-size: 1.15rem; margin: 1.25rem 0 0.5rem; }
+    .admin-course-preview-content.learner-view h4 { font-size: 1rem; margin: 1rem 0 0.5rem; }
+    .admin-course-preview-content.learner-view p { margin: 0.5rem 0; }
+    .admin-course-preview-content.learner-view ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+    .admin-course-preview-content .learner-course-video { margin: 1rem 0; min-height: 200px; }
+    .admin-course-preview-content .learner-course-video__wrap { min-height: 280px; }
+    .admin-course-preview-content .learner-course-video-placeholder { min-height: 280px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; border-radius: 8px; color: #64748b; font-size: 0.95rem; padding: 1.5rem; text-align: center; }
+    .admin-course-preview-content .learner-course-materials { margin: 1rem 0; }
+    .admin-course-preview-content .portal-dashboard__card { margin-bottom: 1rem; }
+    .admin-course-preview-quiz { margin: 1rem 0; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .admin-course-preview-quiz h4 { margin-top: 0; }
+    .admin-course-preview-quiz .quiz-question { margin: 1rem 0; padding: 0.75rem; background: #fff; border-radius: 6px; }
+    .admin-course-preview-quiz label { display: block; margin: 0.35rem 0; cursor: pointer; }
+    .admin-course-preview-assignment { margin: 1rem 0; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .cb-module-click-head { cursor: pointer; padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .cb-module-click-head:hover { color: #1e40af; }
+    .cb-module-chevron { font-size: 0.9rem; transition: transform 0.2s; }
+    .cb-mod-badge { font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 4px; background: #e0f2fe; color: #0369a1; margin-left: 0.25rem; }
+    .cb-mod-badge + .cb-mod-badge { margin-left: 0.25rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/the-hub/">The Hub</a>
+        <a class="nav__link nav__link--cta" href="/admin-portal/">Admin</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Admin Portal</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="admin-gate" class="admin-portal__gate portal-gate">
+      <section class="page-hero page-hero--blc" aria-labelledby="admin-title">
+        <div class="container page-hero__container">
+          <h1 id="admin-title" class="page-hero__title">Admin Portal</h1>
+          <p class="page-hero__sub">Administrators only. Sign in to manage courses, approvals, and platform settings.</p>
+        </div>
+      </section>
+      <section class="section learner-hub">
+        <div class="container learner-hub__container">
+          <div class="learner-hub__panel">
+            <div class="learner-hub__card learner-hub__card--login">
+              <h2 class="learner-hub__card-title">Admin sign in</h2>
+              <p class="learner-hub__card-desc">Use your admin credentials to access the portal.</p>
+              <form class="learner-hub__form" id="admin-login-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="admin-email">Email <span class="contact-form__required">*</span></label>
+                  <input type="email" id="admin-email" name="email" class="contact-form__input" required autocomplete="email" placeholder="admin@aphamo.co.za">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="admin-password">Password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="admin-password" name="password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+                </div>
+              </form>
+              <p class="admin-portal__gate-note">Default admin: admin@aphamo.co.za / Admin123! (change after first login)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="admin-dashboard-wrap" class="admin-portal__dashboard portal-dashboard portal-dashboard--visible" aria-label="Admin dashboard" hidden>
+      <div class="admin-portal__bar portal-dashboard__bar">
+        <p class="portal-dashboard__welcome">Admin: <strong id="admin-name">—</strong></p>
+        <a href="/" class="portal-dashboard__sign-out" id="admin-sign-out">Sign out</a>
+      </div>
+      <div class="portal-dashboard__layout">
+        <aside class="portal-dashboard__side" aria-label="Admin navigation">
+          <ul class="portal-dashboard__nav" role="tablist" id="admin-tablist">
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#dashboard" class="portal-dashboard__nav-link is-active" role="tab" id="admin-tab-dashboard" aria-selected="true" aria-controls="panel-dashboard" data-panel="dashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                Dashboard
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#courses" class="portal-dashboard__nav-link" role="tab" id="admin-tab-courses" aria-selected="false" aria-controls="panel-courses" data-panel="courses" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8"/><path d="M8 11h8"/></svg>
+                Courses
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#course-builder" class="portal-dashboard__nav-link" role="tab" id="admin-tab-course-builder" aria-selected="false" aria-controls="panel-course-builder" data-panel="course-builder" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+                Course Builder
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#assessments" class="portal-dashboard__nav-link" role="tab" id="admin-tab-assessments" aria-selected="false" aria-controls="panel-assessments" data-panel="assessments" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                Assessments / Quizzes
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#beneficiaries" class="portal-dashboard__nav-link" role="tab" id="admin-tab-beneficiaries" aria-selected="false" aria-controls="panel-beneficiaries" data-panel="beneficiaries" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                Beneficiaries
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#learners" class="portal-dashboard__nav-link" role="tab" id="admin-tab-learners" aria-selected="false" aria-controls="panel-learners" data-panel="learners" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8"/><path d="M8 11h8"/></svg>
+                Learners
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#farmers" class="portal-dashboard__nav-link" role="tab" id="admin-tab-farmers" aria-selected="false" aria-controls="panel-farmers" data-panel="farmers" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                Farmers
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#users" class="portal-dashboard__nav-link" role="tab" id="admin-tab-users" aria-selected="false" aria-controls="panel-users" data-panel="users" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Users
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <div class="admin-portal__main portal-dashboard__main">
+        <div id="panel-dashboard" class="admin-portal__panel is-visible">
+          <h2 class="portal-dashboard__title">Dashboard</h2>
+
+          <div class="portal-dashboard__card">
+            <h3>User analytics</h3>
+            <div class="admin-stat-grid admin-stat-grid--wide" id="admin-analytics-stats">
+              <div class="admin-stat"><span class="admin-stat__value" id="stat-total-users">0</span><span class="admin-stat__label">Total users</span></div>
+              <div class="admin-stat"><span class="admin-stat__value" id="stat-learners">0</span><span class="admin-stat__label">Learners</span></div>
+              <div class="admin-stat"><span class="admin-stat__value" id="stat-beneficiaries">0</span><span class="admin-stat__label">Beneficiaries</span></div>
+              <div class="admin-stat"><span class="admin-stat__value" id="stat-farmers">0</span><span class="admin-stat__label">Farmers</span></div>
+            </div>
+            <p class="admin-pending-note" id="admin-pending-note">Pending approvals: <span id="stat-pending-learners">0</span> learners, <span id="stat-pending-beneficiaries">0</span> beneficiaries, <span id="stat-pending-farmers">0</span> farmers. <a href="#learners" class="portal-dashboard__panel-link" data-panel="learners">Review</a></p>
+          </div>
+
+          <div class="portal-dashboard__card">
+            <h3>Payment tracking (learners / students)</h3>
+            <p>Track which learners have made payments and which have not yet paid.</p>
+            <div class="admin-stat-grid">
+              <div class="admin-stat admin-stat--success"><span class="admin-stat__value" id="stat-paid">0</span><span class="admin-stat__label">Paid</span></div>
+              <div class="admin-stat admin-stat--warning"><span class="admin-stat__value" id="stat-unpaid">0</span><span class="admin-stat__label">Not yet paid</span></div>
+            </div>
+            <div class="admin-payment-tables">
+              <div class="admin-payment-section">
+                <h4>Learners who have paid</h4>
+                <div class="portal-dashboard__table-wrap">
+                  <table class="portal-dashboard__table">
+                    <thead><tr><th>Name</th><th>Email</th></tr></thead>
+                    <tbody id="admin-paid-learners-tbody">
+                      <tr><td colspan="2">None</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="admin-payment-section">
+                <h4>Learners who have not yet paid</h4>
+                <div class="portal-dashboard__table-wrap">
+                  <table class="portal-dashboard__table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Action</th></tr></thead>
+                    <tbody id="admin-unpaid-learners-tbody">
+                      <tr><td colspan="3">None</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portal-dashboard__card">
+            <h3>Progress tracking</h3>
+            <p>Track learning progress across all users and courses.</p>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>User</th><th>Email</th><th>Courses</th><th>Avg. progress</th><th>Action</th></tr></thead>
+                <tbody id="admin-progress-tbody">
+                  <tr><td colspan="5">No progress data yet. Progress is recorded when learners complete course modules.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="portal-dashboard__card">
+            <h3>Quick actions</h3>
+            <ul>
+              <li><a href="#course-builder" class="portal-dashboard__panel-link" data-panel="course-builder">Build a course with AI (Course Builder)</a></li>
+              <li><a href="#courses" class="portal-dashboard__panel-link" data-panel="courses">Upload a new course</a></li>
+              <li><a href="#beneficiaries" class="portal-dashboard__panel-link" data-panel="beneficiaries">Approve pending beneficiaries</a></li>
+              <li><a href="#learners" class="portal-dashboard__panel-link" data-panel="learners">Approve pending learners</a></li>
+              <li><a href="#farmers" class="portal-dashboard__panel-link" data-panel="farmers">Approve pending farmers (sellers)</a></li>
+              <li><a href="#users" class="portal-dashboard__panel-link" data-panel="users">Add, suspend, or delete users</a></li>
+              <li>Lock or unlock courses based on payment status</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="panel-course-builder" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Smart Course Builder</h2>
+          <p class="admin-course-builder-intro">Build courses with AI assistance. Add modules, quizzes, assessments, assignments, and tests. <strong>Every course must have at least one quiz or assessment</strong> before it can be published.</p>
+
+          <div class="portal-dashboard__card admin-course-builder-card">
+            <h3>1. AI Course Generator</h3>
+            <p>Enter a topic and let AI suggest a course structure.</p>
+            <div class="admin-course-builder-ai-row">
+              <input type="text" id="cb-ai-topic" class="contact-form__input" placeholder="e.g. Goat Farming Fundamentals">
+              <button type="button" id="cb-ai-generate" class="btn btn--primary">Generate with AI</button>
+            </div>
+            <div id="cb-ai-preview" class="admin-course-builder-preview" hidden>
+              <h4>Preview</h4>
+              <p id="cb-ai-desc"></p>
+              <p><strong>Modules:</strong></p>
+              <ul id="cb-ai-modules"></ul>
+              <p><strong>Quiz questions:</strong></p>
+              <ul id="cb-ai-quiz"></ul>
+              <p id="cb-ai-assignments-label" style="display:none"><strong>Assignments:</strong></p>
+              <ul id="cb-ai-assignments"></ul>
+              <div class="contact-form__actions">
+                <button type="button" id="cb-ai-save-as-course" class="btn btn--primary">Save as new course</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="portal-dashboard__card admin-course-builder-card">
+            <h3>2. Select course to edit</h3>
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="cb-course-select">Course</label>
+              <select id="cb-course-select" class="contact-form__input contact-form__select">
+                <option value="">— Select course —</option>
+              </select>
+            </div>
+            <div id="cb-course-detail" hidden>
+              <div class="portal-dashboard__card cb-course-settings" style="margin-bottom:1rem; padding:1rem; background:#f8fafc; border-radius:8px; border:1px solid #e2e8f0">
+                <h4 style="margin-top:0">Course settings</h4>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="cb-course-title">Title</label>
+                  <input type="text" id="cb-course-title" class="contact-form__input" placeholder="Course title">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="cb-course-description">Description</label>
+                  <textarea id="cb-course-description" class="contact-form__input contact-form__textarea" rows="2" placeholder="Brief description"></textarea>
+                </div>
+                <div class="contact-form__row">
+                  <label class="learner-hub__checkbox-label">
+                    <input type="checkbox" id="cb-course-locked" name="locked">
+                    <span>Locked (requires payment to access)</span>
+                  </label>
+                </div>
+                <div class="admin-approval-row" style="margin-top:0.5rem; flex-wrap:wrap; gap:0.5rem">
+                  <button type="button" id="cb-save-course-settings" class="btn btn--primary btn--sm">Save course settings</button>
+                  <button type="button" id="cb-preview-course-btn" class="btn btn--outline btn--sm">Preview course</button>
+                  <button type="button" id="cb-duplicate-course-btn" class="btn btn--outline btn--sm">Duplicate course</button>
+                </div>
+              </div>
+              <p id="cb-course-detail-quiz-required" class="admin-pending-note" style="display:none; margin-bottom:0.75rem">This course has no quiz or assessment yet. Add at least one before publishing.</p>
+              <h4>Modules</h4>
+              <p class="admin-course-builder-module-note">Assign a video and/or quiz/assessment/test to each module. Learners click modules to view content.</p>
+              <form id="cb-add-module-form" class="profile-form admin-course-builder-inline-form" style="margin-bottom:0.75rem">
+                <input type="text" id="cb-module-title" class="contact-form__input" placeholder="New module title">
+                <button type="submit" class="btn btn--primary btn--sm">Add module</button>
+              </form>
+              <div id="cb-modules-list" class="admin-course-builder-modules"></div>
+
+              <h4>Quizzes</h4>
+              <div id="cb-quizzes-section">
+                <ul id="cb-quizzes-list" class="admin-course-builder-list"></ul>
+                <form id="cb-add-quiz-form" class="profile-form admin-course-builder-inline-form">
+                  <input type="text" id="cb-quiz-title" placeholder="Quiz title" class="contact-form__input">
+                  <button type="submit" class="btn btn--primary btn--sm">Add quiz</button>
+                </form>
+              </div>
+
+              <h4>Assessments</h4>
+              <div id="cb-assessments-section">
+                <ul id="cb-assessments-list" class="admin-course-builder-list"></ul>
+                <form id="cb-add-assessment-form" class="profile-form admin-course-builder-inline-form">
+                  <input type="text" id="cb-assessment-title" placeholder="Assessment title" class="contact-form__input">
+                  <button type="submit" class="btn btn--primary btn--sm">Add assessment</button>
+                </form>
+              </div>
+
+              <h4>Assignments</h4>
+              <div id="cb-assignments-section">
+                <ul id="cb-assignments-list" class="admin-course-builder-list"></ul>
+                <form id="cb-add-assignment-form" class="profile-form admin-course-builder-inline-form">
+                  <input type="text" id="cb-assignment-title" placeholder="Assignment title" class="contact-form__input">
+                  <textarea id="cb-assignment-instructions" placeholder="Instructions" class="contact-form__input contact-form__textarea" rows="2"></textarea>
+                  <button type="submit" class="btn btn--primary btn--sm">Add assignment</button>
+                </form>
+              </div>
+
+              <h4>Tests</h4>
+              <div id="cb-tests-section">
+                <ul id="cb-tests-list" class="admin-course-builder-list"></ul>
+                <form id="cb-add-test-form" class="profile-form admin-course-builder-inline-form">
+                  <input type="text" id="cb-test-title" placeholder="Test title" class="contact-form__input">
+                  <input type="number" id="cb-test-time" placeholder="Time (min)" class="contact-form__input" min="0">
+                  <button type="submit" class="btn btn--primary btn--sm">Add test</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-course-preview" class="admin-portal__panel admin-course-preview-panel">
+          <div class="admin-course-preview-header">
+            <button type="button" class="btn btn--outline admin-back-from-preview" id="admin-back-from-preview">← Back to courses</button>
+            <h2 class="portal-dashboard__title admin-course-preview-title" id="admin-course-preview-heading">Course preview</h2>
+          </div>
+          <div id="admin-course-preview-content" class="admin-course-preview-content learner-view"></div>
+        </div>
+
+        <div id="panel-courses" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Courses</h2>
+          <div class="portal-dashboard__card">
+            <h3>Add new course</h3>
+            <form id="admin-course-form" class="profile-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="course-title">Title <span class="contact-form__required">*</span></label>
+                <input type="text" id="course-title" name="title" class="contact-form__input" required placeholder="e.g. Introduction to Goat Husbandry">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="course-description">Description</label>
+                <textarea id="course-description" name="description" class="contact-form__input contact-form__textarea" rows="3" placeholder="Brief course description"></textarea>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="course-video">Video URL (YouTube embed)</label>
+                <input type="url" id="course-video" name="videoUrl" class="contact-form__input" placeholder="https://www.youtube.com/embed/...">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label">Materials (one URL per line)</label>
+                <textarea id="course-materials" name="materials" class="contact-form__input contact-form__textarea" rows="2" placeholder="https://example.com/material1.pdf&#10;https://example.com/material2.pdf"></textarea>
+              </div>
+              <div class="contact-form__row">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" id="course-locked" name="locked">
+                  <span>Locked (requires payment to access)</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary">Add course</button>
+              </div>
+            </form>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>All courses</h3>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Title</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="admin-courses-tbody">
+                  <tr><td colspan="3">No courses yet. Add one above.</td></tr>
+                </tbody>
+              </table>
+              <p class="admin-pending-note" style="margin-top:0.5rem">Actions: Preview shows course content; Edit opens Course Builder; Publish makes the course visible to learners.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-assessments" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Assessments / Quizzes</h2>
+          <p class="admin-course-builder-intro">Create and manage quizzes, assessments, and tests for your courses. Select a course below, then add quizzes, assessments, or tests and their questions.</p>
+
+          <div class="portal-dashboard__card">
+            <h3>Select course</h3>
+            <div class="contact-form__row">
+              <label class="contact-form__label" for="assessments-course-select">Course</label>
+              <select id="assessments-course-select" class="contact-form__input contact-form__select">
+                <option value="">— Select course —</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="assessments-course-detail" class="portal-dashboard__card" hidden>
+            <h3>Quizzes</h3>
+            <p class="admin-course-builder-module-note">Short knowledge checks. Add a quiz, then add multiple-choice questions with correct answers.</p>
+            <ul id="assessments-quizzes-list" class="admin-course-builder-list"></ul>
+            <form id="assessments-add-quiz-form" class="profile-form admin-course-builder-inline-form">
+              <input type="text" id="assessments-quiz-title" class="contact-form__input" placeholder="Quiz title">
+              <button type="submit" class="btn btn--primary btn--sm">Add quiz</button>
+            </form>
+
+            <h4 style="margin-top:1.5rem">Assessments</h4>
+            <p class="admin-course-builder-module-note">Longer or graded assessments. Add questions the same way as quizzes.</p>
+            <ul id="assessments-assessments-list" class="admin-course-builder-list"></ul>
+            <form id="assessments-add-assessment-form" class="profile-form admin-course-builder-inline-form">
+              <input type="text" id="assessments-assessment-title" class="contact-form__input" placeholder="Assessment title">
+              <button type="submit" class="btn btn--primary btn--sm">Add assessment</button>
+            </form>
+
+            <h4 style="margin-top:1.5rem">Tests</h4>
+            <p class="admin-course-builder-module-note">Timed tests. Optionally set a time limit in minutes.</p>
+            <ul id="assessments-tests-list" class="admin-course-builder-list"></ul>
+            <form id="assessments-add-test-form" class="profile-form admin-course-builder-inline-form">
+              <input type="text" id="assessments-test-title" class="contact-form__input" placeholder="Test title">
+              <input type="number" id="assessments-test-time" class="contact-form__input" placeholder="Time (min)" min="0" style="max-width:100px">
+              <button type="submit" class="btn btn--primary btn--sm">Add test</button>
+            </form>
+          </div>
+
+          <div id="assessments-no-course" class="portal-dashboard__card">
+            <p class="admin-course-builder-intro">Select a course above to create or edit its quizzes, assessments, and tests. If you have no courses yet, add one under <a href="#courses" class="portal-dashboard__panel-link" data-panel="courses">Courses</a> first.</p>
+          </div>
+        </div>
+
+        <div id="panel-beneficiaries" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Beneficiaries</h2>
+          <div class="portal-dashboard__card">
+            <h3>Pending approval</h3>
+            <p>Beneficiaries who have registered and are awaiting admin approval to access the portal.</p>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
+                <tbody id="admin-beneficiaries-tbody">
+                  <tr><td colspan="3">No pending beneficiaries.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>Approved beneficiaries</h3>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th></tr></thead>
+                <tbody id="admin-beneficiaries-approved-tbody">
+                  <tr><td colspan="2">None yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-learners" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Learners</h2>
+          <div class="portal-dashboard__card">
+            <h3>Pending approval</h3>
+            <p>Learners who have registered and are awaiting admin approval to access courses.</p>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
+                <tbody id="admin-learners-tbody">
+                  <tr><td colspan="3">No pending learners.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>Approved learners</h3>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th></tr></thead>
+                <tbody id="admin-learners-approved-tbody">
+                  <tr><td colspan="2">None yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-farmers" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">Farmers (sellers)</h2>
+          <div class="portal-dashboard__card">
+            <h3>Pending approval</h3>
+            <p>Goat farmers who have registered and are awaiting admin approval to list goats for sale.</p>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
+                <tbody id="admin-farmers-tbody">
+                  <tr><td colspan="3">No pending farmers.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>Approved farmers</h3>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th></tr></thead>
+                <tbody id="admin-farmers-approved-tbody">
+                  <tr><td colspan="2">None yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>Goat listings for approval</h3>
+            <p>Review goat listings submitted by farmers. Rate each listing (1–5) on how well it matches the website criteria: <strong>title</strong>, <strong>breed</strong>, <strong>quantity</strong>, <strong>price</strong>, <strong>location</strong>, <strong>description</strong>, and <strong>photo(s)</strong>. Only approve listings that meet the criteria.</p>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Farmer</th><th>Title</th><th>Breed</th><th>Qty</th><th>Price</th><th>Location</th><th>Listing rating</th><th>Actions</th></tr></thead>
+                <tbody id="admin-goat-listings-tbody">
+                  <tr><td colspan="8">No pending goat listings.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="admin-pending-note" style="margin-top:0.5rem"><strong>Listing rating</strong>: 1 = does not meet criteria, 5 = fully meets all listing criteria. Set rating before approving. Rejected listings are not shown on the public Browse Listings page.</p>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>Approved &amp; rejected listings</h3>
+            <p>Summary of goat listings you have approved or rejected.</p>
+            <div class="admin-stat-grid admin-stat-grid--wide" style="margin-bottom:0.75rem">
+              <div class="admin-stat"><span class="admin-stat__value" id="admin-listings-approved-count">0</span><span class="admin-stat__label">Approved</span></div>
+              <div class="admin-stat"><span class="admin-stat__value" id="admin-listings-rejected-count">0</span><span class="admin-stat__label">Rejected</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-users" class="admin-portal__panel">
+          <h2 class="portal-dashboard__title">User management</h2>
+          <div class="portal-dashboard__card">
+            <h3>Add new user</h3>
+            <form id="admin-add-user-form" class="profile-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="user-add-name">Full name <span class="contact-form__required">*</span></label>
+                <input type="text" id="user-add-name" name="name" class="contact-form__input" required placeholder="e.g. John Smith">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="user-add-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="user-add-email" name="email" class="contact-form__input" required placeholder="user@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="user-add-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="user-add-password" name="password" class="contact-form__input" required minlength="8" placeholder="At least 8 characters">
+              </div>
+              <div class="contact-form__row learner-hub__roles-row">
+                <span class="contact-form__label">Roles <span class="contact-form__required">*</span></span>
+                <div class="learner-hub__roles learner-hub__roles--checkboxes">
+                  <label class="learner-hub__role"><input type="checkbox" name="user-roles" value="learner" class="user-add-role"> <span>Learner</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="user-roles" value="beneficiary" class="user-add-role"> <span>Beneficiary</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="user-roles" value="farmer" class="user-add-role"> <span>Farmer</span></label>
+                </div>
+              </div>
+              <div class="contact-form__row">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" id="user-add-auto-approve" name="autoApprove">
+                  <span>Auto-approve (user can access portals immediately)</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary">Add user</button>
+              </div>
+            </form>
+          </div>
+          <div class="portal-dashboard__card">
+            <h3>All users</h3>
+            <p>Manage user accounts. Suspend to block login; delete to remove the account permanently.</p>
+            <div class="portal-dashboard__table-wrap">
+              <table class="portal-dashboard__table">
+                <thead><tr><th>Name</th><th>Email</th><th>Roles</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="admin-users-tbody">
+                  <tr><td colspan="5">No users yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="admin-modal-quiz-question" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="cb-quiz-q-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box" style="max-width:520px">
+      <button type="button" class="beneficiary-action-modal__close cb-close-quiz-q" aria-label="Close">&times;</button>
+      <h2 id="cb-quiz-q-modal-title" class="beneficiary-action-modal__title">Add question</h2>
+      <form id="cb-quiz-question-form" class="beneficiary-action-modal__form" novalidate>
+        <input type="hidden" id="cb-quiz-q-course-id" name="courseId">
+        <input type="hidden" id="cb-quiz-q-item-id" name="itemId">
+        <input type="hidden" id="cb-quiz-q-type" name="type" value="quiz">
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="cb-quiz-q-question-type">Question type</label>
+          <select id="cb-quiz-q-question-type" class="contact-form__input contact-form__select">
+            <option value="multiple_choice">Multiple choice</option>
+            <option value="true_false">True or False</option>
+            <option value="fill_blank">Fill in the missing words</option>
+            <option value="match">Match the words</option>
+          </select>
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="cb-quiz-q-text">Question / statement</label>
+          <input type="text" id="cb-quiz-q-text" class="contact-form__input" required placeholder="e.g. What is the capital of South Africa?">
+        </div>
+        <div id="cb-quiz-q-panel-multiple" class="cb-quiz-q-panel">
+          <div class="contact-form__row">
+            <label class="contact-form__label">Options (mark correct)</label>
+            <div class="cb-options-wrap">
+              <label class="learner-hub__checkbox-label"><input type="radio" name="cb-correct" value="0" checked> <input type="text" id="cb-opt-0" class="contact-form__input" placeholder="Option A"></label>
+              <label class="learner-hub__checkbox-label"><input type="radio" name="cb-correct" value="1"> <input type="text" id="cb-opt-1" class="contact-form__input" placeholder="Option B"></label>
+              <label class="learner-hub__checkbox-label"><input type="radio" name="cb-correct" value="2"> <input type="text" id="cb-opt-2" class="contact-form__input" placeholder="Option C"></label>
+              <label class="learner-hub__checkbox-label"><input type="radio" name="cb-correct" value="3"> <input type="text" id="cb-opt-3" class="contact-form__input" placeholder="Option D"></label>
+            </div>
+          </div>
+        </div>
+        <div id="cb-quiz-q-panel-truefalse" class="cb-quiz-q-panel" style="display:none">
+          <div class="contact-form__row">
+            <label class="contact-form__label">Correct answer</label>
+            <div class="cb-options-wrap">
+              <label class="learner-hub__checkbox-label"><input type="radio" name="cb-tf-correct" value="0" checked> True</label>
+              <label class="learner-hub__checkbox-label"><input type="radio" name="cb-tf-correct" value="1"> False</label>
+            </div>
+          </div>
+        </div>
+        <div id="cb-quiz-q-panel-fillblank" class="cb-quiz-q-panel" style="display:none">
+          <div class="contact-form__row">
+            <label class="contact-form__label" for="cb-quiz-q-blanks">Correct answers (one per blank, in order, comma-separated)</label>
+            <input type="text" id="cb-quiz-q-blanks" class="contact-form__input" placeholder="e.g. Pretoria, Cape Town">
+          </div>
+          <p class="admin-pending-note" style="font-size:0.85rem; margin-top:0.25rem">Use _____ in the question text for each blank. Number of answers must match number of blanks.</p>
+        </div>
+        <div id="cb-quiz-q-panel-match" class="cb-quiz-q-panel" style="display:none">
+          <div class="contact-form__row">
+            <label class="contact-form__label" for="cb-quiz-q-match-pairs">Pairs (one per line: left word or phrase | right word or phrase)</label>
+            <textarea id="cb-quiz-q-match-pairs" class="contact-form__input contact-form__textarea" rows="5" placeholder="Goat | Animal&#10;Boer | Breed&#10;Drenching | Health"></textarea>
+          </div>
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Add question</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="admin-modal-progress" class="beneficiary-action-modal" aria-hidden="true" role="dialog" aria-labelledby="admin-progress-modal-title" aria-modal="true">
+    <div class="beneficiary-action-modal__backdrop"></div>
+    <div class="beneficiary-action-modal__box">
+      <button type="button" class="beneficiary-action-modal__close" aria-label="Close">&times;</button>
+      <h2 id="admin-progress-modal-title" class="beneficiary-action-modal__title">Update progress</h2>
+      <p class="beneficiary-action-modal__sub">Record learning progress for this user.</p>
+      <form id="admin-progress-form" class="beneficiary-action-modal__form" novalidate>
+        <input type="hidden" id="admin-progress-email" name="email">
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="admin-progress-course">Course</label>
+          <select id="admin-progress-course" name="courseId" class="contact-form__input contact-form__select" required>
+            <option value="">Select course</option>
+          </select>
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="admin-progress-percent">Progress (%)</label>
+          <input type="number" id="admin-progress-percent" name="percent" class="contact-form__input" min="0" max="100" value="0" required>
+        </div>
+        <div class="contact-form__row">
+          <label class="contact-form__label" for="admin-progress-modules">Modules completed</label>
+          <input type="number" id="admin-progress-modules" name="modulesCompleted" class="contact-form__input" min="0" value="0">
+        </div>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary btn--lg">Save progress</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo"><img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'"><span class="footer__logo-fallback">Aphamo</span></a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/learner-portal/">Learner Portal</a></li>
+          <li><a href="/beneficiary-portal/">Beneficiary Portal</a></li>
+          <li><a href="/goat-listing-portal/">Goat Listing Portal</a></li>
+          <li><a href="/admin-portal/">Admin Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. Admin access restricted.</span>
+    </div>
+  </footer>
+
+  <script src="../scripts/hub-auth.js"></script>
+  <script src="../scripts/admin-data.js"></script>
+  <script src="../scripts/course-builder.js"></script>
+  <script>
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+
+    (function () {
+      var auth = window.AphamoHubAuth;
+      var adminData = window.AphamoAdminData;
+      var gate = document.getElementById('admin-gate');
+      var wrap = document.getElementById('admin-dashboard-wrap');
+
+      auth.ensureAdminExists();
+
+      function renderDashboardAnalytics() {
+        var analytics = adminData.getAnalytics();
+        var courses = adminData.getCourses();
+        var courseMap = {};
+        courses.forEach(function (c) { courseMap[c.id] = c.title || c.id; });
+
+        document.getElementById('stat-total-users').textContent = analytics.totalUsers;
+        document.getElementById('stat-learners').textContent = analytics.learners;
+        document.getElementById('stat-beneficiaries').textContent = analytics.beneficiaries;
+        document.getElementById('stat-farmers').textContent = analytics.farmers;
+        document.getElementById('stat-paid').textContent = analytics.learnersPaid;
+        document.getElementById('stat-unpaid').textContent = analytics.learnersUnpaid;
+
+        var paidTbody = document.getElementById('admin-paid-learners-tbody');
+        if (paidTbody) {
+          paidTbody.innerHTML = '';
+          if (analytics.paidLearners.length === 0) {
+            paidTbody.innerHTML = '<tr><td colspan="2">None</td></tr>';
+          } else {
+            analytics.paidLearners.forEach(function (u) {
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '—') + '</td>';
+              paidTbody.appendChild(tr);
+            });
+          }
+        }
+
+        var unpaidTbody = document.getElementById('admin-unpaid-learners-tbody');
+        if (unpaidTbody) {
+          unpaidTbody.innerHTML = '';
+          if (analytics.unpaidLearners.length === 0) {
+            unpaidTbody.innerHTML = '<tr><td colspan="3">None</td></tr>';
+          } else {
+            analytics.unpaidLearners.forEach(function (u) {
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '—') + '</td><td class="admin-approval-row"><button type="button" class="btn btn--primary btn--sm mark-paid-btn" data-email="' + (u.email || '') + '">Mark as paid</button></td>';
+              unpaidTbody.appendChild(tr);
+            });
+            unpaidTbody.querySelectorAll('.mark-paid-btn').forEach(function (btn) {
+              btn.addEventListener('click', function () {
+                adminData.recordPayment(btn.dataset.email, null, 0);
+                renderDashboardAnalytics();
+                updateStats();
+              });
+            });
+          }
+        }
+
+        var progressTbody = document.getElementById('admin-progress-tbody');
+        if (progressTbody) {
+          var progressSummary = adminData.getAllProgressSummary();
+          progressTbody.innerHTML = '';
+          if (progressSummary.length === 0) {
+            progressTbody.innerHTML = '<tr><td colspan="5">No progress data yet. Progress is recorded when learners complete course modules.</td></tr>';
+          } else {
+            progressSummary.forEach(function (p) {
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + (p.name || '—') + '</td><td>' + (p.email || '—') + '</td><td>' + (p.courses.length + ' course(s)') + '</td><td><div class="admin-progress-bar"><div class="admin-progress-bar__fill" style="width:' + p.avgPercent + '%"></div></div> ' + p.avgPercent + '%</td><td><button type="button" class="btn btn--outline btn--sm update-progress-btn" data-email="' + p.email + '">Update</button></td>';
+              progressTbody.appendChild(tr);
+            });
+            progressTbody.querySelectorAll('.update-progress-btn').forEach(function (btn) {
+              btn.addEventListener('click', function () { openProgressModal(btn.dataset.email); });
+            });
+          }
+        }
+      }
+
+      function openProgressModal(email) {
+        var modal = document.getElementById('admin-modal-progress');
+        var emailInput = document.getElementById('admin-progress-email');
+        var courseSelect = document.getElementById('admin-progress-course');
+        var courses = adminData.getCourses();
+        if (emailInput) emailInput.value = email || '';
+        if (courseSelect) {
+          courseSelect.innerHTML = '<option value="">Select course</option>';
+          courses.forEach(function (c) {
+            var opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.title || c.id;
+            courseSelect.appendChild(opt);
+          });
+        }
+        document.getElementById('admin-progress-percent').value = 0;
+        document.getElementById('admin-progress-modules').value = 0;
+        if (modal) {
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeProgressModal() {
+        var modal = document.getElementById('admin-modal-progress');
+        if (modal) {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      }
+
+      function switchQuizQuestionTypePanels() {
+        var qtype = (document.getElementById('cb-quiz-q-question-type') && document.getElementById('cb-quiz-q-question-type').value) || 'multiple_choice';
+        ['multiple', 'truefalse', 'fillblank', 'match'].forEach(function (name) {
+          var el = document.getElementById('cb-quiz-q-panel-' + name);
+          if (el) el.style.display = (qtype === 'multiple_choice' && name === 'multiple') || (qtype === 'true_false' && name === 'truefalse') || (qtype === 'fill_blank' && name === 'fillblank') || (qtype === 'match' && name === 'match') ? 'block' : 'none';
+        });
+      }
+      function openAddQuizQuestionModal(courseId, itemId, type) {
+        var modal = document.getElementById('admin-modal-quiz-question');
+        type = type || 'quiz';
+        var titleEl = document.getElementById('cb-quiz-q-modal-title');
+        var courseEl = document.getElementById('cb-quiz-q-course-id');
+        var itemEl = document.getElementById('cb-quiz-q-item-id');
+        var typeEl = document.getElementById('cb-quiz-q-type');
+        var qtypeSelect = document.getElementById('cb-quiz-q-question-type');
+        if (courseEl) courseEl.value = courseId || '';
+        if (itemEl) itemEl.value = itemId || '';
+        if (typeEl) typeEl.value = type || 'quiz';
+        if (qtypeSelect) qtypeSelect.value = 'multiple_choice';
+        if (titleEl) titleEl.textContent = 'Add ' + (type === 'assessment' ? 'assessment' : type === 'test' ? 'test' : 'quiz') + ' question';
+        var textEl = document.getElementById('cb-quiz-q-text');
+        if (textEl) textEl.value = '';
+        [0, 1, 2, 3].forEach(function (i) { var o = document.getElementById('cb-opt-' + i); if (o) o.value = ''; });
+        var correct0 = document.querySelector('input[name="cb-correct"][value="0"]');
+        if (correct0) correct0.checked = true;
+        var tf0 = document.querySelector('input[name="cb-tf-correct"][value="0"]');
+        if (tf0) tf0.checked = true;
+        var blanksEl = document.getElementById('cb-quiz-q-blanks');
+        if (blanksEl) blanksEl.value = '';
+        var matchEl = document.getElementById('cb-quiz-q-match-pairs');
+        if (matchEl) matchEl.value = '';
+        switchQuizQuestionTypePanels();
+        if (modal) { modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+      }
+      function closeQuizQuestionModal() {
+        var modal = document.getElementById('admin-modal-quiz-question');
+        if (modal) { modal.classList.remove('is-open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+      }
+
+      function renderCourseBuilder() {
+        var courseBuilder = window.AphamoCourseBuilder;
+        if (!courseBuilder) return;
+        var courses = adminData.getCourses();
+        var sel = document.getElementById('cb-course-select');
+        if (!sel) return;
+        var currentValue = sel.value;
+        sel.innerHTML = '<option value="">— Select course —</option>';
+        courses.forEach(function (c) {
+          var opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.title || c.id;
+          sel.appendChild(opt);
+        });
+        if (currentValue && courses.some(function (c) { return c.id === currentValue; })) {
+          sel.value = currentValue;
+        }
+        var courseId = sel.value;
+        var detail = document.getElementById('cb-course-detail');
+        if (!courseId) {
+          if (detail) detail.hidden = true;
+          return;
+        }
+        if (detail) detail.hidden = false;
+        var course = courseBuilder.getCourse(courseId);
+        if (!course) return;
+        var hasQuizOrAssessment = (course.quizzes && course.quizzes.length > 0) || (course.assessments && course.assessments.length > 0) || (course.tests && course.tests.length > 0);
+        var quizRequiredEl = document.getElementById('cb-course-detail-quiz-required');
+        if (quizRequiredEl) quizRequiredEl.style.display = hasQuizOrAssessment ? 'none' : 'block';
+        var titleEl = document.getElementById('cb-course-title');
+        var descEl = document.getElementById('cb-course-description');
+        var lockedEl = document.getElementById('cb-course-locked');
+        if (titleEl) titleEl.value = course.title || '';
+        if (descEl) descEl.value = course.description || '';
+        if (lockedEl) lockedEl.checked = !!course.locked;
+        var modList = document.getElementById('cb-modules-list');
+        if (modList) {
+          modList.innerHTML = '';
+          var quizzes = course.quizzes || [];
+          var assessments = course.assessments || [];
+          var tests = course.tests || [];
+          (course.modules || []).forEach(function (m, i) {
+            var card = document.createElement('div');
+            card.className = 'cb-module-card';
+            card.dataset.moduleId = m.id;
+            var actOpts = '<option value="">— None —</option>';
+            quizzes.forEach(function (q) { actOpts += '<option value="quiz:' + q.id + '"' + (m.activityType === 'quiz' && m.activityId === q.id ? ' selected' : '') + '>Quiz: ' + (q.title || 'Quiz') + '</option>'; });
+            assessments.forEach(function (a) { actOpts += '<option value="assessment:' + a.id + '"' + (m.activityType === 'assessment' && m.activityId === a.id ? ' selected' : '') + '>Assessment: ' + (a.title || 'Assessment') + '</option>'; });
+            tests.forEach(function (t) { actOpts += '<option value="test:' + t.id + '"' + (m.activityType === 'test' && m.activityId === t.id ? ' selected' : '') + '>Test: ' + (t.title || 'Test') + '</option>'; });
+            var badges = [];
+            if (m.videoUrl) badges.push('<span style="font-size:0.75rem;background:#e0f2fe;color:#0369a1;padding:0.1rem 0.4rem;border-radius:4px">Video</span>');
+            if (m.liveSessionUrl && String(m.liveSessionUrl).trim()) badges.push('<span style="font-size:0.75rem;background:#fef3c7;color:#b45309;padding:0.1rem 0.4rem;border-radius:4px">Live</span>');
+            if (m.activityType) badges.push('<span style="font-size:0.75rem;background:#dcfce7;color:#15803d;padding:0.1rem 0.4rem;border-radius:4px">' + (m.activityType === 'quiz' ? 'Quiz' : m.activityType === 'assessment' ? 'Assessment' : 'Test') + '</span>');
+            card.innerHTML = '<div class="cb-module-card__head">' +
+              '<span>▸</span> <strong>Module ' + (i + 1) + ':</strong> ' + (m.title || 'Untitled') + ' ' + badges.join(' ') + '</div>' +
+              '<div class="cb-module-card__body"><div class="cb-module-fields">' +
+              '<label>Module title</label><input type="text" class="cb-mod-title contact-form__input" placeholder="Module title" value="' + (m.title || '').replace(/"/g, '&quot;') + '">' +
+              '<label>Video URL</label><input type="url" class="cb-mod-video contact-form__input" placeholder="https://youtube.com/embed/..." value="' + (m.videoUrl || '').replace(/"/g, '&quot;') + '">' +
+              '<label>Zoom / Teams link (live class)</label><input type="url" class="cb-mod-live-link contact-form__input" placeholder="https://zoom.us/j/... or https://teams.microsoft.com/..." value="' + (m.liveSessionUrl || '').replace(/"/g, '&quot;') + '">' +
+              '<label>Quiz / Assessment / Test</label><select class="cb-mod-activity contact-form__input contact-form__select">' + actOpts + '</select>' +
+              '<div class="admin-approval-row"><button type="button" class="btn btn--primary btn--sm cb-mod-save">Save module</button> <button type="button" class="btn btn--outline btn--sm cb-mod-delete">Delete module</button></div></div></div>';
+            modList.appendChild(card);
+          });
+          modList.querySelectorAll('.cb-module-card__head').forEach(function (head) {
+            head.addEventListener('click', function () {
+              var card = head.closest('.cb-module-card');
+              card.classList.toggle('is-open');
+              head.querySelector('span').textContent = card.classList.contains('is-open') ? '▾' : '▸';
+            });
+          });
+          modList.querySelectorAll('.cb-mod-save').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var card = btn.closest('.cb-module-card');
+              var moduleId = card.dataset.moduleId;
+              var titleInput = card.querySelector('.cb-mod-title');
+              var videoInput = card.querySelector('.cb-mod-video');
+              var liveLinkInput = card.querySelector('.cb-mod-live-link');
+              var activitySelect = card.querySelector('.cb-mod-activity');
+              var val = (activitySelect && activitySelect.value) || '';
+              var parts = val.split(':');
+              var activityType = parts[0] || '';
+              var activityId = parts[1] || '';
+              courseBuilder.updateModule(courseId, moduleId, {
+                title: titleInput ? titleInput.value.trim() : '',
+                videoUrl: videoInput ? videoInput.value.trim() : '',
+                liveSessionUrl: liveLinkInput ? liveLinkInput.value.trim() : '',
+                activityType: activityType,
+                activityId: activityId
+              });
+              renderCourseBuilder();
+            });
+          });
+          modList.querySelectorAll('.cb-mod-delete').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var card = btn.closest('.cb-module-card');
+              var moduleId = card.dataset.moduleId;
+              if (!confirm('Delete this module?')) return;
+              courseBuilder.deleteModule(courseId, moduleId);
+              renderCourseBuilder();
+            });
+          });
+        }
+        var quizList = document.getElementById('cb-quizzes-list');
+        if (quizList) {
+          quizList.innerHTML = '';
+          (course.quizzes || []).forEach(function (q) {
+            var qCount = (q.questions || []).length;
+            var li = document.createElement('li');
+            li.innerHTML = '<span>' + (q.title || 'Quiz') + ' (' + qCount + ' Q)</span><span><button type="button" class="btn btn--outline btn--sm cb-add-quiz-q" data-quiz-id="' + q.id + '">Add question</button> <button type="button" class="btn btn--outline btn--sm cb-del-quiz" data-id="' + q.id + '">Delete</button></span>';
+            quizList.appendChild(li);
+          });
+          quizList.querySelectorAll('.cb-add-quiz-q').forEach(function (btn) {
+            btn.addEventListener('click', function () { openAddQuizQuestionModal(courseId, btn.dataset.quizId, 'quiz'); });
+          });
+          quizList.querySelectorAll('.cb-del-quiz').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              courseBuilder.deleteQuiz(courseId, btn.dataset.id);
+              renderCourseBuilder();
+            });
+          });
+        }
+        var assessList = document.getElementById('cb-assessments-list');
+        if (assessList) {
+          assessList.innerHTML = '';
+          (course.assessments || []).forEach(function (a) {
+            var aCount = (a.questions || []).length;
+            var li = document.createElement('li');
+            li.innerHTML = '<span>' + (a.title || 'Assessment') + ' (' + aCount + ' Q)</span><span><button type="button" class="btn btn--outline btn--sm cb-add-assess-q" data-assess-id="' + a.id + '">Add question</button> <button type="button" class="btn btn--outline btn--sm cb-del-assessment" data-id="' + a.id + '">Delete</button></span>';
+            assessList.appendChild(li);
+          });
+          assessList.querySelectorAll('.cb-add-assess-q').forEach(function (btn) {
+            btn.addEventListener('click', function () { openAddQuizQuestionModal(courseId, btn.dataset.assessId, 'assessment'); });
+          });
+          assessList.querySelectorAll('.cb-del-assessment').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              courseBuilder.deleteAssessment(courseId, btn.dataset.id);
+              renderCourseBuilder();
+            });
+          });
+        }
+        var assignList = document.getElementById('cb-assignments-list');
+        if (assignList) {
+          assignList.innerHTML = '';
+          (course.assignments || []).forEach(function (a) {
+            var li = document.createElement('li');
+            li.innerHTML = '<span>' + (a.title || 'Assignment') + '</span><button type="button" class="btn btn--outline btn--sm cb-del-assignment" data-id="' + a.id + '">Delete</button>';
+            assignList.appendChild(li);
+          });
+          assignList.querySelectorAll('.cb-del-assignment').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              courseBuilder.deleteAssignment(courseId, btn.dataset.id);
+              renderCourseBuilder();
+            });
+          });
+        }
+        var testList = document.getElementById('cb-tests-list');
+        if (testList) {
+          testList.innerHTML = '';
+          (course.tests || []).forEach(function (t) {
+            var tCount = (t.questions || []).length;
+            var li = document.createElement('li');
+            li.innerHTML = '<span>' + (t.title || 'Test') + ' (' + tCount + ' Q)' + (t.timeLimit ? ' • ' + t.timeLimit + ' min' : '') + '</span><span><button type="button" class="btn btn--outline btn--sm cb-add-test-q" data-test-id="' + t.id + '">Add question</button> <button type="button" class="btn btn--outline btn--sm cb-del-test" data-id="' + t.id + '">Delete</button></span>';
+            testList.appendChild(li);
+          });
+          testList.querySelectorAll('.cb-add-test-q').forEach(function (btn) {
+            btn.addEventListener('click', function () { openAddQuizQuestionModal(courseId, btn.dataset.testId, 'test'); });
+          });
+          testList.querySelectorAll('.cb-del-test').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              courseBuilder.deleteTest(courseId, btn.dataset.id);
+              renderCourseBuilder();
+            });
+          });
+        }
+      }
+
+      function renderCourses() {
+        var courses = adminData.getCourses();
+        var tbody = document.getElementById('admin-courses-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        if (courses.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3">No courses yet. Add one above.</td></tr>';
+          return;
+        }
+        courses.forEach(function (c) {
+          var tr = document.createElement('tr');
+          var lockClass = c.locked ? 'admin-course-lock--locked' : 'admin-course-lock--open';
+          var lockText = c.locked ? 'Locked' : 'Open';
+          var pubClass = c.published ? 'admin-course-lock--open' : 'admin-user-status--pending';
+          var pubText = c.published ? 'Published' : 'Draft';
+          var pubBtn = c.published ? ' <button type="button" class="btn btn--outline btn--sm unpublish-course-btn" data-id="' + c.id + '">Unpublish</button>' : ' <button type="button" class="btn btn--primary btn--sm publish-course-btn" data-id="' + c.id + '">Publish</button>';
+          tr.innerHTML = '<td>' + (c.title || 'Untitled') + '</td><td><span class="admin-course-lock ' + lockClass + '">' + lockText + '</span> <span class="admin-course-lock ' + pubClass + '">' + pubText + '</span></td><td class="admin-approval-row"><button type="button" class="btn btn--outline btn--sm preview-course-btn" data-id="' + c.id + '">Preview</button> <button type="button" class="btn btn--outline btn--sm edit-course-btn" data-id="' + c.id + '">Edit</button>' + pubBtn + ' <button type="button" class="btn btn--outline btn--sm toggle-lock-btn" data-id="' + c.id + '" data-locked="' + c.locked + '">' + (c.locked ? 'Unlock' : 'Lock') + '</button> <button type="button" class="btn btn--outline btn--sm delete-course-btn" data-id="' + c.id + '">Delete</button></td>';
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll('.toggle-lock-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.dataset.id;
+            var locked = btn.dataset.locked === 'true';
+            adminData.updateCourse(id, { locked: !locked });
+            renderCourses();
+            updateStats();
+          });
+        });
+        tbody.querySelectorAll('.preview-course-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () { openCoursePreview(btn.dataset.id); });
+        });
+        tbody.querySelectorAll('.edit-course-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            showPanel('course-builder');
+            var sel = document.getElementById('cb-course-select');
+            if (sel) { sel.value = btn.dataset.id; renderCourseBuilder(); }
+          });
+        });
+        tbody.querySelectorAll('.publish-course-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var courseId = btn.dataset.id;
+            var course = adminData.getCourses().find(function (c) { return c.id === courseId; });
+            var hasQuizOrAssessment = course && (
+              (course.quizzes && course.quizzes.length > 0) ||
+              (course.assessments && course.assessments.length > 0) ||
+              (course.tests && course.tests.length > 0)
+            );
+            if (!hasQuizOrAssessment) {
+              alert('Every course must have at least one quiz or assessment (or test) before it can be published. Add one in Course Builder or under Assessments / Quizzes.');
+              return;
+            }
+            adminData.updateCourse(courseId, { published: true });
+            renderCourses();
+          });
+        });
+        tbody.querySelectorAll('.unpublish-course-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            adminData.updateCourse(btn.dataset.id, { published: false });
+            renderCourses();
+          });
+        });
+        tbody.querySelectorAll('.delete-course-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            if (confirm('Delete this course?')) {
+              adminData.deleteCourse(btn.dataset.id);
+              renderCourses();
+              updateStats();
+            }
+          });
+        });
+      }
+
+      function renderAssessmentsPanel() {
+        var courseBuilder = window.AphamoCourseBuilder;
+        var courses = adminData.getCourses();
+        var courseSelect = document.getElementById('assessments-course-select');
+        var detailPanel = document.getElementById('assessments-course-detail');
+        var noCoursePanel = document.getElementById('assessments-no-course');
+
+        if (courseSelect) {
+          var currentValue = courseSelect.value;
+          courseSelect.innerHTML = '<option value="">— Select course —</option>';
+          courses.forEach(function (c) {
+            var opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.title || 'Untitled';
+            if (c.id === currentValue) opt.selected = true;
+            courseSelect.appendChild(opt);
+          });
+        }
+
+        var courseId = courseSelect && courseSelect.value ? courseSelect.value : '';
+        if (detailPanel) detailPanel.hidden = !courseId;
+        if (noCoursePanel) noCoursePanel.hidden = !!courseId;
+
+        if (!courseId) return;
+
+        var course = courseBuilder.getCourse(courseId);
+        if (!course) return;
+
+        function renderList(listId, items, type, itemTitleKey) {
+          var ul = document.getElementById(listId);
+          if (!ul) return;
+          ul.innerHTML = '';
+          (items || []).forEach(function (item) {
+            var count = (item.questions || []).length;
+            var li = document.createElement('li');
+            li.innerHTML = '<span>' + (item.title || itemTitleKey) + ' (' + count + ' Q)</span><span><button type="button" class="btn btn--outline btn--sm assessments-add-q" data-item-id="' + item.id + '" data-type="' + type + '">Add question</button> <button type="button" class="btn btn--outline btn--sm assessments-del" data-item-id="' + item.id + '" data-type="' + type + '">Delete</button></span>';
+            ul.appendChild(li);
+          });
+          ul.querySelectorAll('.assessments-add-q').forEach(function (btn) {
+            btn.addEventListener('click', function () { openAddQuizQuestionModal(courseId, btn.dataset.itemId, type); });
+          });
+          ul.querySelectorAll('.assessments-del').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              if (!confirm('Delete this ' + type + ' and all its questions?')) return;
+              if (type === 'quiz') courseBuilder.deleteQuiz(courseId, btn.dataset.itemId);
+              else if (type === 'assessment') courseBuilder.deleteAssessment(courseId, btn.dataset.itemId);
+              else courseBuilder.deleteTest(courseId, btn.dataset.itemId);
+              renderAssessmentsPanel();
+            });
+          });
+        }
+
+        renderList('assessments-quizzes-list', course.quizzes, 'quiz', 'Quiz');
+        renderList('assessments-assessments-list', course.assessments, 'assessment', 'Assessment');
+        renderList('assessments-tests-list', course.tests, 'test', 'Test');
+      }
+
+      function bindAssessmentsPanel() {
+        var courseBuilder = window.AphamoCourseBuilder;
+        var courseSelect = document.getElementById('assessments-course-select');
+        courseSelect && courseSelect.addEventListener('change', function () { renderAssessmentsPanel(); });
+
+        document.getElementById('assessments-add-quiz-form') && document.getElementById('assessments-add-quiz-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('assessments-course-select').value;
+          var title = document.getElementById('assessments-quiz-title').value.trim() || 'Quiz';
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addQuiz(courseId, { title: title, questions: [] });
+          document.getElementById('assessments-quiz-title').value = '';
+          renderAssessmentsPanel();
+        });
+        document.getElementById('assessments-add-assessment-form') && document.getElementById('assessments-add-assessment-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('assessments-course-select').value;
+          var title = document.getElementById('assessments-assessment-title').value.trim() || 'Assessment';
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addAssessment(courseId, { title: title, questions: [] });
+          document.getElementById('assessments-assessment-title').value = '';
+          renderAssessmentsPanel();
+        });
+        document.getElementById('assessments-add-test-form') && document.getElementById('assessments-add-test-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('assessments-course-select').value;
+          var title = document.getElementById('assessments-test-title').value.trim() || 'Test';
+          var timeLimit = parseInt(document.getElementById('assessments-test-time').value, 10) || 0;
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addTest(courseId, { title: title, questions: [], timeLimit: timeLimit });
+          document.getElementById('assessments-test-title').value = '';
+          document.getElementById('assessments-test-time').value = '';
+          renderAssessmentsPanel();
+        });
+      }
+
+      function openCoursePreview(courseId) {
+        var courses = adminData.getCourses();
+        if (!courses || !courses.length) {
+          var el = document.getElementById('admin-course-preview-content');
+          if (el) el.innerHTML = '<div class="portal-dashboard__card"><p>No courses found. Add a course first.</p></div>';
+          document.querySelectorAll('.admin-portal__panel').forEach(function (p) { p.classList.remove('is-visible'); });
+        var previewPanel = document.getElementById('panel-course-preview');
+        if (previewPanel) previewPanel.classList.add('is-visible');
+          return;
+        }
+        var course = courses.find(function (c) { return c.id === courseId; });
+        if (!course) {
+          var el = document.getElementById('admin-course-preview-content');
+          if (el) el.innerHTML = '<div class="portal-dashboard__card"><p>Course not found. It may have been deleted.</p></div>';
+          document.querySelectorAll('.admin-portal__panel').forEach(function (p) { p.classList.remove('is-visible'); });
+        var previewPanel = document.getElementById('panel-course-preview');
+        if (previewPanel) previewPanel.classList.add('is-visible');
+          return;
+        }
+        var el = document.getElementById('admin-course-preview-content');
+        var headingEl = document.getElementById('admin-course-preview-heading');
+        if (headingEl) headingEl.textContent = 'Preview: ' + (course.title || 'Course');
+        if (!el) return;
+
+        var rawVideo = course.videoUrl || '';
+        var embedUrl = rawVideo && (rawVideo.indexOf('/embed/') >= 0 ? rawVideo : rawVideo.replace(/youtube\.com\/watch\?v=/, 'youtube.com/embed/').replace(/youtu\.be\//, 'youtube.com/embed/'));
+        var videoHtml = embedUrl
+          ? '<div class="learner-course-video"><div class="learner-course-video__wrap"><iframe src="' + embedUrl + '" title="' + (course.title || 'Video') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>'
+          : '<div class="learner-course-video"><div class="learner-course-video-placeholder">No video added yet. Add a video URL when editing this course (Courses → Edit).</div></div>';
+
+        var materials = (course.materials || []).filter(Boolean).map(function (m) {
+          if (typeof m === 'string') return { url: m, name: m.split('/').pop() || 'Download' };
+          return { url: m.url || m.href || '', name: m.name || (m.url || m.href || '').split('/').pop() || 'Download' };
+        }).filter(function (m) { return m.url; });
+        var materialsHtml = '<div class="learner-course-materials"><h4>Download learner materials</h4><ul class="learner-course-materials__list">';
+        if (materials.length > 0) {
+          materials.forEach(function (m) {
+            materialsHtml += '<li><a href="' + m.url + '" class="learner-course-materials__link" target="_blank" rel="noopener" download>' + m.name + '</a></li>';
+          });
+        } else {
+          materialsHtml += '<li class="learner-course-materials__note">No materials added yet. Add material URLs when editing this course.</li>';
+        }
+        materialsHtml += '</ul></div>';
+
+        function renderOneQuestionHtml(q, qqIdx, namePrefix) {
+          var qtype = q.questionType || 'multiple_choice';
+          var qText = String(q.question || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/_____/g, '__________');
+          var out = '<div class="quiz-question"><p><strong>Q' + (qqIdx + 1) + '.</strong> ' + qText + '</p>';
+          if (qtype === 'multiple_choice' || qtype === 'true_false') {
+            (q.options || ['True', 'False']).forEach(function (opt, oIdx) {
+              out += '<label><input type="radio" name="' + namePrefix + '" value="' + oIdx + '"> ' + opt + '</label>';
+            });
+          } else if (qtype === 'fill_blank') {
+            var blanks = q.blanks || [];
+            for (var b = 0; b < blanks.length; b++) {
+              out += '<input type="text" placeholder="Blank ' + (b + 1) + '" class="contact-form__input" style="max-width:200px;margin:0 0.25rem" disabled> ';
+            }
+            out += '<span class="admin-pending-note" style="display:block;margin-top:0.25rem">Correct: ' + blanks.join(', ') + '</span>';
+          } else if (qtype === 'match') {
+            var lefts = q.leftItems || [], rights = q.rightItems || [];
+            out += '<table class="portal-dashboard__table" style="margin-top:0.5rem"><tbody>';
+            lefts.forEach(function (left, idx) {
+              var rightIdx = (q.correctPairs || [])[idx];
+              var leftEsc = String(left).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+              var rightVal = rights[rightIdx] != null ? String(rights[rightIdx]).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : '';
+              out += '<tr><td>' + leftEsc + '</td><td><select class="contact-form__select" disabled><option>' + rightVal + '</option></select></td></tr>';
+            });
+            out += '</tbody></table>';
+          }
+          return out + '</div>';
+        }
+        var html = '<div class="portal-dashboard__card portal-dashboard__card--featured">';
+        html += '<h2>' + (course.title || 'Untitled') + '</h2>';
+        html += (course.description ? '<p>' + course.description + '</p>' : '') + videoHtml + materialsHtml + '</div>';
+
+        (course.modules || []).forEach(function (m, i) {
+          var modVideoUrl = m.videoUrl || '';
+          var modEmbedUrl = modVideoUrl && (modVideoUrl.indexOf('/embed/') >= 0 ? modVideoUrl : modVideoUrl.replace(/youtube\.com\/watch\?v=/, 'youtube.com/embed/').replace(/youtu\.be\//, 'youtube.com/embed/'));
+          var modVideoBlock = modEmbedUrl
+            ? '<div class="learner-course-video"><div class="learner-course-video__wrap"><iframe src="' + modEmbedUrl + '" title="' + (m.title || 'Video') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>'
+            : '<div class="learner-course-video"><div class="learner-course-video__wrap learner-course-video-placeholder"><p>No video for this module.</p></div></div>';
+          var activity = null;
+          if (m.activityType === 'quiz' && m.activityId) activity = (course.quizzes || []).find(function (q) { return q.id === m.activityId; });
+          else if (m.activityType === 'assessment' && m.activityId) activity = (course.assessments || []).find(function (a) { return a.id === m.activityId; });
+          else if (m.activityType === 'test' && m.activityId) activity = (course.tests || []).find(function (t) { return t.id === m.activityId; });
+          var activityHtml = '';
+          if (activity && (activity.questions || []).length > 0) {
+            activityHtml = '<div class="admin-course-preview-quiz" style="margin-top:1rem"><h4>' + (activity.title || m.activityType) + '</h4>';
+            activity.questions.forEach(function (q, qqIdx) {
+              activityHtml += renderOneQuestionHtml(q, qqIdx, 'mod_' + i + '_' + m.id + '_' + qqIdx);
+            });
+            activityHtml += '</div>';
+          }
+          var badges = [];
+          if (m.videoUrl) badges.push('<span class="cb-mod-badge">Video</span>');
+          if (m.liveSessionUrl) badges.push('<span class="cb-mod-badge" style="background:#fef3c7;color:#b45309">Live</span>');
+          if (m.activityType) badges.push('<span class="cb-mod-badge">' + (m.activityType === 'quiz' ? 'Quiz' : m.activityType === 'assessment' ? 'Assessment' : 'Test') + '</span>');
+          html += '<div class="portal-dashboard__card cb-clickable-module" data-module-idx="' + i + '">';
+          html += '<div class="cb-module-click-head"><span class="cb-module-chevron">▸</span> <h3 style="margin:0;display:inline">Module ' + (i + 1) + ': ' + (m.title || 'Untitled') + '</h3> ' + badges.join(' ') + '</div>';
+          html += '<div class="cb-module-click-body" style="display:none">' + modVideoBlock;
+          if (m.liveSessionUrl && String(m.liveSessionUrl).trim()) {
+            var liveUrl = String(m.liveSessionUrl).trim().replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+            html += '<p><a href="' + liveUrl + '" target="_blank" rel="noopener" class="btn btn--primary btn--sm">Join live class (Zoom / Teams)</a></p>';
+          }
+          html += m.content ? '<p>' + m.content + '</p>' : '<p>No content yet.</p>';
+          if ((m.materials || []).length > 0) {
+            html += '<h4>Resources</h4><ul>';
+            m.materials.forEach(function (mat) {
+              var url = typeof mat === 'string' ? mat : (mat.url || mat.href || '');
+              var name = typeof mat === 'object' && mat.name ? mat.name : (url.split('/').pop() || 'Download');
+              html += '<li><a href="' + url + '" target="_blank" rel="noopener" download>' + name + '</a></li>';
+            });
+            html += '</ul>';
+          }
+          html += activityHtml + '</div></div>';
+        });
+
+        var linkedActivityIds = {};
+        (course.modules || []).forEach(function (m) {
+          if (m.activityType && m.activityId) linkedActivityIds[m.activityType + ':' + m.activityId] = true;
+        });
+        (course.quizzes || []).forEach(function (quiz, qIdx) {
+          if (linkedActivityIds['quiz:' + quiz.id]) return;
+          html += '<div class="admin-course-preview-quiz portal-dashboard__card">';
+          html += '<h3>' + (quiz.title || 'Quiz') + ' <span style="font-size:0.8rem;color:#64748b">(not linked to a module)</span></h3>';
+          (quiz.questions || []).forEach(function (q, qqIdx) {
+            html += renderOneQuestionHtml(q, qqIdx, 'preview_quiz_' + qIdx + '_' + qqIdx);
+          });
+          html += '</div>';
+        });
+        (course.assessments || []).forEach(function (a, aIdx) {
+          if (linkedActivityIds['assessment:' + a.id]) return;
+          html += '<div class="admin-course-preview-quiz portal-dashboard__card"><h3>' + (a.title || 'Assessment') + ' <span style="font-size:0.8rem;color:#64748b">(not linked)</span></h3>';
+          (a.questions || []).forEach(function (q, qqIdx) {
+            html += renderOneQuestionHtml(q, qqIdx, 'preview_a_' + aIdx + '_' + qqIdx);
+          });
+          html += '</div>';
+        });
+        (course.tests || []).forEach(function (t, tIdx) {
+          if (linkedActivityIds['test:' + t.id]) return;
+          html += '<div class="admin-course-preview-quiz portal-dashboard__card"><h3>' + (t.title || 'Test') + (t.timeLimit ? ' (' + t.timeLimit + ' min)' : '') + ' <span style="font-size:0.8rem;color:#64748b">(not linked)</span></h3>';
+          (t.questions || []).forEach(function (q, qqIdx) {
+            html += renderOneQuestionHtml(q, qqIdx, 'preview_t_' + tIdx + '_' + qqIdx);
+          });
+          html += '</div>';
+        });
+
+        (course.assignments || []).forEach(function (a) {
+          html += '<div class="admin-course-preview-assignment portal-dashboard__card">';
+          html += '<h3>' + (a.title || 'Assignment') + '</h3>';
+          html += (a.description ? '<p>' + a.description + '</p>' : '') + (a.instructions ? '<p><strong>Instructions:</strong> ' + a.instructions + '</p>' : '');
+          html += '</div>';
+        });
+
+        el.innerHTML = html;
+
+        document.querySelectorAll('.cb-module-click-head').forEach(function (head) {
+          head.addEventListener('click', function () {
+            var card = head.closest('.cb-clickable-module');
+            var body = card && card.querySelector('.cb-module-click-body');
+            var chevron = head && head.querySelector('.cb-module-chevron');
+            var isOpen = body && body.style.display === 'block';
+            if (body) body.style.display = isOpen ? 'none' : 'block';
+            if (chevron) chevron.textContent = isOpen ? '▸' : '▾';
+          });
+        });
+
+        document.querySelectorAll('.admin-portal__panel').forEach(function (p) { p.classList.remove('is-visible'); });
+        document.querySelectorAll('.portal-dashboard__nav-link[data-panel]').forEach(function (a) { a.classList.remove('is-active'); });
+        var previewPanel = document.getElementById('panel-course-preview');
+        if (previewPanel) previewPanel.classList.add('is-visible');
+      }
+
+      function closeCoursePreview() {
+        document.querySelectorAll('.admin-portal__panel').forEach(function (p) { p.classList.remove('is-visible'); });
+        var coursesPanel = document.getElementById('panel-courses');
+        if (coursesPanel) coursesPanel.classList.add('is-visible');
+        document.querySelectorAll('.portal-dashboard__nav-link[data-panel="courses"]').forEach(function (a) { a.classList.add('is-active'); });
+      }
+
+      function renderApprovals(role, pendingId, approvedId) {
+        var pending = adminData.getPendingByRole(role);
+        var approved = adminData.getUsersByRole(role).filter(function (u) {
+          return (u.approvalStatus && u.approvalStatus[role] === 'approved') || (!u.approvalStatus && !u.approvalStatus);
+        });
+        approved = adminData.getUsersByRole(role).filter(function (u) {
+          var s = (u.approvalStatus && u.approvalStatus[role]) || 'approved';
+          return s === 'approved';
+        });
+
+        var tbodyPending = document.getElementById(pendingId);
+        var tbodyApproved = document.getElementById(approvedId);
+        if (!tbodyPending) return;
+
+        tbodyPending.innerHTML = '';
+        if (pending.length === 0) {
+          tbodyPending.innerHTML = '<tr><td colspan="3">No pending ' + role + 's.</td></tr>';
+        } else {
+          pending.forEach(function (u) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '—') + '</td><td class="admin-approval-row"><button type="button" class="btn btn--primary btn--sm approve-btn" data-email="' + (u.email || '') + '" data-role="' + role + '">Approve</button> <button type="button" class="btn btn--outline btn--sm reject-btn" data-email="' + (u.email || '') + '" data-role="' + role + '">Reject</button></td>';
+            tbodyPending.appendChild(tr);
+          });
+        }
+
+        if (tbodyApproved) {
+          tbodyApproved.innerHTML = '';
+          if (approved.length === 0) {
+            tbodyApproved.innerHTML = '<tr><td colspan="2">None yet.</td></tr>';
+          } else {
+            approved.forEach(function (u) {
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '—') + '</td>';
+              tbodyApproved.appendChild(tr);
+            });
+          }
+        }
+
+        tbodyPending.querySelectorAll('.approve-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            adminData.approveUser(btn.dataset.email, btn.dataset.role);
+            renderApprovals(role, pendingId, approvedId);
+            updateStats();
+          });
+        });
+        tbodyPending.querySelectorAll('.reject-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            adminData.rejectUser(btn.dataset.email, btn.dataset.role);
+            renderApprovals(role, pendingId, approvedId);
+            updateStats();
+          });
+        });
+      }
+
+      function renderGoatListings() {
+        var pending = adminData.getListingsByStatus('pending');
+        var all = adminData.getListings();
+        var approvedCount = all.filter(function (l) { return l.status === 'approved'; }).length;
+        var rejectedCount = all.filter(function (l) { return l.status === 'rejected'; }).length;
+
+        var approvedEl = document.getElementById('admin-listings-approved-count');
+        var rejectedEl = document.getElementById('admin-listings-rejected-count');
+        if (approvedEl) approvedEl.textContent = approvedCount;
+        if (rejectedEl) rejectedEl.textContent = rejectedCount;
+
+        var tbody = document.getElementById('admin-goat-listings-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        if (pending.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8">No pending goat listings.</td></tr>';
+          return;
+        }
+        var user = window.AphamoHubAuth && window.AphamoHubAuth.getCurrentUser ? window.AphamoHubAuth.getCurrentUser() : null;
+        var adminBy = user ? (user.name || user.email || 'admin') : 'admin';
+        pending.forEach(function (l) {
+          var tr = document.createElement('tr');
+          var ratingVal = l.listingRating != null ? l.listingRating : '';
+          var ratingOpts = '<option value="">— Rate 1–5 —</option>';
+          for (var r = 1; r <= 5; r++) {
+            ratingOpts += '<option value="' + r + '"' + (ratingVal === r ? ' selected' : '') + '>' + r + '</option>';
+          }
+          tr.innerHTML = '<td>' + (l.farmerName || l.farmerEmail || '—') + '</td><td>' + (l.title || '—') + '</td><td>' + (l.breed || '—') + '</td><td>' + (l.quantity || '—') + '</td><td>' + (l.price || '—') + '</td><td>' + (l.location || '—') + '</td><td><select class="admin-listing-rating contact-form__select contact-form__input" data-listing-id="' + l.id + '" style="min-width:6rem">' + ratingOpts + '</select></td><td class="admin-approval-row"><button type="button" class="btn btn--primary btn--sm admin-listing-approve" data-listing-id="' + l.id + '">Approve</button> <button type="button" class="btn btn--outline btn--sm admin-listing-reject" data-listing-id="' + l.id + '">Reject</button></td>';
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll('.admin-listing-rating').forEach(function (sel) {
+          sel.addEventListener('change', function () {
+            var id = sel.dataset.listingId;
+            var rating = parseInt(sel.value, 10);
+            if (id && !isNaN(rating)) adminData.updateListing(id, { listingRating: rating });
+          });
+        });
+        tbody.querySelectorAll('.admin-listing-approve').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.dataset.listingId;
+            var row = btn.closest('tr');
+            var select = row && row.querySelector('.admin-listing-rating');
+            var rating = select && select.value ? parseInt(select.value, 10) : null;
+            if (!id) return;
+            if (rating == null || isNaN(rating) || rating < 1 || rating > 5) {
+              alert('Please set a listing rating (1–5) before approving. The rating indicates how well the listing matches the website criteria.');
+              return;
+            }
+            var user = window.AphamoHubAuth && window.AphamoHubAuth.getCurrentUser ? window.AphamoHubAuth.getCurrentUser() : null;
+            var adminBy = user ? (user.name || user.email || 'admin') : 'admin';
+            adminData.updateListing(id, { status: 'approved', listingRating: rating, approvedAt: new Date().toISOString(), approvedBy: adminBy });
+            renderGoatListings();
+          });
+        });
+        tbody.querySelectorAll('.admin-listing-reject').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.dataset.listingId;
+            if (!id) return;
+            if (!confirm('Reject this goat listing? The farmer can submit a new listing.')) return;
+            var user = window.AphamoHubAuth && window.AphamoHubAuth.getCurrentUser ? window.AphamoHubAuth.getCurrentUser() : null;
+            var adminBy = user ? (user.name || user.email || 'admin') : 'admin';
+            adminData.updateListing(id, { status: 'rejected', approvedAt: new Date().toISOString(), approvedBy: adminBy });
+            renderGoatListings();
+          });
+        });
+      }
+
+      function updateStats() {
+        var courses = adminData.getCourses();
+        var statCourses = document.getElementById('stat-courses');
+        if (statCourses) statCourses.textContent = courses.length;
+        var statPendingBen = document.getElementById('stat-pending-beneficiaries');
+        if (statPendingBen) statPendingBen.textContent = adminData.getPendingByRole('beneficiary').length;
+        var statPendingLearn = document.getElementById('stat-pending-learners');
+        if (statPendingLearn) statPendingLearn.textContent = adminData.getPendingByRole('learner').length;
+        var statPendingFarm = document.getElementById('stat-pending-farmers');
+        if (statPendingFarm) statPendingFarm.textContent = adminData.getPendingByRole('farmer').length;
+      }
+
+      function renderUsers() {
+        var users = adminData.getNonAdminUsers();
+        var tbody = document.getElementById('admin-users-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        if (users.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5">No users yet.</td></tr>';
+          return;
+        }
+        users.forEach(function (u) {
+          var roles = (u.roles || [u.role]).join(', ') || '—';
+          var primaryRole = (u.roles && u.roles[0]) || u.role || '';
+          var approvalStatus = (u.approvalStatus && u.approvalStatus[primaryRole]) || 'approved';
+          var statusClass = u.suspended ? 'admin-user-status--suspended' : (approvalStatus === 'approved' ? 'admin-user-status--approved' : 'admin-user-status--pending');
+          var statusText = u.suspended ? 'Suspended' : (approvalStatus === 'approved' ? 'Active' : 'Pending');
+          var suspendBtn = u.suspended
+            ? '<button type="button" class="btn btn--outline btn--sm unsuspend-user-btn" data-email="' + (u.email || '') + '">Unsuspend</button>'
+            : '<button type="button" class="btn btn--outline btn--sm suspend-user-btn" data-email="' + (u.email || '') + '">Suspend</button>';
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '—') + '</td><td>' + roles + '</td><td><span class="admin-user-status ' + statusClass + '">' + statusText + '</span></td><td class="admin-approval-row">' + suspendBtn + ' <button type="button" class="btn btn--outline btn--sm delete-user-btn" data-email="' + (u.email || '') + '">Delete</button></td>';
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll('.suspend-user-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            adminData.suspendUser(btn.dataset.email);
+            renderUsers();
+          });
+        });
+        tbody.querySelectorAll('.unsuspend-user-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            adminData.unsuspendUser(btn.dataset.email);
+            renderUsers();
+          });
+        });
+        tbody.querySelectorAll('.delete-user-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            if (confirm('Permanently delete this user? This cannot be undone.')) {
+              adminData.deleteUser(btn.dataset.email);
+              renderUsers();
+              updateStats();
+            }
+          });
+        });
+      }
+
+      function showPanel(panelId) {
+        document.querySelectorAll('.admin-portal__panel').forEach(function (p) {
+          p.classList.remove('is-visible');
+        });
+        document.querySelectorAll('.portal-dashboard__nav-link[data-panel]').forEach(function (a) {
+          a.classList.remove('is-active');
+          if (a.dataset.panel === panelId) a.classList.add('is-active');
+        });
+        var panel = document.getElementById('panel-' + panelId);
+        if (panel) panel.classList.add('is-visible');
+        if (panelId === 'courses') renderCourses();
+        if (panelId === 'course-builder') renderCourseBuilder();
+        if (panelId === 'assessments') renderAssessmentsPanel();
+        if (panelId === 'beneficiaries') renderApprovals('beneficiary', 'admin-beneficiaries-tbody', 'admin-beneficiaries-approved-tbody');
+        if (panelId === 'learners') renderApprovals('learner', 'admin-learners-tbody', 'admin-learners-approved-tbody');
+        if (panelId === 'farmers') {
+          renderApprovals('farmer', 'admin-farmers-tbody', 'admin-farmers-approved-tbody');
+          renderGoatListings();
+        }
+        if (panelId === 'users') renderUsers();
+        if (panelId === 'dashboard') renderDashboardAnalytics();
+      }
+
+        var user = auth.getCurrentUser();
+      if (user && auth.hasRole(user, 'admin')) {
+        gate.classList.add('portal-gate--hidden');
+        wrap.hidden = false;
+        document.getElementById('admin-name').textContent = user.name || user.email || 'Admin';
+        updateStats();
+        renderDashboardAnalytics();
+        renderCourses();
+        bindAssessmentsPanel();
+        var hash = (window.location.hash || '').replace(/^#/, '');
+        if (hash && ['dashboard', 'courses', 'course-builder', 'assessments', 'beneficiaries', 'learners', 'farmers', 'users'].indexOf(hash) >= 0) {
+          showPanel(hash);
+        }
+        renderApprovals('beneficiary', 'admin-beneficiaries-tbody', 'admin-beneficiaries-approved-tbody');
+        renderApprovals('learner', 'admin-learners-tbody', 'admin-learners-approved-tbody');
+        renderApprovals('farmer', 'admin-farmers-tbody', 'admin-farmers-approved-tbody');
+        renderGoatListings();
+
+        document.getElementById('admin-back-from-preview')?.addEventListener('click', closeCoursePreview);
+
+        document.getElementById('admin-modal-progress')?.querySelector('.beneficiary-action-modal__backdrop')?.addEventListener('click', closeProgressModal);
+        document.getElementById('admin-modal-progress')?.querySelector('.beneficiary-action-modal__close')?.addEventListener('click', closeProgressModal);
+        document.addEventListener('keydown', function progressModalEscape(e) {
+          if (e.key === 'Escape' && document.getElementById('admin-modal-progress')?.classList.contains('is-open')) {
+            closeProgressModal();
+          }
+          if (e.key === 'Escape' && document.getElementById('admin-modal-quiz-question')?.classList.contains('is-open')) {
+            closeQuizQuestionModal();
+          }
+          if (e.key === 'Escape' && document.getElementById('panel-course-preview')?.classList.contains('is-visible')) {
+            closeCoursePreview();
+          }
+        });
+        document.getElementById('admin-progress-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var email = document.getElementById('admin-progress-email').value;
+          var courseId = document.getElementById('admin-progress-course').value;
+          var percent = parseInt(document.getElementById('admin-progress-percent').value, 10) || 0;
+          var modulesCompleted = parseInt(document.getElementById('admin-progress-modules').value, 10) || 0;
+          if (!courseId) { alert('Select a course.'); return; }
+          adminData.saveProgress(email, courseId, percent, modulesCompleted);
+          closeProgressModal();
+          renderDashboardAnalytics();
+        });
+
+        document.getElementById('admin-add-user-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var name = document.getElementById('user-add-name').value.trim();
+          var email = document.getElementById('user-add-email').value.trim();
+          var password = document.getElementById('user-add-password').value;
+          var roles = Array.prototype.map.call(document.querySelectorAll('.user-add-role:checked'), function (c) { return c.value; });
+          var autoApprove = document.getElementById('user-add-auto-approve').checked;
+          if (roles.length === 0) {
+            alert('Select at least one role.');
+            return;
+          }
+          var result = adminData.addUser({ name: name, email: email, password: password, roles: roles, autoApprove: autoApprove });
+          if (result.success) {
+            document.getElementById('admin-add-user-form').reset();
+            renderUsers();
+            updateStats();
+            showPanel('users');
+          } else {
+            alert(result.message || 'Could not add user.');
+          }
+        });
+
+        function handlePanelClick(e) {
+          var link = e.target.closest('[data-panel]');
+          if (link && link.dataset.panel) {
+            e.preventDefault();
+            showPanel(link.dataset.panel);
+            window.history.replaceState(null, '', '#' + link.dataset.panel);
+          }
+        }
+        document.querySelectorAll('.portal-dashboard__nav-link[data-panel], .portal-dashboard__panel-link[data-panel]').forEach(function (link) {
+          link.addEventListener('click', handlePanelClick);
+        });
+
+        document.getElementById('admin-sign-out').addEventListener('click', function (e) {
+          e.preventDefault();
+          auth.signOut();
+          window.location.reload();
+        });
+
+        var courseBuilder = window.AphamoCourseBuilder;
+        var aiPreview = null;
+
+        document.getElementById('cb-quiz-q-question-type')?.addEventListener('change', switchQuizQuestionTypePanels);
+        document.getElementById('admin-modal-quiz-question')?.querySelector('.beneficiary-action-modal__backdrop')?.addEventListener('click', closeQuizQuestionModal);
+        document.querySelector('.cb-close-quiz-q')?.addEventListener('click', closeQuizQuestionModal);
+        document.getElementById('cb-quiz-question-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseBuilder = window.AphamoCourseBuilder;
+          var cid = document.getElementById('cb-quiz-q-course-id').value;
+          var itemId = document.getElementById('cb-quiz-q-item-id').value;
+          var type = document.getElementById('cb-quiz-q-type').value || 'quiz';
+          var questionType = (document.getElementById('cb-quiz-q-question-type') && document.getElementById('cb-quiz-q-question-type').value) || 'multiple_choice';
+          var question = document.getElementById('cb-quiz-q-text').value.trim();
+          if (!question || !cid || !itemId) { alert('Fill in the question.'); return; }
+          var payload = { questionType: questionType, question: question };
+          if (questionType === 'multiple_choice') {
+            var opts = [0, 1, 2, 3].map(function (i) { return document.getElementById('cb-opt-' + i).value.trim(); }).filter(Boolean);
+            var correctEl = document.querySelector('input[name="cb-correct"]:checked');
+            var correctIndex = correctEl ? parseInt(correctEl.value, 10) : 0;
+            if (opts.length < 2) { alert('Add at least 2 options.'); return; }
+            payload.options = opts;
+            payload.correctIndex = Math.min(correctIndex, opts.length - 1);
+          } else if (questionType === 'true_false') {
+            var tfEl = document.querySelector('input[name="cb-tf-correct"]:checked');
+            payload.correctIndex = tfEl ? parseInt(tfEl.value, 10) : 0;
+          } else if (questionType === 'fill_blank') {
+            var blanksStr = (document.getElementById('cb-quiz-q-blanks') && document.getElementById('cb-quiz-q-blanks').value) || '';
+            payload.blanks = blanksStr.split(/[,;\n]/).map(function (s) { return s.trim(); }).filter(Boolean);
+            if (payload.blanks.length === 0) { alert('Enter at least one correct answer for the blank(s).'); return; }
+          } else if (questionType === 'match') {
+            var pairsStr = (document.getElementById('cb-quiz-q-match-pairs') && document.getElementById('cb-quiz-q-match-pairs').value) || '';
+            var lines = pairsStr.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+            var leftItems = [], rightItems = [];
+            lines.forEach(function (line) {
+              var idx = line.indexOf('|');
+              if (idx >= 0) {
+                leftItems.push(line.substring(0, idx).trim());
+                rightItems.push(line.substring(idx + 1).trim());
+              }
+            });
+            if (leftItems.length === 0) { alert('Enter at least one pair (e.g. Goat | Animal).'); return; }
+            payload.leftItems = leftItems;
+            payload.rightItems = rightItems;
+            payload.correctPairs = leftItems.map(function (_, i) { return i; });
+          }
+          courseBuilder.addQuestion(cid, type, itemId, payload);
+          closeQuizQuestionModal();
+          renderCourseBuilder();
+          renderAssessmentsPanel();
+        });
+
+        (function () {
+          function handleAIGenerate() {
+            var topic = document.getElementById('cb-ai-topic');
+            var topicVal = topic && topic.value ? topic.value.trim() : '';
+            if (!topicVal) topicVal = 'Goat farming';
+            var courseBuilder = window.AphamoCourseBuilder;
+            if (!courseBuilder) { alert('Course Builder not loaded.'); return; }
+            aiPreview = courseBuilder.generateWithAI(topicVal);
+            var preview = document.getElementById('cb-ai-preview');
+            var desc = document.getElementById('cb-ai-desc');
+            var modUl = document.getElementById('cb-ai-modules');
+            var quizUl = document.getElementById('cb-ai-quiz');
+            var assignLabel = document.getElementById('cb-ai-assignments-label');
+            var assignUl = document.getElementById('cb-ai-assignments');
+            if (preview) preview.hidden = false;
+            if (desc) desc.textContent = aiPreview.description;
+            if (modUl) {
+              modUl.innerHTML = '';
+              (aiPreview.modules || []).forEach(function (m) {
+                var li = document.createElement('li');
+                li.textContent = m.title + (m.content ? ' — ' + m.content.substring(0, 60) + '…' : '');
+                modUl.appendChild(li);
+              });
+            }
+            if (quizUl) {
+              quizUl.innerHTML = '';
+              (aiPreview.quizQuestions || []).forEach(function (q) {
+                var li = document.createElement('li');
+                li.textContent = q.q + ' → ' + (q.opts && q.opts[q.correct] != null ? q.opts[q.correct] : '—');
+                quizUl.appendChild(li);
+              });
+            }
+            if (assignLabel && assignUl) {
+              var assigns = aiPreview.assignments || [];
+              assignLabel.style.display = assigns.length ? 'block' : 'none';
+              assignUl.innerHTML = '';
+              assigns.forEach(function (a) {
+                var li = document.createElement('li');
+                li.textContent = (a.title || 'Assignment') + (a.instructions ? ': ' + a.instructions.substring(0, 50) + '…' : '');
+                assignUl.appendChild(li);
+              });
+            }
+          }
+          function handleAISave() {
+            if (!aiPreview) { alert('Generate a course first.'); return; }
+            var courseBuilder = window.AphamoCourseBuilder;
+            var modules = (aiPreview.modules || []).map(function (m) {
+              return { id: m.id, title: m.title, content: m.content || '', materials: m.materials || [], videoUrl: m.videoUrl || '' };
+            });
+            var quizQ = (aiPreview.quizQuestions || []).map(function (q) {
+              return { id: 'q_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), question: q.q, options: q.opts || [], correctIndex: q.correct || 0 };
+            });
+            var assignList = (aiPreview.assignments || []).map(function (a) {
+              return { id: 'a_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), title: a.title || '', instructions: a.instructions || '', description: '' };
+            });
+            var id = adminData.addCourse({
+              title: aiPreview.title,
+              description: aiPreview.description,
+              modules: modules,
+              quizzes: [{ id: 'qz_' + Date.now(), title: 'Quiz 1', questions: quizQ }],
+              assessments: [],
+              assignments: assignList,
+              tests: []
+            });
+            if (id) {
+              aiPreview = null;
+              document.getElementById('cb-ai-preview').hidden = true;
+              var topicInput = document.getElementById('cb-ai-topic');
+              if (topicInput) topicInput.value = '';
+              renderCourses();
+              showPanel('course-builder');
+              var sel = document.getElementById('cb-course-select');
+              if (sel) sel.value = id;
+              renderCourseBuilder();
+            }
+          }
+          var wrap = document.getElementById('admin-dashboard-wrap');
+          if (wrap) {
+            wrap.addEventListener('click', function (e) {
+              if (e.target.id === 'cb-ai-generate' || e.target.closest && e.target.closest('#cb-ai-generate')) {
+                e.preventDefault();
+                handleAIGenerate();
+              }
+              if (e.target.id === 'cb-ai-save-as-course' || e.target.closest && e.target.closest('#cb-ai-save-as-course')) {
+                e.preventDefault();
+                handleAISave();
+              }
+            });
+          }
+        })();
+        document.getElementById('cb-course-select')?.addEventListener('change', renderCourseBuilder);
+        document.getElementById('cb-save-course-settings')?.addEventListener('click', function () {
+          var courseId = document.getElementById('cb-course-select').value;
+          if (!courseId) return;
+          var title = document.getElementById('cb-course-title').value?.trim() || '';
+          var description = document.getElementById('cb-course-description').value?.trim() || '';
+          var locked = document.getElementById('cb-course-locked').checked;
+          adminData.updateCourse(courseId, { title: title, description: description, locked: !!locked });
+          renderCourses();
+          renderCourseBuilder();
+        });
+        document.getElementById('cb-preview-course-btn')?.addEventListener('click', function () {
+          var courseId = document.getElementById('cb-course-select').value;
+          if (courseId) openCoursePreview(courseId);
+        });
+        document.getElementById('cb-duplicate-course-btn')?.addEventListener('click', function () {
+          var courseId = document.getElementById('cb-course-select').value;
+          if (!courseId) { alert('Select a course first.'); return; }
+          var newId = courseBuilder.duplicateCourse(courseId);
+          if (newId) {
+            renderCourses();
+            var sel = document.getElementById('cb-course-select');
+            if (sel) { sel.value = newId; renderCourseBuilder(); }
+          }
+        });
+        document.getElementById('cb-add-module-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('cb-course-select').value;
+          var title = document.getElementById('cb-module-title').value?.trim() || 'New module';
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addModule(courseId, { title: title, content: '' });
+          document.getElementById('cb-module-title').value = '';
+          renderCourseBuilder();
+        });
+        document.getElementById('cb-add-quiz-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('cb-course-select').value;
+          var title = document.getElementById('cb-quiz-title').value?.trim() || 'Quiz';
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addQuiz(courseId, { title: title, questions: [] });
+          document.getElementById('cb-quiz-title').value = '';
+          renderCourseBuilder();
+        });
+        document.getElementById('cb-add-assessment-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('cb-course-select').value;
+          var title = document.getElementById('cb-assessment-title').value?.trim() || 'Assessment';
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addAssessment(courseId, { title: title, questions: [] });
+          document.getElementById('cb-assessment-title').value = '';
+          renderCourseBuilder();
+        });
+        document.getElementById('cb-add-assignment-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('cb-course-select').value;
+          var title = document.getElementById('cb-assignment-title').value?.trim() || 'Assignment';
+          var instructions = document.getElementById('cb-assignment-instructions').value?.trim() || '';
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addAssignment(courseId, { title: title, instructions: instructions });
+          document.getElementById('cb-assignment-title').value = '';
+          document.getElementById('cb-assignment-instructions').value = '';
+          renderCourseBuilder();
+        });
+        document.getElementById('cb-add-test-form')?.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var courseId = document.getElementById('cb-course-select').value;
+          var title = document.getElementById('cb-test-title').value?.trim() || 'Test';
+          var timeLimit = parseInt(document.getElementById('cb-test-time').value, 10) || 0;
+          if (!courseId) { alert('Select a course first.'); return; }
+          courseBuilder.addTest(courseId, { title: title, timeLimit: timeLimit, questions: [] });
+          document.getElementById('cb-test-title').value = '';
+          document.getElementById('cb-test-time').value = '';
+          renderCourseBuilder();
+        });
+
+        document.getElementById('admin-course-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+          var title = document.getElementById('course-title').value.trim();
+          var desc = document.getElementById('course-description').value.trim();
+          var videoUrl = document.getElementById('course-video').value.trim();
+          var materialsText = document.getElementById('course-materials').value.trim();
+          var materials = materialsText ? materialsText.split(/[\r\n]+/).map(function (s) { return s.trim(); }).filter(Boolean) : [];
+          var locked = document.getElementById('course-locked').checked;
+          var id = adminData.addCourse({ title: title, description: desc, videoUrl: videoUrl, materials: materials, locked: locked });
+          if (id) {
+            document.getElementById('admin-course-form').reset();
+            renderCourses();
+            updateStats();
+            showPanel('courses');
+          }
+        });
+      }
+
+      document.getElementById('admin-login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = document.getElementById('admin-email').value.trim();
+        var password = document.getElementById('admin-password').value;
+        var result = auth.login(email, password);
+        if (!result.success) {
+          alert(result.message || 'Sign-in failed.');
+          return;
+        }
+        var sessUser = auth.getCurrentUser();
+        if (!auth.hasRole(sessUser, 'admin')) {
+          auth.signOut();
+          alert('You do not have admin access. Use The Hub to sign in as a learner, beneficiary, or farmer.');
+          return;
+        }
+        window.location.reload();
+      });
+    })();
+  </script>
+</body>
+</html>

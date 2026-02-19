@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learner Portal – Sign in to access your training courses, progress, and learning resources on Aphamo Goat Aggregation.">
+  <title>Learner Portal – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/sell/">Beneficiary Programme</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Learner Portal</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="portal-gate" class="portal-gate">
+    <section class="page-hero page-hero--blc" aria-labelledby="learner-portal-title">
+      <div class="container page-hero__container">
+        <h1 id="learner-portal-title" class="page-hero__title">Learner Portal</h1>
+        <p class="page-hero__sub">Sign in to access your training courses, track progress, and use learning resources.</p>
+      </div>
+    </section>
+
+    <section class="section learner-hub" aria-labelledby="learner-portal-heading">
+      <div class="container learner-hub__container">
+        <p id="learner-portal-heading" class="learner-hub__intro">
+          Use your learner credentials to access your dashboard. New to Aphamo? Register via The Hub and choose “Learner” to get started.
+        </p>
+
+        <div class="learner-hub__panel">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h2 class="learner-hub__card-title">Learner login</h2>
+            <p class="learner-hub__card-desc">Sign in to view your courses, complete modules, and track your training progress.</p>
+            <form class="learner-hub__form" id="learner-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="learner-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="learner-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner" selected>Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="learner-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="learner-email" name="email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="learner-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="learner-password" name="password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Not a learner yet?</p>
+                <a href="/the-hub/" class="btn btn--outline learner-hub__switch-btn">Register at The Hub</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <section class="contact-form-section" aria-labelledby="learner-features-title">
+          <div class="contact-form-section__container">
+            <h2 id="learner-features-title" class="contact-form-card__title">What you can do in the Learner Portal</h2>
+            <p class="contact-form-section__intro">
+              Once signed in, you can access training content and track your progress. When integrated with your learning system, this portal will support full course delivery.
+            </p>
+            <ul class="beneficiary-conduct__list" role="list">
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Training courses – browse and start goat farming and aggregation modules.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Progress tracking – see which modules you’ve completed and what’s next.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Certificates – download completion certificates when you finish a course.</span>
+              </li>
+              <li class="beneficiary-conduct__item">
+                <span class="beneficiary-conduct__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="beneficiary-conduct__text">Resources – access guides, videos, and links to support your learning.</span>
+              </li>
+            </ul>
+            <p class="contact-form-section__note">
+              This page is a front-end placeholder. When you are ready, connect the login and dashboard to your learning management system or training backend.
+            </p>
+          </div>
+        </section>
+      </div>
+    </section>
+    </div>
+
+    <div id="portal-dashboard" class="portal-dashboard" aria-label="Learner dashboard">
+      <div class="portal-dashboard__bar">
+        <p class="portal-dashboard__welcome">Welcome, <strong id="portal-dashboard-name">Learner</strong> <span class="portal-dashboard__role" id="portal-dashboard-role" aria-label="Logged in as">Learner</span></p>
+        <div id="portal-switcher" class="portal-switcher" hidden>
+          <label for="portal-switcher-select" class="portal-switcher__label">Switch to:</label>
+          <select id="portal-switcher-select" class="portal-switcher__select" aria-label="Switch to another portal">
+            <option value="">Other portals</option>
+          </select>
+        </div>
+        <button type="button" class="portal-dashboard__sign-out" id="portal-sign-out">Sign out</button>
+      </div>
+      <div class="portal-dashboard__layout">
+        <aside class="portal-dashboard__side" aria-label="Portal navigation">
+          <ul class="portal-dashboard__nav" role="tablist" id="portal-tablist">
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#dashboard" class="portal-dashboard__nav-link is-active" role="tab" id="tab-dashboard" aria-selected="true" aria-controls="panel-dashboard" data-panel="dashboard">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+                Dashboard
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#courses" class="portal-dashboard__nav-link" role="tab" id="tab-courses" aria-selected="false" aria-controls="panel-courses" data-panel="courses" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8"/><path d="M8 11h8"/></svg>
+                My courses
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#progress" class="portal-dashboard__nav-link" role="tab" id="tab-progress" aria-selected="false" aria-controls="panel-progress" data-panel="progress" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Progress
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#certificates" class="portal-dashboard__nav-link" role="tab" id="tab-certificates" aria-selected="false" aria-controls="panel-certificates" data-panel="certificates" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                Certificates
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#analytics" class="portal-dashboard__nav-link" role="tab" id="tab-analytics" aria-selected="false" aria-controls="panel-analytics" data-panel="analytics" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Analytics
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="#profile" class="portal-dashboard__nav-link" role="tab" id="tab-profile" aria-selected="false" aria-controls="panel-profile" data-panel="profile" tabindex="-1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Profile &amp; settings
+              </a>
+            </li>
+            <li class="portal-dashboard__nav-item" role="presentation">
+              <a href="/training/" class="portal-dashboard__nav-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                Resources
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <div class="portal-dashboard__main">
+          <div id="panel-dashboard" class="portal-dashboard__panel is-visible" role="tabpanel" aria-labelledby="tab-dashboard">
+            <h2 class="portal-dashboard__title">Dashboard</h2>
+            <div class="portal-dashboard__card">
+              <p>Welcome to your learner dashboard. This is your central place to access training courses, track your progress through goat farming and aggregation modules, and download certificates once you complete a course.</p>
+              <div class="portal-dashboard__stat-grid">
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">2</span><span class="portal-dashboard__stat-label">Courses in progress</span></div>
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">5</span><span class="portal-dashboard__stat-label">Modules completed</span></div>
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">1</span><span class="portal-dashboard__stat-label">Certificates earned</span></div>
+              </div>
+              <h3>Quick actions</h3>
+              <ul>
+                <li>Resume <strong>Introduction to Goat Husbandry</strong> – you are 60% through Module 3.</li>
+                <li>Complete the short quiz for <strong>Basic Herd Health</strong> to earn your next badge.</li>
+                <li>Visit the <a href="/training/">Training &amp; Development</a> page for new courses and live workshop dates.</li>
+              </ul>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Recent activity</h3>
+              <p>Your latest activity helps you pick up where you left off and stay on track with programme requirements.</p>
+              <div class="portal-dashboard__empty-state">
+                <p>Your learning activity will appear here as you complete modules, take quizzes, and earn certificates.</p>
+              </div>
+            </div>
+          </div>
+          <div id="panel-courses" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-courses">
+            <h2 class="portal-dashboard__title">My courses</h2>
+            <div class="portal-dashboard__card">
+              <p>Enrol in and access all your goat farming and aggregation training. Courses are designed for South African conditions and aligned with Aphamo’s aggregation and compliance standards.</p>
+            </div>
+            <div id="learner-courses-container">
+              <!-- Admin-uploaded courses rendered here -->
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>In progress</h3>
+              <ul>
+                <li><strong>Introduction to Goat Husbandry</strong> – Covers breeds, housing, feeding, and basic care. You have completed 2 of 5 modules. Estimated time remaining: 4–6 hours.</li>
+                <li><strong>Goat Aggregation &amp; Market Readiness</strong> – Preparing animals for sale, quality criteria, and working with Aphamo. You have completed 0 of 4 modules.</li>
+              </ul>
+              <p><a href="/training/" class="btn btn--primary">Continue learning</a></p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Available courses</h3>
+              <p>These courses are open for enrolment. Start any time and learn at your own pace.</p>
+              <ul>
+                <li><strong>Basic Herd Health</strong> – Vaccinations, parasite control, and when to call a vet. <em>You have completed this course.</em></li>
+                <li><strong>Record-Keeping for Smallholders</strong> – Births, deaths, sales, and compliance records.</li>
+                <li><strong>Breed Identification &amp; Selection</strong> – Recognising breeds and choosing stock for your goals.</li>
+                <li><strong>Financial Basics for Goat Farmers</strong> – Costs, pricing, and simple profit tracking.</li>
+              </ul>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Upcoming workshops</h3>
+              <p>Live sessions are announced on the main Training page. Topics include hands-on handling, vet days, and aggregation drop-off procedures.</p>
+              <ul>
+                <li>Groot Marico – Goat handling &amp; weighing (date TBC)</li>
+                <li>North West – Herd health check workshop (date TBC)</li>
+              </ul>
+            </div>
+          </div>
+          <div id="panel-progress" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-progress">
+            <h2 class="portal-dashboard__title">Progress</h2>
+            <div class="portal-dashboard__card">
+              <p>Track your progress across all courses. Completing required modules helps you stay compliant and ready for aggregation and market opportunities.</p>
+              <div class="portal-dashboard__stat-grid">
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">40%</span><span class="portal-dashboard__stat-label">Overall completion</span></div>
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">5</span><span class="portal-dashboard__stat-label">Modules done</span></div>
+                <div class="portal-dashboard__stat"><span class="portal-dashboard__stat-value">12</span><span class="portal-dashboard__stat-label">Modules total</span></div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Course progress</h3>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Course</th><th>Modules</th><th>Status</th><th>Completed</th></tr></thead>
+                  <tbody>
+                    <tr><td>Basic Herd Health</td><td>4 of 4</td><td>Complete</td><td>5 Feb 2026</td></tr>
+                    <tr><td>Introduction to Goat Husbandry</td><td>2 of 5</td><td>In progress</td><td>—</td></tr>
+                    <tr><td>Goat Aggregation &amp; Market Readiness</td><td>0 of 4</td><td>Not started</td><td>—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Learning path</h3>
+              <p>We recommend this order for new learners: (1) Introduction to Goat Husbandry, (2) Basic Herd Health, (3) Record-Keeping for Smallholders, then (4) Goat Aggregation &amp; Market Readiness. You can still take courses in any order that suits your schedule.</p>
+            </div>
+          </div>
+          <div id="panel-certificates" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-certificates">
+            <h2 class="portal-dashboard__title">Certificates</h2>
+            <div class="portal-dashboard__card">
+              <p>Download certificates for courses you have completed. Keep them for your records and for showing compliance or training history to buyers or programme partners.</p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Your certificates</h3>
+              <div class="portal-dashboard__table-wrap">
+                <table class="portal-dashboard__table">
+                  <thead><tr><th>Course</th><th>Completed</th><th>Action</th></tr></thead>
+                  <tbody>
+                    <tr><td>Basic Herd Health</td><td>5 Feb 2026</td><td><button type="button" class="btn btn--outline btn--sm">Download PDF</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>More certificates will appear here as you complete additional courses.</p>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Certificate validity</h3>
+              <p>Aphamo certificates do not expire. For certain compliance or buyer requirements, you may be asked to refresh specific training (e.g. herd health) every few years; we will notify you if that applies.</p>
+            </div>
+          </div>
+          <div id="panel-analytics" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-analytics">
+            <h2 class="portal-dashboard__title">Analytics</h2>
+            <div class="portal-dashboard__card">
+              <p>Your learning analytics at a glance. Track time spent, completion rates, and engagement over time.</p>
+              <div class="portal-dashboard__empty-state">
+                <p>Learning analytics will appear here as you complete modules, take quizzes, and earn certificates. Track time spent, completion rates, and course progress.</p>
+              </div>
+            </div>
+          </div>
+          <div id="panel-profile" class="portal-dashboard__panel" role="tabpanel" aria-labelledby="tab-profile">
+            <h2 class="portal-dashboard__title">Profile &amp; settings</h2>
+            <div class="portal-dashboard__card profile-card">
+              <div class="profile-header">
+                <div class="profile-avatar-wrap">
+                  <img id="profile-avatar" class="profile-avatar" src="" alt="" width="96" height="96">
+                  <span class="profile-avatar-placeholder" id="profile-avatar-placeholder" aria-hidden="true">?</span>
+                  <label for="profile-photo-input" class="profile-avatar-change">Change photo</label>
+                  <input type="file" id="profile-photo-input" accept="image/*" class="profile-photo-input" aria-label="Upload profile photo">
+                </div>
+                <div class="profile-info">
+                  <h3 id="profile-name" class="profile-name">—</h3>
+                  <p id="profile-email" class="profile-email">—</p>
+                </div>
+              </div>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Update profile</h3>
+              <form id="profile-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-name-input">Full name</label>
+                  <input type="text" id="profile-name-input" name="name" class="contact-form__input" placeholder="Your name">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-email-input">Email</label>
+                  <input type="email" id="profile-email-input" name="email" class="contact-form__input" placeholder="you@example.com">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Change password</h3>
+              <form id="profile-password-form" class="profile-form" novalidate>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-current-password">Current password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-current-password" name="current" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-new-password">New password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-new-password" name="new" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+                </div>
+                <div class="contact-form__row">
+                  <label class="contact-form__label" for="profile-confirm-password">Confirm new password <span class="contact-form__required">*</span></label>
+                  <input type="password" id="profile-confirm-password" name="confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+                </div>
+                <div class="contact-form__actions">
+                  <button type="submit" class="btn btn--primary">Update password</button>
+                </div>
+              </form>
+            </div>
+            <div class="portal-dashboard__card">
+              <h3>Settings</h3>
+              <div class="profile-settings">
+                <label class="profile-setting">
+                  <input type="checkbox" id="setting-email-notifications" name="emailNotifications" checked>
+                  <span>Email notifications for updates and reminders</span>
+                </label>
+                <label class="profile-setting">
+                  <input type="checkbox" id="setting-activity-digest" name="activityDigest">
+                  <span>Weekly activity digest email</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/learner-portal/">Learner Portal</a></li>
+          <li><a href="/beneficiary-portal/">Beneficiary Portal</a></li>
+          <li><a href="/goat-listing-portal/">Goat Listing Portal</a></li>
+          <li><a href="/admin-portal/">Admin Portal</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <div id="hub-modal" class="hub-modal" aria-hidden="true" role="dialog" aria-labelledby="hub-modal-title">
+    <div class="hub-modal__backdrop"></div>
+    <div class="hub-modal__box">
+      <button type="button" class="hub-modal__close" aria-label="Close The Hub">&times;</button>
+      <h2 id="hub-modal-title" class="hub-modal__title">The Hub</h2>
+      <p class="hub-modal__intro">Sign in or register as a learner, beneficiary, or goat farmer.</p>
+      <div class="section learner-hub learner-hub--login" id="hub-modal-section">
+        <div class="learner-hub__panel learner-hub__panel--login" id="hub-modal-panel-login">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h3 class="learner-hub__card-title">Sign in</h3>
+            <p class="learner-hub__card-desc">Sign in to continue your training and view your dashboard.</p>
+            <form class="learner-hub__form" id="hub-modal-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="hub-modal-login-role" name="role" class="contact-form__input contact-form__select" required>
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-login-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-login-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-login-password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Don't have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-signup">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="learner-hub__panel learner-hub__panel--register learner-hub__panel--hidden" id="hub-modal-panel-register">
+          <div class="learner-hub__card learner-hub__card--register">
+            <h3 class="learner-hub__card-title">Create account</h3>
+            <p class="learner-hub__card-desc">Register as a learner, beneficiary, or goat farmer.</p>
+            <form class="learner-hub__form" id="hub-modal-register-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-name">Full name <span class="contact-form__required">*</span></label>
+                <input type="text" id="hub-modal-register-name" class="contact-form__input" required autocomplete="name" placeholder="e.g. John Smith">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="hub-modal-register-email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row learner-hub__roles-row">
+                <span class="contact-form__label">I am registering as <span class="contact-form__required">*</span></span>
+                <p class="learner-hub__roles-hint">Select all that apply.</p>
+                <div class="learner-hub__roles learner-hub__roles--checkboxes">
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="learner" class="hub-modal-role-checkbox"> <span>Learner</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="beneficiary" class="hub-modal-role-checkbox"> <span>Beneficiary</span></label>
+                  <label class="learner-hub__role"><input type="checkbox" name="roles" value="farmer" class="hub-modal-role-checkbox"> <span>Goat farmer (seller)</span></label>
+                </div>
+                <span id="hub-modal-register-roles-error" class="learner-hub__roles-error" aria-live="polite" hidden>Select at least one role.</span>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-password" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="hub-modal-register-confirm">Confirm password <span class="contact-form__required">*</span></label>
+                <input type="password" id="hub-modal-register-confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra learner-hub__form-extra--checkbox">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" name="updates" class="learner-hub__checkbox" checked>
+                  <span>Send me training updates and course news</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Create account</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Already have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="hub-modal-show-login">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <p class="learner-hub__note">By signing in or registering you agree to our terms and privacy policy. POPIA-compliant.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/hub-auth.js"></script>
+  <script src="../scripts/admin-data.js"></script>
+  <script src="../scripts/hub-modal.js"></script>
+  <script src="../scripts/profile-panel.js"></script>
+  <script src="../scripts/portal-switcher.js"></script>
+  <script>
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+
+    (function () {
+      var auth = window.AphamoHubAuth;
+      var gate = document.getElementById('portal-gate');
+      var dashboard = document.getElementById('portal-dashboard');
+      var expectedRole = 'learner';
+
+      if (auth) {
+        var user = auth.getCurrentUser();
+        if (user) {
+          if (auth.hasRole(user, expectedRole)) {
+            if (!auth.isApproved(user, expectedRole)) {
+              if (gate) gate.classList.remove('portal-gate--hidden');
+              var intro = document.getElementById('learner-portal-heading');
+              if (intro) intro.innerHTML = 'Your learner account is <strong>pending approval</strong>. Our team will review your registration and notify you when you can access the portal. If you have questions, <a href="/contact/">contact us</a>.';
+              var loginPanel = document.querySelector('#portal-gate .learner-hub__panel');
+              if (loginPanel) loginPanel.style.display = 'none';
+              return;
+            }
+            if (gate) gate.classList.add('portal-gate--hidden');
+            if (dashboard) {
+              dashboard.classList.add('portal-dashboard--visible');
+              var nameEl = document.getElementById('portal-dashboard-name');
+              if (nameEl) nameEl.textContent = user.name || user.email || 'Learner';
+              var roleEl = document.getElementById('portal-dashboard-role');
+              if (roleEl) roleEl.textContent = user.role === 'farmer' ? 'Goat farmer' : (user.role === 'beneficiary' ? 'Beneficiary' : 'Learner');
+              if (window.AphamoProfilePanel) AphamoProfilePanel.init(auth);
+            }
+            var signOutBtn = document.getElementById('portal-sign-out');
+            if (signOutBtn) signOutBtn.addEventListener('click', function () {
+              auth.signOut();
+              window.location.reload();
+            });
+            var navLinks = document.querySelectorAll('.portal-dashboard__nav-link[data-panel]');
+            var panels = document.querySelectorAll('.portal-dashboard__panel');
+            function renderLearnerCourses() {
+              var container = document.getElementById('learner-courses-container');
+              if (!container || !window.AphamoAdminData) return;
+              var courses = window.AphamoAdminData.getCourses().filter(function (c) {
+                return c.published !== false;
+              });
+              var user = auth.getCurrentUser();
+              var userEmail = (user && user.email) || '';
+              container.innerHTML = '';
+              if (courses.length === 0) {
+                container.innerHTML = '<div class="portal-dashboard__card"><p>No courses available yet. Check back later or visit <a href="/training/">Training &amp; Development</a> for resources.</p></div>';
+                return;
+              }
+              courses.forEach(function (c) {
+                var hasAccess = !c.locked || (userEmail && window.AphamoAdminData.hasPaid(userEmail, c.id));
+                var card = document.createElement('div');
+                card.className = 'portal-dashboard__card learner-course-card' + (!hasAccess && c.locked ? ' portal-dashboard__card--locked' : ' portal-dashboard__card--featured');
+                var lockedHtml = !hasAccess && c.locked ? '<p class="learner-course-locked"><strong>Locked.</strong> Payment required to access this course. Contact Aphamo to enrol.</p>' : '';
+                var rawVideo = c.videoUrl || '';
+                var embedUrl = rawVideo && (rawVideo.indexOf('/embed/') >= 0 ? rawVideo : rawVideo.replace(/youtube\.com\/watch\?v=/, 'youtube.com/embed/').replace(/youtu\.be\//, 'youtube.com/embed/'));
+                var videoHtml = hasAccess && embedUrl
+                  ? '<div class="learner-course-video"><div class="learner-course-video__wrap"><iframe src="' + embedUrl + '" title="' + (c.title || 'Video') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>'
+                  : '<div class="learner-course-video"><div class="learner-course-video__wrap learner-course-video-placeholder"><p>Video not yet available for this course.</p></div></div>';
+                var materials = (c.materials || []).filter(Boolean);
+                var materialsHtml = '<div class="learner-course-materials"><h4>Download learner materials</h4><ul class="learner-course-materials__list">';
+                if (hasAccess && materials.length > 0) {
+                  materials.forEach(function (m) {
+                    var url = typeof m === 'string' ? m : (m.url || m.href || '');
+                    var name = typeof m === 'object' && m.name ? m.name : (url.split('/').pop() || 'Download');
+                    materialsHtml += '<li><a href="' + url + '" class="learner-course-materials__link" target="_blank" rel="noopener" download>' + name + '</a></li>';
+                  });
+                } else {
+                  materialsHtml += '<li class="learner-course-materials__note">No materials available for this course yet.</li>';
+                }
+                materialsHtml += '</ul></div>';
+                var modulesHtml = '';
+                if (hasAccess && (c.modules || []).length > 0) {
+                  modulesHtml = '<div class="learner-course-modules"><h4>Modules</h4>';
+                  (c.modules || []).forEach(function (m, i) {
+                    var modVideoUrl = m.videoUrl || '';
+                    var modEmbedUrl = modVideoUrl && (modVideoUrl.indexOf('/embed/') >= 0 ? modVideoUrl : modVideoUrl.replace(/youtube\.com\/watch\?v=/, 'youtube.com/embed/').replace(/youtu\.be\//, 'youtube.com/embed/'));
+                    var modVideoBlock = modEmbedUrl
+                      ? '<div class="learner-course-video"><div class="learner-course-video__wrap"><iframe src="' + modEmbedUrl + '" title="' + (m.title || 'Video') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>'
+                      : '<div class="learner-course-video"><div class="learner-course-video__wrap learner-course-video-placeholder"><p>No video for this module.</p></div></div>';
+                    var liveUrl = (m.liveSessionUrl && String(m.liveSessionUrl).trim()) ? String(m.liveSessionUrl).trim() : '';
+                    var liveSessionBlock = liveUrl
+                      ? '<p><a href="' + liveUrl.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;') + '" target="_blank" rel="noopener" class="btn btn--primary">Join live class (Zoom / Teams)</a></p>'
+                      : '';
+                    var activity = null;
+                    if (m.activityType === 'quiz' && m.activityId) activity = (c.quizzes || []).find(function (q) { return q.id === m.activityId; });
+                    else if (m.activityType === 'assessment' && m.activityId) activity = (c.assessments || []).find(function (a) { return a.id === m.activityId; });
+                    else if (m.activityType === 'test' && m.activityId) activity = (c.tests || []).find(function (t) { return t.id === m.activityId; });
+                    var activityHtml = '';
+                    if (activity && (activity.questions || []).length > 0) {
+                      activityHtml = '<div class="learner-module-activity"><h5>' + (activity.title || m.activityType) + '</h5>';
+                      activity.questions.forEach(function (q, qqIdx) {
+                        var namePre = 'learner_mod_' + c.id + '_' + i + '_' + qqIdx;
+                        var qtype = q.questionType || 'multiple_choice';
+                        activityHtml += '<div class="quiz-question"><p><strong>Q' + (qqIdx + 1) + '.</strong> ' + (q.question || '').replace(/_____/g, '__________') + '</p>';
+                        if (qtype === 'multiple_choice' || qtype === 'true_false') {
+                          (q.options || ['True', 'False']).forEach(function (opt, oIdx) {
+                            activityHtml += '<label><input type="radio" name="' + namePre + '" value="' + oIdx + '"> ' + opt + '</label>';
+                          });
+                        } else if (qtype === 'fill_blank') {
+                          var blanks = q.blanks || [];
+                          for (var b = 0; b < blanks.length; b++) {
+                            activityHtml += '<input type="text" name="' + namePre + '_' + b + '" placeholder="Your answer" class="contact-form__input" style="max-width:200px;margin:0 0.25rem 0.25rem 0"> ';
+                          }
+                        } else if (qtype === 'match') {
+                          var lefts = q.leftItems || [], rights = q.rightItems || [];
+                          var shuffledRights = rights.slice();
+                          for (var si = shuffledRights.length - 1; si > 0; si--) {
+                            var j = Math.floor(Math.random() * (si + 1));
+                            var tmp = shuffledRights[si]; shuffledRights[si] = shuffledRights[j]; shuffledRights[j] = tmp;
+                          }
+                          activityHtml += '<table class="portal-dashboard__table" style="margin-top:0.5rem"><tbody>';
+                          lefts.forEach(function (left, idx) {
+                            activityHtml += '<tr><td>' + left + '</td><td><select name="' + namePre + '_' + idx + '" class="contact-form__select"><option value="">— Select —</option>';
+                            shuffledRights.forEach(function (r, ri) {
+                              activityHtml += '<option value="' + rights.indexOf(r) + '">' + r + '</option>';
+                            });
+                            activityHtml += '</select></td></tr>';
+                          });
+                          activityHtml += '</tbody></table>';
+                        }
+                        activityHtml += '</div>';
+                      });
+                      activityHtml += '</div>';
+                    }
+                    var badges = [];
+                    if (m.videoUrl) badges.push('<span class="cb-mod-badge">Video</span>');
+                    if (m.activityType) badges.push('<span class="cb-mod-badge">' + (m.activityType === 'quiz' ? 'Quiz' : m.activityType === 'assessment' ? 'Assessment' : 'Test') + '</span>');
+                    if (m.liveSessionUrl && String(m.liveSessionUrl).trim()) badges.push('<span class="cb-mod-badge" style="background:#fef3c7;color:#b45309">Live</span>');
+                    modulesHtml += '<div class="learner-module-item"><div class="learner-module-head"><span class="learner-module-chevron">▸</span> <strong>Module ' + (i + 1) + ': ' + (m.title || 'Untitled') + '</strong> ' + badges.join(' ') + '</div>';
+                    modulesHtml += '<div class="learner-module-body" style="display:none">' + modVideoBlock + liveSessionBlock + (m.content ? '<p>' + m.content + '</p>' : '');
+                    if ((m.materials || []).length > 0) {
+                      modulesHtml += '<h5>Resources</h5><ul>';
+                      m.materials.forEach(function (mat) {
+                        var url = typeof mat === 'string' ? mat : (mat.url || mat.href || '');
+                        var name = typeof mat === 'object' && mat.name ? mat.name : (url.split('/').pop() || 'Download');
+                        modulesHtml += '<li><a href="' + url + '" target="_blank" rel="noopener" download>' + name + '</a></li>';
+                      });
+                      modulesHtml += '</ul>';
+                    }
+                    modulesHtml += activityHtml + '</div></div>';
+                  });
+                  modulesHtml += '</div>';
+                }
+                card.innerHTML = '<h3>' + (c.title || 'Untitled') + '</h3>' + (c.description ? '<p>' + c.description + '</p>' : '') + lockedHtml + videoHtml + materialsHtml + modulesHtml;
+                container.appendChild(card);
+              });
+              container.querySelectorAll('.learner-module-head').forEach(function (head) {
+                head.addEventListener('click', function () {
+                  var item = head.closest('.learner-module-item');
+                  var body = item && item.querySelector('.learner-module-body');
+                  var chevron = head && head.querySelector('.learner-module-chevron');
+                  var isOpen = body && body.style.display === 'block';
+                  if (body) body.style.display = isOpen ? 'none' : 'block';
+                  if (chevron) chevron.textContent = isOpen ? '▸' : '▾';
+                });
+              });
+            }
+            function switchPanel(link) {
+              var panelId = link.getAttribute('aria-controls') || ('panel-' + link.getAttribute('data-panel'));
+              navLinks.forEach(function (l) {
+                l.classList.remove('is-active');
+                l.setAttribute('aria-selected', 'false');
+                l.setAttribute('tabindex', '-1');
+              });
+              panels.forEach(function (p) {
+                p.classList.remove('is-visible');
+                p.setAttribute('aria-hidden', 'true');
+              });
+              link.classList.add('is-active');
+              link.setAttribute('aria-selected', 'true');
+              link.setAttribute('tabindex', '0');
+              var panel = document.getElementById(panelId);
+              if (panel) {
+                panel.classList.add('is-visible');
+                panel.setAttribute('aria-hidden', 'false');
+                if (panelId === 'panel-profile' && window.AphamoProfilePanel) AphamoProfilePanel.refresh();
+                if (panelId === 'panel-courses') renderLearnerCourses();
+              }
+              link.focus();
+            }
+            navLinks.forEach(function (link, i) {
+              link.addEventListener('click', function (e) {
+                e.preventDefault();
+                switchPanel(link);
+              });
+              link.addEventListener('keydown', function (e) {
+                var list = link.closest('[role="tablist"]');
+                var tabs = list ? list.querySelectorAll('[role="tab"][data-panel]') : [];
+                var idx = Array.prototype.indexOf.call(tabs, link);
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                  e.preventDefault();
+                  switchPanel(tabs[(idx + 1) % tabs.length]);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                  e.preventDefault();
+                  switchPanel(tabs[(idx - 1 + tabs.length) % tabs.length]);
+                } else if (e.key === 'Home') {
+                  e.preventDefault();
+                  switchPanel(tabs[0]);
+                } else if (e.key === 'End') {
+                  e.preventDefault();
+                  switchPanel(tabs[tabs.length - 1]);
+                }
+              });
+            });
+            panels.forEach(function (p) {
+              if (!p.classList.contains('is-visible')) p.setAttribute('aria-hidden', 'true');
+            });
+          } else {
+            window.location.href = auth.getPortalUrl(user.role);
+            return;
+          }
+        }
+      }
+
+      var form = document.getElementById('learner-login-form');
+      if (form && auth) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          var email = document.getElementById('learner-email').value.trim();
+          var password = document.getElementById('learner-password').value;
+          var roleEl = document.getElementById('learner-login-role');
+          var result = auth.login(email, password);
+          if (result.success) {
+            var role = roleEl && roleEl.value ? roleEl.value : null;
+            if (role === 'admin') {
+              var sessUser = auth.getCurrentUser();
+              if (!auth.hasRole(sessUser, 'admin')) {
+                auth.signOut();
+                alert('You do not have admin access.');
+                return;
+              }
+            }
+            var url = role ? auth.getPortalUrl(role) : result.redirectUrl;
+            window.location.href = url;
+            return;
+          }
+          alert(result.message || 'Sign-in failed.');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Hub – Sign in or register as a learner, beneficiary, or goat farmer to access training, compliance tools, and goat listing services.">
+  <title>The Hub – Learner, Beneficiary &amp; Farmer Portal – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/sell/">Beneficiary Programme</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">The Hub</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero page-hero--blc" aria-labelledby="learner-hub-title">
+      <div class="container page-hero__container">
+        <h1 id="learner-hub-title" class="page-hero__title">The Hub</h1>
+        <p class="page-hero__sub">Sign in or register as a learner, beneficiary, or goat farmer to access training, listings, and compliance tools.</p>
+      </div>
+    </section>
+
+    <section class="section learner-hub learner-hub--login" id="learner-hub-section" aria-labelledby="learner-hub-heading">
+      <div class="container learner-hub__container">
+        <p id="learner-hub-heading" class="learner-hub__intro">
+          As a registered user you can access learner courses, the beneficiary compliance portal, or the goat listing portal—depending on your role.
+        </p>
+
+        <div class="learner-hub__panel learner-hub__panel--login" id="learner-panel-login">
+          <div class="learner-hub__card learner-hub__card--login">
+            <h2 class="learner-hub__card-title">Sign in</h2>
+            <p class="learner-hub__card-desc">Sign in to continue your training and view your dashboard.</p>
+            <form class="learner-hub__form" id="learner-login-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="login-role">Sign in as <span class="contact-form__required">*</span></label>
+                <select id="login-role" name="role" class="contact-form__input contact-form__select" required aria-describedby="login-role-hint">
+                  <option value="learner">Learner</option>
+                  <option value="beneficiary">Beneficiary</option>
+                  <option value="farmer">Goat farmer (seller)</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <span id="login-role-hint" class="learner-hub__hint">Choose which portal you are signing in to.</span>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="login-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="login-email" name="email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="login-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="login-password" name="password" class="contact-form__input" required autocomplete="current-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra">
+                <a href="/the-hub/forgot-password/" class="learner-hub__link">Forgot password?</a>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Sign in</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Don’t have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="learner-show-signup">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="learner-hub__panel learner-hub__panel--register learner-hub__panel--hidden" id="learner-panel-register">
+          <div class="learner-hub__card learner-hub__card--register">
+            <h2 class="learner-hub__card-title">Create account</h2>
+            <p class="learner-hub__card-desc">Select all that apply—you can be a beneficiary, farmer, and learner at the same time.</p>
+            <form class="learner-hub__form" id="learner-register-form" novalidate>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="register-name">Full name <span class="contact-form__required">*</span></label>
+                <input type="text" id="register-name" name="name" class="contact-form__input" required autocomplete="name" placeholder="e.g. John Smith">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="register-email">Email <span class="contact-form__required">*</span></label>
+                <input type="email" id="register-email" name="email" class="contact-form__input" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="contact-form__row learner-hub__roles-row">
+                <span class="contact-form__label">I am registering as <span class="contact-form__required">*</span></span>
+                <p class="learner-hub__roles-hint">Select all that apply. You can be a beneficiary, farmer, and learner at once.</p>
+                <div class="learner-hub__roles learner-hub__roles--checkboxes">
+                  <label class="learner-hub__role">
+                    <input type="checkbox" name="roles" value="learner" class="learner-hub__role-checkbox">
+                    <span>Learner</span>
+                  </label>
+                  <label class="learner-hub__role">
+                    <input type="checkbox" name="roles" value="beneficiary" class="learner-hub__role-checkbox">
+                    <span>Beneficiary</span>
+                  </label>
+                  <label class="learner-hub__role">
+                    <input type="checkbox" name="roles" value="farmer" class="learner-hub__role-checkbox">
+                    <span>Goat farmer (seller)</span>
+                  </label>
+                </div>
+                <span id="register-roles-error" class="learner-hub__roles-error" aria-live="polite" hidden>Select at least one role.</span>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="register-password">Password <span class="contact-form__required">*</span></label>
+                <input type="password" id="register-password" name="password" class="contact-form__input" required autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="register-confirm">Confirm password <span class="contact-form__required">*</span></label>
+                <input type="password" id="register-confirm" name="confirm" class="contact-form__input" required autocomplete="new-password" placeholder="••••••••">
+              </div>
+              <div class="learner-hub__form-extra learner-hub__form-extra--checkbox">
+                <label class="learner-hub__checkbox-label">
+                  <input type="checkbox" name="updates" id="register-updates" class="learner-hub__checkbox" checked>
+                  <span>Send me training updates and course news</span>
+                </label>
+              </div>
+              <div class="contact-form__actions">
+                <button type="submit" class="btn btn--primary btn--lg">Create account</button>
+              </div>
+              <div class="learner-hub__switch">
+                <p class="learner-hub__switch-text">Already have an account?</p>
+                <button type="button" class="btn btn--outline learner-hub__switch-btn" id="learner-show-login">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <p class="learner-hub__note">
+          By signing in or registering you agree to our terms of use and privacy policy. Your data is protected under POPIA.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/learner-portal/">Learner Portal</a></li>
+          <li><a href="/beneficiary-portal/">Beneficiary Portal</a></li>
+          <li><a href="/goat-listing-portal/">Goat Listing Portal</a></li>
+          <li><a href="/admin-portal/">Admin Portal</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <script src="../scripts/hub-auth.js"></script>
+  <script>
+    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
+      document.querySelector('.nav').classList.toggle('is-open');
+    });
+
+    (function () {
+      var section = document.getElementById('learner-hub-section');
+      var panelLogin = document.getElementById('learner-panel-login');
+      var panelRegister = document.getElementById('learner-panel-register');
+      var btnSignUp = document.getElementById('learner-show-signup');
+      var btnSignIn = document.getElementById('learner-show-login');
+      var auth = window.AphamoHubAuth;
+
+      function showLogin() {
+        if (section) section.classList.remove('learner-hub--register');
+        if (section) section.classList.add('learner-hub--login');
+        if (panelLogin) panelLogin.classList.remove('learner-hub__panel--hidden');
+        if (panelRegister) panelRegister.classList.add('learner-hub__panel--hidden');
+      }
+
+      function showRegister() {
+        if (section) section.classList.remove('learner-hub--login');
+        if (section) section.classList.add('learner-hub--register');
+        if (panelLogin) panelLogin.classList.add('learner-hub__panel--hidden');
+        if (panelRegister) panelRegister.classList.remove('learner-hub__panel--hidden');
+      }
+
+      if (btnSignUp) btnSignUp.addEventListener('click', showRegister);
+      if (btnSignIn) btnSignIn.addEventListener('click', showLogin);
+
+      var loginForm = document.getElementById('learner-login-form');
+      var registerForm = document.getElementById('learner-register-form');
+
+      if (loginForm && auth) {
+        loginForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!loginForm.checkValidity()) {
+            loginForm.reportValidity();
+            return;
+          }
+          var email = document.getElementById('login-email').value.trim();
+          var password = document.getElementById('login-password').value;
+          var roleEl = document.getElementById('login-role');
+          var result = auth.login(email, password);
+          if (result.success) {
+            var role = roleEl && roleEl.value ? roleEl.value : null;
+            if (role === 'admin') {
+              var sessUser = auth.getCurrentUser();
+              if (!auth.hasRole(sessUser, 'admin')) {
+                auth.signOut();
+                alert('You do not have admin access.');
+                return;
+              }
+            }
+            var url = role ? auth.getPortalUrl(role) : result.redirectUrl;
+            window.location.href = url;
+            return;
+          }
+          alert(result.message || 'Sign-in failed.');
+        });
+      }
+
+      if (registerForm && auth) {
+        registerForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var passwordEl = document.getElementById('register-password');
+          var confirmEl = document.getElementById('register-confirm');
+          if (passwordEl && confirmEl && passwordEl.value !== confirmEl.value) {
+            confirmEl.setCustomValidity('Passwords do not match');
+            registerForm.reportValidity();
+            return;
+          }
+          if (confirmEl) confirmEl.setCustomValidity('');
+          if (!registerForm.checkValidity()) {
+            registerForm.reportValidity();
+            return;
+          }
+          var name = document.getElementById('register-name').value;
+          var email = document.getElementById('register-email').value;
+          var roleChecks = registerForm.querySelectorAll('input[name="roles"]:checked');
+          var roles = Array.prototype.map.call(roleChecks, function (c) { return c.value; });
+          if (roles.length === 0) {
+            var errEl = document.getElementById('register-roles-error');
+            if (errEl) { errEl.hidden = false; errEl.textContent = 'Select at least one role.'; }
+            return;
+          }
+          var errEl = document.getElementById('register-roles-error');
+          if (errEl) errEl.hidden = true;
+          var result = auth.register({
+            name: name,
+            email: email,
+            roles: roles,
+            password: passwordEl ? passwordEl.value : ''
+          });
+          if (result.success) {
+            window.location.href = result.redirectUrl;
+            return;
+          }
+          alert(result.message || 'Registration failed.');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
