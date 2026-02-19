@@ -16,10 +16,14 @@
       </a>
       <nav class="nav" aria-label="Main">
         <a class="nav__link" href="/">Home</a>
-        <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+        <div class="nav__dropdown">
+          <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+          <ul class="nav__sub" aria-label="Goat Aggregation Hub submenu">
+            <li><a class="nav__sublink" href="/sell/">Beneficiary Programme</a></li>
+          </ul>
+        </div>
         <a class="nav__link" href="/training/">Training &amp; Development</a>
         <a class="nav__link" href="/listings/">Browse Listings</a>
-        <a class="nav__link" href="/sell/">Beneficiary Programme</a>
         <a class="nav__link" href="/about/">About Us</a>
         <a class="nav__link" href="/contact/">Contact</a>
         <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
@@ -220,10 +224,10 @@
               </ul>
               <p><a href="/training/" class="btn btn--primary">Continue learning</a></p>
             </div>
-            <div class="portal-dashboard__card">
+            <div id="available-courses-card" class="portal-dashboard__card">
               <h3>Available courses</h3>
               <p>These courses are open for enrolment. Start any time and learn at your own pace.</p>
-              <ul>
+              <ul id="available-courses-list">
                 <li><strong>Basic Herd Health</strong> – Vaccinations, parasite control, and when to call a vet. <em>You have completed this course.</em></li>
                 <li><strong>Record-Keeping for Smallholders</strong> – Births, deaths, sales, and compliance records.</li>
                 <li><strong>Breed Identification &amp; Selection</strong> – Recognising breeds and choosing stock for your goals.</li>
@@ -558,9 +562,10 @@
                 container.innerHTML = '<div class="portal-dashboard__card"><p>No courses available yet. Check back later or visit <a href="/training/">Training &amp; Development</a> for resources.</p></div>';
                 return;
               }
-              courses.forEach(function (c) {
+              courses.forEach(function (c, i) {
                 var hasAccess = !c.locked || (userEmail && window.AphamoAdminData.hasPaid(userEmail, c.id));
                 var card = document.createElement('div');
+                card.id = 'learner-course-' + (c.id || ('c' + i));
                 card.className = 'portal-dashboard__card learner-course-card' + (!hasAccess && c.locked ? ' portal-dashboard__card--locked' : ' portal-dashboard__card--featured');
                 var lockedHtml = !hasAccess && c.locked ? '<p class="learner-course-locked"><strong>Locked.</strong> Payment required to access this course. Contact Aphamo to enrol.</p>' : '';
                 var rawVideo = c.videoUrl || '';
@@ -666,6 +671,23 @@
                   if (chevron) chevron.textContent = isOpen ? '▸' : '▾';
                 });
               });
+              var availableList = document.getElementById('available-courses-list');
+              var availableCard = document.getElementById('available-courses-card');
+              if (availableList && availableCard && courses.length > 0) {
+                availableList.innerHTML = courses.map(function (c, i) {
+                  var courseId = c.id || ('c' + i);
+                  var frag = (c.description || '').substring(0, 80);
+                  if (frag.length < (c.description || '').length) frag += '…';
+                  return '<li><a href="#learner-course-' + courseId + '" class="learner-available-course-link">' + (c.title || 'Untitled') + '</a>' + (frag ? ' – ' + frag : '') + '</li>';
+                }).join('');
+                availableList.querySelectorAll('.learner-available-course-link').forEach(function (link) {
+                  link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var target = document.querySelector(link.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  });
+                });
+              }
             }
             function switchPanel(link) {
               var panelId = link.getAttribute('aria-controls') || ('panel-' + link.getAttribute('data-panel'));
