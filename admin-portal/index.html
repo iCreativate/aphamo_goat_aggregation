@@ -104,6 +104,11 @@
     .cb-module-chevron { font-size: 0.9rem; transition: transform 0.2s; }
     .cb-mod-badge { font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 4px; background: #e0f2fe; color: #0369a1; margin-left: 0.25rem; }
     .cb-mod-badge + .cb-mod-badge { margin-left: 0.25rem; }
+    .event-images-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; min-height: 24px; }
+    .event-images-list__item { position: relative; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid var(--color-border); background: var(--color-surface-2); }
+    .event-images-list__item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .event-images-list__item .event-images-list__remove { position: absolute; top: 2px; right: 2px; width: 22px; height: 22px; padding: 0; border: none; border-radius: 4px; background: rgba(0,0,0,0.6); color: #fff; cursor: pointer; font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+    .event-images-list__item .event-images-list__remove:hover { background: #b91c1c; }
   </style>
 </head>
 <body>
@@ -636,9 +641,17 @@
                 <textarea id="event-add-details" name="details" class="contact-form__input" rows="3" placeholder="Short description for the events page."></textarea>
               </div>
               <div class="contact-form__row">
-                <label class="contact-form__label" for="event-add-image-urls">Image URLs <span class="contact-form__required">*</span></label>
-                <textarea id="event-add-image-urls" name="imageUrls" class="contact-form__input" rows="2" placeholder="One image URL per line. Events always show at least one image (default used if empty)."></textarea>
-                <span class="admin-pending-note">Add at least one image URL so the event has a cover image. You can use links to hosted images or upload elsewhere and paste the URL.</span>
+                <span class="contact-form__label">Event images <span class="contact-form__required">*</span></span>
+                <p class="admin-pending-note" style="margin-bottom:0.5rem">Add at least one image (link or upload). First image is the cover. Uploaded images are stored in the browser.</p>
+                <div id="event-images-list" class="event-images-list"></div>
+                <div class="admin-course-builder-inline-form" style="margin-top:0.5rem; flex-wrap: wrap;">
+                  <textarea id="event-add-image-urls" class="contact-form__input" rows="1" placeholder="Paste image URL(s), one per line" style="min-width: 240px; flex: 1;"></textarea>
+                  <button type="button" id="event-add-image-urls-btn" class="btn btn--outline btn--sm">Add URL(s)</button>
+                </div>
+                <div style="margin-top:0.5rem;">
+                  <label class="btn btn--outline btn--sm" for="event-upload-images">Upload image(s)</label>
+                  <input type="file" id="event-upload-images" accept="image/*" multiple style="position:absolute; width:0.1px; height:0.1px; opacity:0;">
+                </div>
               </div>
               <div class="contact-form__row">
                 <label class="contact-form__label" for="event-add-video-urls">Video URLs</label>
@@ -851,6 +864,7 @@
     (function () {
       var auth = window.AphamoHubAuth;
       var adminData = window.AphamoAdminData;
+      var eventImageUrls = [];
       var gate = document.getElementById('admin-gate');
       var wrap = document.getElementById('admin-dashboard-wrap');
 
@@ -1756,7 +1770,9 @@
             if (dateEl) dateEl.value = ev.date || '';
             if (detailsEl) detailsEl.value = ev.details || '';
             if (statusEl) statusEl.value = ev.status || 'upcoming';
-            if (imageUrlsEl) imageUrlsEl.value = (ev.imageUrls && ev.imageUrls.length) ? ev.imageUrls.join('\n') : '';
+            eventImageUrls = (ev.imageUrls && ev.imageUrls.length) ? ev.imageUrls.slice() : [];
+            renderEventImagesList();
+            if (imageUrlsEl) imageUrlsEl.value = '';
             if (videoUrlsEl) videoUrlsEl.value = (ev.videoUrls && ev.videoUrls.length) ? ev.videoUrls.join('\n') : '';
             renderEventAttachmentsList(ev.attachments || []);
             var form = document.getElementById('admin-add-event-form');
@@ -1777,12 +1793,86 @@
             if (form) {
               delete form.dataset.editEventId;
               form.reset();
+              eventImageUrls = [];
+              renderEventImagesList();
               renderEventAttachmentsList([]);
               form.querySelector('button[type="submit"]').textContent = 'Add event';
             }
           });
         });
       }
+
+      function renderEventImagesList() {
+        var list = document.getElementById('event-images-list');
+        if (!list) return;
+        list.innerHTML = '';
+        for (var i = 0; i < eventImageUrls.length; i++) {
+          (function (idx) {
+            var url = eventImageUrls[idx];
+            var item = document.createElement('div');
+            item.className = 'event-images-list__item';
+            if (url && (url.indexOf('data:') === 0 || url.indexOf('http') === 0)) {
+              var img = document.createElement('img');
+              img.src = url;
+              img.alt = '';
+              img.onerror = function () {
+                img.style.display = 'none';
+                var fallback = document.createElement('span');
+                fallback.style.cssText = 'font-size:0.7rem; color:#64748b; padding:4px;';
+                fallback.textContent = '?';
+                item.insertBefore(fallback, img);
+              };
+              item.appendChild(img);
+            } else {
+              item.textContent = '?';
+            }
+            var removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'event-images-list__remove';
+            removeBtn.setAttribute('aria-label', 'Remove image');
+            removeBtn.innerHTML = '&times;';
+            removeBtn.addEventListener('click', function () {
+              eventImageUrls.splice(idx, 1);
+              renderEventImagesList();
+            });
+            item.appendChild(removeBtn);
+            list.appendChild(item);
+          })(i);
+        }
+      }
+      document.getElementById('event-add-image-urls-btn').addEventListener('click', function () {
+        var ta = document.getElementById('event-add-image-urls');
+        if (!ta) return;
+        var lines = (ta.value || '').split(/\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+        lines.forEach(function (url) { eventImageUrls.push(url); });
+        if (lines.length) {
+          renderEventImagesList();
+          ta.value = '';
+        }
+      });
+      document.getElementById('event-upload-images').addEventListener('change', function () {
+        var input = this;
+        var files = input.files;
+        if (!files || !files.length) return;
+        var read = 0;
+        function maybeDone() {
+          read++;
+          if (read >= files.length) { input.value = ''; }
+        }
+        for (var f = 0; f < files.length; f++) {
+          (function (file) {
+            if (!file.type || file.type.indexOf('image/') !== 0) { maybeDone(); return; }
+            var reader = new FileReader();
+            reader.onload = function () {
+              if (reader.result) eventImageUrls.push(reader.result);
+              renderEventImagesList();
+              maybeDone();
+            };
+            reader.onerror = maybeDone;
+            reader.readAsDataURL(file);
+          })(files[f]);
+        }
+      });
 
       function renderEventAttachmentsList(attachments) {
         var list = document.getElementById('event-attachments-list');
@@ -1884,9 +1974,8 @@
           var date = document.getElementById('event-add-date').value.trim();
           var details = document.getElementById('event-add-details').value.trim();
           var status = document.getElementById('event-add-status').value || 'upcoming';
-          var imageUrlsText = document.getElementById('event-add-image-urls').value || '';
+          var imageUrls = eventImageUrls.length ? eventImageUrls.slice() : [];
           var videoUrlsText = document.getElementById('event-add-video-urls').value || '';
-          var imageUrls = imageUrlsText.split(/\n/).map(function (s) { return s.trim(); }).filter(Boolean);
           var videoUrls = videoUrlsText.split(/\n/).map(function (s) { return s.trim(); }).filter(Boolean);
           var attachmentRows = document.querySelectorAll('.event-attachment-row');
           var attachments = [];
@@ -1905,6 +1994,8 @@
             adminData.addEvent(payload);
           }
           form.reset();
+          eventImageUrls = [];
+          renderEventImagesList();
           renderEventAttachmentsList([]);
           renderEvents();
           showPanel('events');
