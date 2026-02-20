@@ -10,11 +10,11 @@
   var EVENTS_KEY = 'aphamo_events';
 
   var EVENTS_SEED = [
-    { id: 'evt_seed_1', title: 'Goat handling & weighing', location: 'Groot Marico', date: '2026-03-15', details: 'Hands-on handling and weighing for aggregation readiness. Open to beneficiaries and smallholders.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z' },
-    { id: 'evt_seed_2', title: 'Herd health check workshop', location: 'North West', date: '2026-04-10', details: 'Vet-led health checks, vaccination, and parasite control. Bring your herd records.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z' },
-    { id: 'evt_seed_3', title: 'Aggregation drop-off day', location: 'Koedoeberg Farm', date: '2026-05-20', details: 'Bring animals for quality check and aggregation. Pre-register via contact form.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z' },
-    { id: 'evt_seed_4', title: 'Introduction to Goat Husbandry – workshop', location: 'Koedoeberg Farm', date: '2025-11-08', details: 'Full-day workshop covering breeds, housing, feeding, and basic care. Completed successfully.', status: 'past', createdAt: '2025-10-01T00:00:00.000Z' },
-    { id: 'evt_seed_5', title: 'Record-keeping for Smallholders', location: 'Online', date: '2025-12-05', details: 'Webinar on births, deaths, sales, and compliance records for aggregation.', status: 'past', createdAt: '2025-11-01T00:00:00.000Z' }
+    { id: 'evt_seed_1', title: 'Goat handling & weighing', location: 'Groot Marico', date: '2026-03-15', details: 'Hands-on handling and weighing for aggregation readiness. Open to beneficiaries and smallholders.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z', imageUrls: ['https://picsum.photos/seed/evt1/800/500'], videoUrls: [], attachments: [] },
+    { id: 'evt_seed_2', title: 'Herd health check workshop', location: 'North West', date: '2026-04-10', details: 'Vet-led health checks, vaccination, and parasite control. Bring your herd records.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z', imageUrls: ['https://picsum.photos/seed/evt2/800/500'], videoUrls: [], attachments: [] },
+    { id: 'evt_seed_3', title: 'Aggregation drop-off day', location: 'Koedoeberg Farm', date: '2026-05-20', details: 'Bring animals for quality check and aggregation. Pre-register via contact form.', status: 'upcoming', createdAt: '2026-01-01T00:00:00.000Z', imageUrls: ['https://picsum.photos/seed/evt3/800/500'], videoUrls: [], attachments: [] },
+    { id: 'evt_seed_4', title: 'Introduction to Goat Husbandry – workshop', location: 'Koedoeberg Farm', date: '2025-11-08', details: 'Full-day workshop covering breeds, housing, feeding, and basic care. Completed successfully.', status: 'past', createdAt: '2025-10-01T00:00:00.000Z', imageUrls: ['https://picsum.photos/seed/evt4/800/500'], videoUrls: [], attachments: [] },
+    { id: 'evt_seed_5', title: 'Record-keeping for Smallholders', location: 'Online', date: '2025-12-05', details: 'Webinar on births, deaths, sales, and compliance records for aggregation.', status: 'past', createdAt: '2025-11-01T00:00:00.000Z', imageUrls: ['https://picsum.photos/seed/evt5/800/500'], videoUrls: [], attachments: [] }
   ];
 
   function getCourses() {
@@ -394,6 +394,9 @@
     addEvent: function (data) {
       var events = this.getEvents();
       var id = 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+      var imageUrls = Array.isArray(data.imageUrls) ? data.imageUrls.filter(function (u) { return (u || '').trim(); }) : [];
+      var videoUrls = Array.isArray(data.videoUrls) ? data.videoUrls.filter(function (u) { return (u || '').trim(); }) : [];
+      var attachments = Array.isArray(data.attachments) ? data.attachments.filter(function (a) { return a && (a.url || '').trim(); }) : [];
       var event = {
         id: id,
         title: (data.title || '').trim(),
@@ -401,7 +404,10 @@
         date: (data.date || '').trim(),
         details: (data.details || '').trim(),
         status: (data.status === 'past' || data.status === 'ongoing' || data.status === 'upcoming') ? data.status : 'upcoming',
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        imageUrls: imageUrls.length ? imageUrls : ['https://picsum.photos/seed/' + id + '/800/500'],
+        videoUrls: videoUrls,
+        attachments: attachments
       };
       events.push(event);
       return this.setEvents(events) ? id : null;
@@ -415,6 +421,9 @@
       if (updates.date !== undefined) events[idx].date = String(updates.date).trim();
       if (updates.details !== undefined) events[idx].details = String(updates.details).trim();
       if (updates.status !== undefined && ['past', 'ongoing', 'upcoming'].indexOf(updates.status) >= 0) events[idx].status = updates.status;
+      if (updates.imageUrls !== undefined) events[idx].imageUrls = Array.isArray(updates.imageUrls) ? updates.imageUrls.filter(function (u) { return (u || '').trim(); }) : (events[idx].imageUrls || []);
+      if (updates.videoUrls !== undefined) events[idx].videoUrls = Array.isArray(updates.videoUrls) ? updates.videoUrls.filter(function (u) { return (u || '').trim(); }) : (events[idx].videoUrls || []);
+      if (updates.attachments !== undefined) events[idx].attachments = Array.isArray(updates.attachments) ? updates.attachments.filter(function (a) { return a && (a.url || '').trim(); }) : (events[idx].attachments || []);
       return this.setEvents(events);
     },
     deleteEvent: function (id) {

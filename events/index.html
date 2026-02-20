@@ -103,6 +103,20 @@
     .events-modal__meta { font-size: var(--text-small); color: var(--color-ink-secondary); margin-bottom: var(--space-lg); display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
     .events-modal__details { margin-bottom: var(--space-lg); line-height: 1.6; color: var(--color-ink); }
     .events-modal__actions { margin-top: var(--space-lg); }
+    .events-card__thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .events-modal__media { margin-bottom: var(--space-lg); }
+    .events-modal__images { display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-md); }
+    .events-modal__images img { max-width: 100%; height: auto; border-radius: var(--radius-md); border: 1px solid var(--color-border); max-height: 200px; object-fit: cover; }
+    .events-modal__videos { margin-bottom: var(--space-md); }
+    .events-modal__video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-md); margin-bottom: var(--space-sm); }
+    .events-modal__video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .events-modal__video-link { display: inline-block; margin-bottom: var(--space-sm); font-size: var(--text-small); color: var(--color-primary); }
+    .events-modal__attachments { margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-border); }
+    .events-modal__attachments h4 { font-size: 1rem; margin: 0 0 var(--space-sm); color: var(--color-ink); }
+    .events-modal__attachments ul { list-style: none; padding: 0; margin: 0; }
+    .events-modal__attachments li { margin-bottom: var(--space-sm); }
+    .events-modal__attachments a { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--color-primary); }
+    .events-modal__attachments a:hover { text-decoration: underline; }
   </style>
   <script src="../scripts/admin-data.js"></script>
   <script src="../scripts/menu.js"></script>
@@ -166,7 +180,9 @@
         <button type="button" class="events-modal__close" id="events-modal-close" aria-label="Close">&times;</button>
         <h2 id="events-modal-title" class="events-modal__title"></h2>
         <p class="events-modal__meta" id="events-modal-meta"></p>
+        <div class="events-modal__media" id="events-modal-media"></div>
         <div class="events-modal__details" id="events-modal-details"></div>
+        <div class="events-modal__attachments" id="events-modal-attachments"></div>
         <div class="events-modal__actions">
           <a href="/contact/" class="btn btn--primary">Contact us to register</a>
         </div>
@@ -228,7 +244,9 @@
       var modal = document.getElementById('events-modal');
       var modalTitle = document.getElementById('events-modal-title');
       var modalMeta = document.getElementById('events-modal-meta');
+      var modalMedia = document.getElementById('events-modal-media');
       var modalDetails = document.getElementById('events-modal-details');
+      var modalAttachments = document.getElementById('events-modal-attachments');
       if (!gallery || !modal) return;
 
       var events = adminData.getEvents();
@@ -244,7 +262,50 @@
         modalTitle.textContent = ev.title || 'Event';
         modalMeta.innerHTML = (ev.location ? '<span>📍 ' + escapeHtml(ev.location) + '</span>' : '') +
           (ev.date ? '<span>📅 ' + escapeHtml(ev.date) + '</span>' : '<span>📅 Date TBC</span>');
+        var imageUrls = ev.imageUrls && Array.isArray(ev.imageUrls) ? ev.imageUrls : [];
+        var videoUrls = ev.videoUrls && Array.isArray(ev.videoUrls) ? ev.videoUrls : [];
+        var attachments = ev.attachments && Array.isArray(ev.attachments) ? ev.attachments : [];
+        var mediaHtml = '';
+        if (imageUrls.length) {
+          mediaHtml += '<div class="events-modal__images">';
+          imageUrls.forEach(function (url) {
+            if ((url || '').trim()) mediaHtml += '<img src="' + escapeHtml(url.trim()) + '" alt="" loading="lazy">';
+          });
+          mediaHtml += '</div>';
+        }
+        if (videoUrls.length) {
+          mediaHtml += '<div class="events-modal__videos">';
+          videoUrls.forEach(function (url) {
+            url = (url || '').trim();
+            if (!url) return;
+            var embed = url;
+            if (url.indexOf('youtube.com') !== -1 || url.indexOf('youtu.be') !== -1) {
+              var vid = (url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/) || [])[1];
+              if (vid) embed = 'https://www.youtube.com/embed/' + vid;
+            } else if (url.indexOf('vimeo.com') !== -1) {
+              var v = (url.match(/vimeo\.com\/(\d+)/) || [])[1];
+              if (v) embed = 'https://player.vimeo.com/video/' + v;
+            }
+            if (embed !== url) {
+              mediaHtml += '<div class="events-modal__video-wrap"><iframe src="' + escapeHtml(embed) + '" allowfullscreen></iframe></div>';
+            } else {
+              mediaHtml += '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener" class="events-modal__video-link">Watch video →</a>';
+            }
+          });
+          mediaHtml += '</div>';
+        }
+        if (modalMedia) modalMedia.innerHTML = mediaHtml || '';
         modalDetails.textContent = ev.details || 'No further details at the moment. Contact us for more information.';
+        var attHtml = '';
+        if (attachments.length) {
+          attHtml = '<h4>Read or download</h4><ul>';
+          attachments.forEach(function (a) {
+            var label = (a.label || a.url || 'Download').trim() || 'Download';
+            attHtml += '<li><a href="' + escapeHtml((a.url || '').trim()) + '" target="_blank" rel="noopener">' + escapeHtml(label) + ' ↗</a></li>';
+          });
+          attHtml += '</ul>';
+        }
+        if (modalAttachments) modalAttachments.innerHTML = attHtml;
         modal.setAttribute('aria-hidden', 'false');
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
@@ -270,6 +331,10 @@
         var dateText = ev.date || 'TBC';
         var badgeClass = ev.status === 'past' ? 'events-card__badge--past' : (ev.status === 'ongoing' ? 'events-card__badge events-card__badge--ongoing' : 'events-card__badge');
         var badgeText = ev.status === 'past' ? 'Past' : (ev.status === 'ongoing' ? 'Ongoing' : 'Upcoming');
+        var firstImage = (ev.imageUrls && ev.imageUrls.length && ev.imageUrls[0]) ? ev.imageUrls[0].trim() : ('https://picsum.photos/seed/' + (ev.id || 'ev') + '/800/500');
+        var thumbContent = firstImage
+          ? '<img src="' + escapeHtml(firstImage) + '" alt="" loading="lazy">'
+          : '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
         var card = document.createElement('div');
         card.className = 'events-card';
         card.setAttribute('role', 'listitem');
@@ -277,7 +342,7 @@
         card.innerHTML =
           '<div class="events-card__thumb">' +
             '<span class="events-card__badge ' + badgeClass + '">' + escapeHtml(badgeText) + '</span>' +
-            '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' +
+            thumbContent +
           '</div>' +
           '<div class="events-card__body">' +
             '<h3 class="events-card__title">' + escapeHtml(ev.title || 'Event') + '</h3>' +

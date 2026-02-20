@@ -636,6 +636,21 @@
                 <textarea id="event-add-details" name="details" class="contact-form__input" rows="3" placeholder="Short description for the events page."></textarea>
               </div>
               <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-image-urls">Image URLs <span class="contact-form__required">*</span></label>
+                <textarea id="event-add-image-urls" name="imageUrls" class="contact-form__input" rows="2" placeholder="One image URL per line. Events always show at least one image (default used if empty)."></textarea>
+                <span class="admin-pending-note">Add at least one image URL so the event has a cover image. You can use links to hosted images or upload elsewhere and paste the URL.</span>
+              </div>
+              <div class="contact-form__row">
+                <label class="contact-form__label" for="event-add-video-urls">Video URLs</label>
+                <textarea id="event-add-video-urls" name="videoUrls" class="contact-form__input" rows="2" placeholder="One video URL per line (e.g. YouTube, Vimeo)."></textarea>
+              </div>
+              <div class="contact-form__row">
+                <span class="contact-form__label">Attachments (PDF / Word)</span>
+                <p class="admin-pending-note" style="margin-bottom:0.5rem">Add articles or documents visitors can read or download. Enter label and URL for each.</p>
+                <div id="event-attachments-list" class="cb-options-wrap"></div>
+                <button type="button" id="event-add-attachment-btn" class="btn btn--outline btn--sm" style="margin-top:0.5rem">+ Add attachment</button>
+              </div>
+              <div class="contact-form__row">
                 <label class="contact-form__label" for="event-add-status">Status</label>
                 <select id="event-add-status" name="status" class="contact-form__input contact-form__select">
                   <option value="upcoming">Upcoming</option>
@@ -1734,11 +1749,16 @@
             var dateEl = document.getElementById('event-add-date');
             var detailsEl = document.getElementById('event-add-details');
             var statusEl = document.getElementById('event-add-status');
+            var imageUrlsEl = document.getElementById('event-add-image-urls');
+            var videoUrlsEl = document.getElementById('event-add-video-urls');
             if (titleEl) titleEl.value = ev.title || '';
             if (locEl) locEl.value = ev.location || '';
             if (dateEl) dateEl.value = ev.date || '';
             if (detailsEl) detailsEl.value = ev.details || '';
             if (statusEl) statusEl.value = ev.status || 'upcoming';
+            if (imageUrlsEl) imageUrlsEl.value = (ev.imageUrls && ev.imageUrls.length) ? ev.imageUrls.join('\n') : '';
+            if (videoUrlsEl) videoUrlsEl.value = (ev.videoUrls && ev.videoUrls.length) ? ev.videoUrls.join('\n') : '';
+            renderEventAttachmentsList(ev.attachments || []);
             var form = document.getElementById('admin-add-event-form');
             if (form) {
               form.dataset.editEventId = id;
@@ -1757,11 +1777,36 @@
             if (form) {
               delete form.dataset.editEventId;
               form.reset();
+              renderEventAttachmentsList([]);
               form.querySelector('button[type="submit"]').textContent = 'Add event';
             }
           });
         });
       }
+
+      function renderEventAttachmentsList(attachments) {
+        var list = document.getElementById('event-attachments-list');
+        if (!list) return;
+        list.innerHTML = '';
+        (attachments || []).forEach(function (a) {
+          var row = document.createElement('div');
+          row.className = 'admin-course-builder-inline-form event-attachment-row';
+          var labelVal = (a.label || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+          var urlVal = (a.url || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+          row.innerHTML = '<input type="text" class="contact-form__input event-attachment-label" placeholder="Label (e.g. Event guide PDF)" value="' + labelVal + '"> <input type="url" class="contact-form__input event-attachment-url" placeholder="URL to PDF or Word doc" value="' + urlVal + '"> <button type="button" class="btn btn--outline btn--sm event-attachment-remove">Remove</button>';
+          list.appendChild(row);
+          row.querySelector('.event-attachment-remove').addEventListener('click', function () { row.remove(); });
+        });
+      }
+      document.getElementById('event-add-attachment-btn').addEventListener('click', function () {
+        var list = document.getElementById('event-attachments-list');
+        if (!list) return;
+        var row = document.createElement('div');
+        row.className = 'admin-course-builder-inline-form event-attachment-row';
+        row.innerHTML = '<input type="text" class="contact-form__input event-attachment-label" placeholder="Label (e.g. Event guide PDF)"> <input type="url" class="contact-form__input event-attachment-url" placeholder="URL to PDF or Word doc"> <button type="button" class="btn btn--outline btn--sm event-attachment-remove">Remove</button>';
+        list.appendChild(row);
+        row.querySelector('.event-attachment-remove').addEventListener('click', function () { row.remove(); });
+      });
 
         var user = auth.getCurrentUser();
       if (user && auth.hasRole(user, 'admin')) {
@@ -1839,15 +1884,28 @@
           var date = document.getElementById('event-add-date').value.trim();
           var details = document.getElementById('event-add-details').value.trim();
           var status = document.getElementById('event-add-status').value || 'upcoming';
+          var imageUrlsText = document.getElementById('event-add-image-urls').value || '';
+          var videoUrlsText = document.getElementById('event-add-video-urls').value || '';
+          var imageUrls = imageUrlsText.split(/\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+          var videoUrls = videoUrlsText.split(/\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+          var attachmentRows = document.querySelectorAll('.event-attachment-row');
+          var attachments = [];
+          attachmentRows.forEach(function (row) {
+            var label = (row.querySelector('.event-attachment-label') && row.querySelector('.event-attachment-label').value) || '';
+            var url = (row.querySelector('.event-attachment-url') && row.querySelector('.event-attachment-url').value) || '';
+            if (url.trim()) attachments.push({ label: label.trim() || 'Download', url: url.trim() });
+          });
           if (!title) { alert('Title is required.'); return; }
+          var payload = { title: title, location: location, date: date, details: details, status: status, imageUrls: imageUrls, videoUrls: videoUrls, attachments: attachments };
           if (editId) {
-            adminData.updateEvent(editId, { title: title, location: location, date: date, details: details, status: status });
+            adminData.updateEvent(editId, payload);
             delete form.dataset.editEventId;
             form.querySelector('button[type="submit"]').textContent = 'Add event';
           } else {
-            adminData.addEvent({ title: title, location: location, date: date, details: details, status: status });
+            adminData.addEvent(payload);
           }
           form.reset();
+          renderEventAttachmentsList([]);
           renderEvents();
           showPanel('events');
         });
