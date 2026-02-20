@@ -828,14 +828,11 @@
     </div>
   </footer>
 
+  <script src="../scripts/menu.js"></script>
   <script src="../scripts/hub-auth.js"></script>
   <script src="../scripts/admin-data.js"></script>
   <script src="../scripts/course-builder.js"></script>
   <script>
-    document.querySelector('.menu-trigger')?.addEventListener('click', function () {
-      document.querySelector('.nav').classList.toggle('is-open');
-    });
-
     (function () {
       var auth = window.AphamoHubAuth;
       var adminData = window.AphamoAdminData;
