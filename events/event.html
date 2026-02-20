@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Event details – Aphamo Goat Aggregation workshops, vet days, and aggregation activities.">
+  <title>Event – Aphamo Goat Aggregation</title>
+  <link rel="icon" href="/images/logo/aphamo-logo.png" type="image/png">
+  <link rel="stylesheet" href="../styles/main.css?v=3">
+  <script src="../scripts/admin-data.js"></script>
+  <script src="../scripts/menu.js"></script>
+  <style>
+    .event-detail { max-width: 900px; margin: 0 auto; }
+    .event-detail__title { font-size: 1.75rem; margin: 0 0 var(--space-md); color: var(--color-ink); }
+    .event-detail__meta { font-size: var(--text-small); color: var(--color-ink-secondary); margin-bottom: var(--space-xl); display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .event-detail__badge { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); }
+    .event-detail__badge--upcoming { background: #fef3c7; color: #92400e; }
+    .event-detail__badge--ongoing { background: var(--color-secondary); color: var(--color-white); }
+    .event-detail__badge--past { background: var(--color-surface-3); color: var(--color-ink-secondary); }
+    .event-detail__gallery { display: grid; gap: var(--space-md); margin-bottom: var(--space-xl); }
+    .event-detail__gallery--single { grid-template-columns: 1fr; }
+    .event-detail__gallery--multi { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .event-detail__gallery img { width: 100%; height: auto; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: block; }
+    .event-detail__section { margin-bottom: var(--space-xl); }
+    .event-detail__section h3 { font-size: 1.125rem; margin: 0 0 var(--space-md); color: var(--color-ink); }
+    .event-detail__details { line-height: 1.7; color: var(--color-ink); }
+    .event-detail__videos { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .event-detail__video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius-lg); background: #000; }
+    .event-detail__video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .event-detail__video-link { display: inline-block; color: var(--color-primary); font-weight: 500; }
+    .event-detail__attachments ul { list-style: none; padding: 0; margin: 0; }
+    .event-detail__attachments li { margin-bottom: var(--space-sm); }
+    .event-detail__attachments a { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--color-primary); }
+    .event-detail__attachments a:hover { text-decoration: underline; }
+    .event-detail__not-found { text-align: center; padding: var(--space-3xl); }
+    .event-detail__not-found a { color: var(--color-primary); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="/" class="logo">
+        <img src="../images/logo/aphamo-logo.png" alt="Aphamo Goat Aggregation logo" class="logo__img" onerror="this.style.display='none'">
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a class="nav__link" href="/">Home</a>
+        <div class="nav__dropdown">
+          <a class="nav__link" href="/breeds/">Goat Aggregation Hub</a>
+          <ul class="nav__sub" aria-label="Goat Aggregation Hub submenu">
+            <li><a class="nav__sublink" href="/sell/">Beneficiary Programme</a></li>
+          </ul>
+        </div>
+        <a class="nav__link" href="/training/">Training &amp; Development</a>
+        <a class="nav__link" href="/listings/">Browse Listings</a>
+        <a class="nav__link" href="/about/">About Us</a>
+        <a class="nav__link" href="/events/">Events</a>
+        <a class="nav__link" href="/contact/">Contact</a>
+        <a class="nav__link nav__link--cta" href="/the-hub/">The Hub</a>
+      </nav>
+      <button type="button" class="menu-trigger" aria-label="Open menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="about-breadcrumb site-header__breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="/events/">Events</a>
+        <span class="about-breadcrumb__sep" aria-hidden="true">/</span>
+        <span id="event-breadcrumb-current" aria-current="page">Event</span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div id="event-detail-root" class="event-detail">
+        <p>Loading event…</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo" aria-label="Aphamo Goat Aggregation – Home">
+          <img src="../images/logo/aphamo-logo.png" alt="" width="160" height="64" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling?.classList.remove('footer__logo-fallback--hidden');">
+          <span class="footer__logo-fallback footer__logo-fallback--hidden">Aphamo Goat Aggregation</span>
+        </a>
+        <p class="footer__tagline">South Africa's premier goat aggregation & learning hub. Buy, sell, connect, master goat farming.</p>
+      </div>
+      <div>
+        <h3 class="footer__title">Platform</h3>
+        <ul class="footer__links">
+          <li><a href="/the-hub/">The Hub</a></li>
+          <li><a href="/breeds/">Goat Aggregation Hub</a></li>
+          <li><a href="/training/">Training &amp; Development</a></li>
+          <li><a href="/listings/">Browse Listings</a></li>
+          <li><a href="/sell/">Beneficiary Programme</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Company</h3>
+        <ul class="footer__links">
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/events/">Events</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/privacy/">Privacy (POPIA)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aphamo Goat Aggregation. POPIA-compliant. SSL secured.</span>
+      <span class="footer__credit">Designed and developed by <a href="https://www.icreativate.co.za" target="_blank" rel="noopener noreferrer">iCreativate</a></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      function escapeHtml(s) {
+        var div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+      }
+      function getEventId() {
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get('id');
+        if (id) return id;
+        var hash = (window.location.hash || '').replace(/^#/, '');
+        return hash || null;
+      }
+      var root = document.getElementById('event-detail-root');
+      var breadcrumbCurrent = document.getElementById('event-breadcrumb-current');
+      if (!root) return;
+      var adminData = window.AphamoAdminData;
+      if (!adminData || !adminData.getEvents) {
+        root.innerHTML = '<div class="event-detail__not-found"><p>Events data could not be loaded.</p><a href="/events/">← Back to Events</a></div>';
+        return;
+      }
+      var eventId = getEventId();
+      if (!eventId) {
+        root.innerHTML = '<div class="event-detail__not-found"><p>No event selected.</p><a href="/events/">← Back to Events</a></div>';
+        if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Event';
+        return;
+      }
+      var events = adminData.getEvents();
+      var ev = events.filter(function (e) { return e.id === eventId; })[0];
+      if (!ev) {
+        root.innerHTML = '<div class="event-detail__not-found"><p>Event not found.</p><a href="/events/">← Back to Events</a></div>';
+        if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Event';
+        return;
+      }
+      var title = ev.title || 'Event';
+      document.title = title + ' – Aphamo Goat Aggregation';
+      if (breadcrumbCurrent) breadcrumbCurrent.textContent = title;
+
+      var imageUrls = (ev.imageUrls && Array.isArray(ev.imageUrls)) ? ev.imageUrls : [];
+      if (!imageUrls.length) imageUrls = ['https://picsum.photos/seed/' + (ev.id || 'ev') + '/800/500'];
+      var videoUrls = (ev.videoUrls && Array.isArray(ev.videoUrls)) ? ev.videoUrls : [];
+      var attachments = (ev.attachments && Array.isArray(ev.attachments)) ? ev.attachments : [];
+      var statusClass = 'event-detail__badge--' + (ev.status || 'upcoming');
+      var statusText = (ev.status === 'past') ? 'Past' : (ev.status === 'ongoing') ? 'Ongoing' : 'Upcoming';
+
+      var galleryHtml = '<div class="event-detail__gallery event-detail__gallery--' + (imageUrls.length === 1 ? 'single' : 'multi') + '" aria-label="Event gallery">';
+      imageUrls.forEach(function (url) {
+        if ((url || '').trim()) galleryHtml += '<img src="' + escapeHtml(url.trim()) + '" alt="" loading="lazy">';
+      });
+      galleryHtml += '</div>';
+
+      var videosHtml = '';
+      if (videoUrls.length) {
+        videosHtml = '<div class="event-detail__section"><h3>Videos</h3><div class="event-detail__videos">';
+        videoUrls.forEach(function (url) {
+          url = (url || '').trim();
+          if (!url) return;
+          var embed = url;
+          if (url.indexOf('youtube.com') !== -1 || url.indexOf('youtu.be') !== -1) {
+            var vid = (url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/) || [])[1];
+            if (vid) embed = 'https://www.youtube.com/embed/' + vid;
+          } else if (url.indexOf('vimeo.com') !== -1) {
+            var v = (url.match(/vimeo\.com\/(\d+)/) || [])[1];
+            if (v) embed = 'https://player.vimeo.com/video/' + v;
+          }
+          if (embed !== url) {
+            videosHtml += '<div class="event-detail__video-wrap"><iframe src="' + escapeHtml(embed) + '" allowfullscreen></iframe></div>';
+          } else {
+            videosHtml += '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener" class="event-detail__video-link">Watch video →</a>';
+          }
+        });
+        videosHtml += '</div></div>';
+      }
+
+      var attHtml = '';
+      if (attachments.length) {
+        attHtml = '<div class="event-detail__section event-detail__attachments"><h3>Read or download</h3><ul>';
+        attachments.forEach(function (a) {
+          var label = (a.label || a.url || 'Download').trim() || 'Download';
+          attHtml += '<li><a href="' + escapeHtml((a.url || '').trim()) + '" target="_blank" rel="noopener">' + escapeHtml(label) + ' ↗</a></li>';
+        });
+        attHtml += '</ul></div>';
+      }
+
+      root.innerHTML =
+        '<h1 class="event-detail__title">' + escapeHtml(title) + '</h1>' +
+        '<p class="event-detail__meta">' +
+          '<span class="event-detail__badge ' + statusClass + '">' + escapeHtml(statusText) + '</span>' +
+          (ev.location ? '<span>📍 ' + escapeHtml(ev.location) + '</span>' : '') +
+          (ev.date ? '<span>📅 ' + escapeHtml(ev.date) + '</span>' : '<span>📅 Date TBC</span>') +
+        '</p>' +
+        galleryHtml +
+        '<div class="event-detail__section"><h3>About this event</h3><div class="event-detail__details">' + escapeHtml(ev.details || 'No further details at the moment. Contact us for more information.') + '</div></div>' +
+        videosHtml +
+        attHtml +
+        '<div class="event-detail__section"><a href="/contact/" class="btn btn--primary">Contact us to register</a></div>';
+    })();
+  </script>
+</body>
+</html>
